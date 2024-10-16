@@ -33,11 +33,13 @@ Frontend:
 3. Tailwind CSS
 4. Next UI
 5. Tanstack query
+
 Backend:
 1. Typescript
 2. Nest js
 3. Postgres
 4. Minio
+
 Other:
 1. Docker
 2. Nginx (опционально)
