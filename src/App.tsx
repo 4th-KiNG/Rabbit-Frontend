@@ -1,10 +1,10 @@
-import Button from "./share/ui/Button";
+import { AuthPage } from "./pages";
 
 function App() {
   return (
-    <>
-      <Button />
-    </>
+    <div className="min-h-screen relative">
+      <AuthPage />
+    </div>
   );
 }
 
