@@ -1,10 +1,12 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button, Input } from "../../ui";
 import { IFormInputs } from "../../ui/Input/Input.types";
+import { useAuth } from "../../../lib/hooks/useAuth";
 
 const SignInForm = () => {
   const { register, handleSubmit } = useForm<IFormInputs>();
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data);
+  const { signIn } = useAuth();
+  const onSubmit: SubmitHandler<IFormInputs> = (data) => signIn(data);
   return (
     <>
       <form action="" className="flex flex-col gap-3 w-full max-w-[500px]">

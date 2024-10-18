@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SignInForm, SignUpForm } from "../../share";
+import { SignInForm } from "../../share";
 
 const AuthPage = () => {
   const [status, setStatus] = useState<"signin" | "signup">("signin");
