@@ -6,9 +6,9 @@ const AuthPage = () => {
   return (
     <>
       <div
-        className={`w-1/2 flex flex-col gap-5 fixed bg-[#121212] translate-x-${
-          status === "signin" ? "full" : "0"
-        } transition-all min-h-screen p-8 items-center justify-center max-[700px]:w-full`}
+        className={`w-1/2 flex flex-col gap-5 fixed bg-[#121212] ${
+          status === "signin" ? "translate-x-full" : ""
+        } transition-all min-h-screen p-8 items-center justify-center max-[700px]:w-full max-[700px]:translate-x-0`}
       >
         {status === "signin" ? (
           <>
@@ -27,7 +27,6 @@ const AuthPage = () => {
         ) : (
           <>
             <h1 className="text-4xl font-bold">Регистрация</h1>
-            <SignUpForm />
             <div className="flex justify-between w-full max-w-[500px]">
               <p>Есть аккаунт?</p>
               <p
