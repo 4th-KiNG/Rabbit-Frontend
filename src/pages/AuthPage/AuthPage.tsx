@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SignInForm } from "../../share";
+import { SignInForm, SignUpForm } from "../../share";
 
 const AuthPage = () => {
   const [status, setStatus] = useState<"signin" | "signup">("signin");
@@ -27,6 +27,7 @@ const AuthPage = () => {
         ) : (
           <>
             <h1 className="text-4xl font-bold">Регистрация</h1>
+            <SignUpForm />
             <div className="flex justify-between w-full max-w-[500px]">
               <p>Есть аккаунт?</p>
               <p

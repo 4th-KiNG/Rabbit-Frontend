@@ -15,4 +15,7 @@ export interface IInput {
 export interface IFormInputs {
   email: string;
   password: string;
+  username: string;
+  surname: string;
+  repeatpassword: string;
 }
