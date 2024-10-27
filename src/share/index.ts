@@ -1,4 +1,4 @@
-import Button from "./ui/Button";
-import Input from "./ui/Input";
+import SignInForm from "./components/SignInForm/SignInForm";
+import SignUpForm from "./components/SignUpForm/SignUpForm";
 
-export { Button, Input };
+export { SignInForm, SignUpForm };

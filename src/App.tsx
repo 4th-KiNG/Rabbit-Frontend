@@ -1,10 +1,13 @@
-import Button from "./share/ui/Button";
+import { useProfile } from "./lib/hooks/useProfile";
+import { AuthPage, ProfilePage } from "./pages";
 
 function App() {
+  const { user } = useProfile();
+
   return (
-    <>
-      <Button />
-    </>
+    <div className="min-h-screen relative">
+      {user ? <ProfilePage /> : <AuthPage />}
+    </div>
   );
 }
 
