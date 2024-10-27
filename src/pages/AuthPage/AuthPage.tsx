@@ -8,7 +8,7 @@ const AuthPage = () => {
       <div
         className={`w-1/2 flex flex-col gap-5 fixed bg-[#121212] ${
           status === "signin" ? "translate-x-full" : ""
-        } transition-all min-h-screen p-8 items-center justify-center max-[700px]:w-full max-[700px]:translate-x-0`}
+        } transition-all duration-400 ease-out min-h-screen p-8 items-center justify-center max-[700px]:w-full max-[700px]:translate-x-0`}
       >
         {status === "signin" ? (
           <>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IP } from "../../constants/api";
+import { IP } from "../../../constants/api";
 import { ISignUp, ISignIn } from "./authApi.types";
 
 export const SignUp = async (userData: ISignUp) => {
@@ -12,7 +12,7 @@ export const SignUp = async (userData: ISignUp) => {
       password: userData.password,
     },
   });
-  console.log(data);
+  localStorage.setItem("access_token", data.access_token);
 };
 
 export const SignIn = async (userData: ISignIn) => {
@@ -24,5 +24,5 @@ export const SignIn = async (userData: ISignIn) => {
       password: userData.password,
     },
   });
-  console.log(data);
+  localStorage.setItem("access_token", data.access_token);
 };
