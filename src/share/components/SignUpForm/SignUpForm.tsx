@@ -1,5 +1,5 @@
 import { Input, Button } from "../../ui";
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, SubmitHandler } from "react-hook-form";
 import { IFormInputs } from "../../ui/Input/Input.types";
 import { useAuth } from "../../../lib/hooks/useAuth";
 
@@ -10,14 +10,14 @@ const SignUpForm = () => {
   return (
     <>
       <form action="" className="flex flex-col gap-3 w-full max-w-[500px]">
-        <Input 
+        <Input
           type="text"
           label="Имя"
           register={register}
           name="username"
           required
         />
-        <Input 
+        <Input
           type="text"
           label="Фамилия"
           register={register}
@@ -46,8 +46,8 @@ const SignUpForm = () => {
           required
         />
         <Button
-          className="bg-[#CE3333] h-12"
-          label="Войти"
+          className="bg-[#CE3333] h-12 text-white"
+          label="Зарегистрироваться"
           onClick={handleSubmit(onSubmit)}
         />
       </form>

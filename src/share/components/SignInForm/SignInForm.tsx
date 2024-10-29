@@ -25,7 +25,7 @@ const SignInForm = () => {
           required
         />
         <Button
-          className="bg-[#CE3333] h-12"
+          className="bg-[#CE3333] h-12 text-white"
           label="Войти"
           onClick={handleSubmit(onSubmit)}
         />
