@@ -7,7 +7,7 @@ const AuthPage = () => {
   const [status, setStatus] = useState<"signin" | "signup">("signin");
   return (
     <>
-      <img src={bg} className="fixed top-0 left-0 w-screen h-screen" alt="" />
+      <img src={bg} className="fixed top-0 left-0 w-full h-full" alt="" />
       <div
         className={`w-1/2 flex flex-col gap-5 fixed bg-[#eeeeee] ${
           status === "signin" ? "translate-x-full" : ""

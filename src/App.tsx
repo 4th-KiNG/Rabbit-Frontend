@@ -5,7 +5,7 @@ function App() {
   const { user } = useProfile();
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-full relative">
       {user ? <ProfilePage /> : <AuthPage />}
     </div>
   );
