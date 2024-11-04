@@ -6,10 +6,18 @@ const ThemeButton = () => {
   return (
     <>
       {theme == "dark" && (
-        <img src={lightThemeIco} onClick={() => setTheme("light")} />
+        <img
+          src={lightThemeIco}
+          className="max-[700px]:w-[40px]"
+          onClick={() => setTheme("light")}
+        />
       )}
       {theme == "light" && (
-        <img src={darkThemeIco} onClick={() => setTheme("dark")} />
+        <img
+          src={darkThemeIco}
+          className="max-[700px]:w-[40px]"
+          onClick={() => setTheme("dark")}
+        />
       )}
     </>
   );

@@ -6,7 +6,7 @@ const Button = (props: IButton) => {
   return (
     <>
       <ButtonUI
-        className={`${className} text-base text-center`}
+        className={`${className} text-base text-center max-[700px]:text-sm`}
         onClick={onClick}
       >
         {label}

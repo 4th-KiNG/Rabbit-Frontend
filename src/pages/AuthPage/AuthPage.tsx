@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SignInForm, SignUpForm } from "../../share";
 import { bg } from "../../assets";
 import { RabbitTitle, ThemeButton } from "../../share/ui";
+import { isMobile } from "../../utils/styles.utils";
 
 const AuthPage = () => {
   const [status, setStatus] = useState<"signin" | "signup">("signin");
@@ -15,7 +16,7 @@ const AuthPage = () => {
       >
         {status === "signin" ? (
           <>
-            <h1 className="text-4xl font-bold">Вход</h1>
+            <h1 className="text-4xl font-bold max-[700px]:text-3xl">Вход</h1>
             <SignInForm />
             <div className="flex justify-between w-full max-w-[500px]">
               <p>Нет аккаунта?</p>
@@ -29,7 +30,9 @@ const AuthPage = () => {
           </>
         ) : (
           <>
-            <h1 className="text-4xl font-bold">Регистрация</h1>
+            <h1 className="text-4xl font-bold max-[700px]:text-3xl">
+              Регистрация
+            </h1>
             <SignUpForm />
             <div className="flex justify-between w-full max-w-[500px]">
               <p>Есть аккаунт?</p>
@@ -42,12 +45,12 @@ const AuthPage = () => {
             </div>
           </>
         )}
-        <div className="fixed bottom-10">
+        <div className="fixed bottom-10 max-[700px]:bottom-8">
           <RabbitTitle />
         </div>
         <div
           className={`fixed top-10 transition-all duration-400 ease-out ${
-            status === "signin" ? "right-10" : "left-10"
+            status === "signup" && !isMobile() ? "left-10" : "right-10"
           }`}
         >
           <ThemeButton />
