@@ -45,7 +45,7 @@ const AuthPage = () => {
             </div>
           </>
         )}
-        <div className="fixed bottom-10 max-[700px]:bottom-8">
+        <div className="absolute bottom-10 max-[700px]:bottom-8">
           <RabbitTitle />
         </div>
         <div

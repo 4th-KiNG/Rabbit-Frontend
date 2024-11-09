@@ -6,13 +6,13 @@ import { useProfile } from "./useProfile";
 export const useAuth = () => {
   const { refetchUserInfo } = useProfile();
 
-  const { mutate: signIn } = useMutation({
+  const { mutate: signIn, error: signInError } = useMutation({
     mutationKey: ["signin"],
     mutationFn: (userData: ISignIn) => SignIn(userData),
     onSuccess: () => refetchUserInfo(),
   });
 
-  const { mutate: signUp } = useMutation({
+  const { mutate: signUp, error: signUpError } = useMutation({
     mutationKey: ["signup"],
     mutationFn: (userData: ISignUp) => SignUp(userData),
     onSuccess: () => refetchUserInfo(),
@@ -21,5 +21,7 @@ export const useAuth = () => {
   return {
     signIn,
     signUp,
+    signInError,
+    signUpError,
   };
 };

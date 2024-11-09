@@ -16,6 +16,5 @@ export interface IFormInputs {
   email: string;
   password: string;
   username: string;
-  surname: string;
-  repeatpassword: string;
+  repeatPassword?: string;
 }

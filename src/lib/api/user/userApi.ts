@@ -5,11 +5,10 @@ import { IP } from "../../../constants/api";
 export const GetUserInfo = async (token: string): Promise<UserData> => {
   const { data } = await axios({
     method: "get",
-    url: `${IP}/auth`,
+    url: `${IP}/user`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log(data);
   return data;
 };
