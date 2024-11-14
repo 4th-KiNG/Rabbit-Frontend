@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Button, Input } from "../../ui";
+import { Button, Input } from "../../";
 import { IFormInputs } from "../../ui/Input/Input.types";
 import { useAuth } from "../../../lib/hooks/useAuth";
 import { useEffect, useState } from "react";
@@ -33,7 +33,7 @@ const SignInForm = () => {
           required
         />
         <Button
-          className="bg-[#CE3333] h-12 text-white"
+          className="bg-[#CE3333] h-12 text-white text-base text-center max-[700px]:text-sm"
           label="Войти"
           onClick={handleSubmit(onSubmit)}
         />

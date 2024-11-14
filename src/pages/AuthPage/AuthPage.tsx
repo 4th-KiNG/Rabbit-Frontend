@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { SignInForm, SignUpForm } from "../../share";
+import { SignInForm, SignUpForm, RabbitTitle, ThemeButton } from "../../share";
 import { bg } from "../../assets";
-import { RabbitTitle, ThemeButton } from "../../share/ui";
 import { isMobile } from "../../utils/styles.utils";
 
 const AuthPage = () => {
