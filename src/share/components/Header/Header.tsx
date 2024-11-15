@@ -10,10 +10,10 @@ const Header = () => {
       то лучше спрашивай у меня. убери gap-[208px] и добавь свойство justify-between */}
       <header
         className="absolute top-0 left-0 bg-[#181717] w-full min-h-[84px] 
-    flex items-center pl-10 pr-[83px] max-[1024px]:px-7 gap-[208px]"
+    flex items-center px-10 justify-between"
       >
-        {/* вместо gap-[20px] можно gap-5 написать. Если нет необходимости указывать размер через пиксели, то лучше указывать в rem */}
-        <div className="flex gap-[20px]">
+        {/* вместо gap-[20px] можно gap-5 написать. Если нет необходимости указывать размер через пиксели, то лучше указывать в rem +*/}
+        <div className="flex gap-5">
           <img src={logo} alt="logo" />
           <RabbitTitle />
         </div>
