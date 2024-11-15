@@ -4,13 +4,13 @@ import Header from "../Header/Header";
 
 const Layout = ({ children }: { children: Readonly<ReactNode> }) => {
   return (
-    <>
+    <div className="min-h-screen relative">
       <Header />
-      {/* смотри, чтобы не писать в NavBar max-w, ты просто оборачиваешь NavBar и
-      children в div, которому задаешь grid и grid-template-columns: 320px 1fr */}
-      <Navbar />
-      {children}
-    </>
+      <div className="grid grid-cols-[320px_1fr]">
+        <Navbar />
+        {children}
+      </div>
+    </div>
   );
 };
 
