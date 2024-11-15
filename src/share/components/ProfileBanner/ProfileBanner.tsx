@@ -21,7 +21,7 @@ const ProfileBanner = (props: ProfileBannerProps) => {
       <div className="relative">
         <Image
           url={banner}
-          className="w-[100%] h-36 object-cover rounded-t-3xl"
+          className="w-[100%] h-36 max-[1300px]:h-20 object-cover rounded-t-3xl"
         />
         <input
           type="file"
@@ -31,7 +31,7 @@ const ProfileBanner = (props: ProfileBannerProps) => {
         />
         <img
           src={editIco}
-          className="absolute bottom-2 right-2 w-8 h-8 max-[700px]:w-4 max-[700px]:h-4"
+          className="absolute bottom-2 right-2 z-10 w-8 h-8 max-[700px]:w-5 max-[700px]:h-5"
           onClick={() => changeBannerRef.current?.click()}
           alt=""
         />

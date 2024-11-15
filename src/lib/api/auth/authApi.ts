@@ -29,4 +29,5 @@ export const SignIn = async (userData: ISignIn) => {
 
 export const SignOut = async () => {
   localStorage.clear();
+  location.reload();
 };

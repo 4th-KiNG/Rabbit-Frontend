@@ -1,7 +1,7 @@
 const RabbitTitle = () => {
   return (
     <>
-      <h1 className="text-[36px] font-bold">
+      <h1 className="text-[36px] max-[900px]:text-[28px] font-bold">
         Ra<span className="text-[#CE3333]">bb</span>it
       </h1>
     </>

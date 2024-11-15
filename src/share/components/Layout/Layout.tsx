@@ -6,7 +6,7 @@ const Layout = ({ children }: { children: Readonly<ReactNode> }) => {
   return (
     <div className="min-h-screen relative">
       <Header />
-      <div className="grid grid-cols-[320px_1fr]">
+      <div className="grid grid-cols-[320px_1fr] max-[1300px]:grid-cols-[280px_1fr] max-[900px]:flex">
         <Navbar />
         {children}
       </div>

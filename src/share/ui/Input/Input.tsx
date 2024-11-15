@@ -11,7 +11,7 @@ const Input = (props: IInput) => {
           size={`${isMobile() ? "md" : "lg"}`}
           label={label}
           labelPlacement="inside"
-          style={{ fontSize: `${isMobile() ? "12px" : "16px"}` }}
+          style={{ fontSize: `${isMobile() ? "14px" : "16px"}` }}
           type={type}
           {...register(name)}
         />
@@ -19,7 +19,7 @@ const Input = (props: IInput) => {
         <InputUI
           size={`${isMobile() ? "md" : "lg"}`}
           placeholder={label}
-          style={{ fontSize: `${isMobile() ? "12px" : "16px"}` }}
+          style={{ fontSize: `${isMobile() ? "14px" : "16px"}` }}
           type={type}
           radius="full"
           startContent={startImage}

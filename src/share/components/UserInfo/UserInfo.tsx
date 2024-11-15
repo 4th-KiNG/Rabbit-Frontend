@@ -17,11 +17,11 @@ const UserInfo = (props: UserInfoProps) => {
 
   return (
     <>
-      <div className="flex items-center gap-5 relative">
+      <div className="flex items-center gap-5 relative ml-5 max-[900px]:ml-1">
         <div onClick={() => changeAvatarRef.current?.click()}>
           <Image
             url={userAvatar ?? ""}
-            className="w-[108px] h-[108px] rounded-full object-cover relative z-0"
+            className="w-[108px] h-[108px] max-[900px]:w-20 max-[900px]:h-20 rounded-full object-cover relative z-0"
           />
           <img
             src={changeAvatarIco}
