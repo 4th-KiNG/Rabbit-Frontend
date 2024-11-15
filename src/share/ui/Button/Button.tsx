@@ -5,10 +5,7 @@ const Button = (props: IButton) => {
   const { label, onClick, className } = props;
   return (
     <>
-      <ButtonUI
-        className={`${className} text-base text-center max-[700px]:text-sm`}
-        onClick={onClick}
-      >
+      <ButtonUI className={`${className}`} onClick={onClick}>
         {label}
       </ButtonUI>
     </>

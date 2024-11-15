@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { ISignIn, ISignUp } from "../api/auth/authApi.types";
-import { SignIn, SignUp } from "../api/auth/authApi";
+import { SignIn, SignOut, SignUp } from "../api/auth/authApi";
 import { useProfile } from "./useProfile";
 
 export const useAuth = () => {
@@ -18,7 +18,14 @@ export const useAuth = () => {
     onSuccess: () => refetchUserInfo(),
   });
 
+  const { mutate: signOut } = useMutation({
+    mutationKey: ["signout"],
+    mutationFn: () => SignOut(),
+    onSuccess: () => refetchUserInfo(),
+  });
+
   return {
+    signOut,
     signIn,
     signUp,
     signInError,

@@ -26,3 +26,7 @@ export const SignIn = async (userData: ISignIn) => {
   });
   localStorage.setItem("access_token", data.access_token);
 };
+
+export const SignOut = async () => {
+  localStorage.clear();
+};

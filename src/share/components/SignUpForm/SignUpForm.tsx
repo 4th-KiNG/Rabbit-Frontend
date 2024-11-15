@@ -1,4 +1,4 @@
-import { Input, Button } from "../../ui";
+import { Button, Input } from "../../";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { IFormInputs } from "../../ui/Input/Input.types";
 import { useAuth } from "../../../lib/hooks/useAuth";
@@ -56,7 +56,7 @@ const SignUpForm = () => {
           required
         />
         <Button
-          className="bg-[#CE3333] h-12 text-white"
+          className="bg-[#CE3333] h-12 text-white text-base text-center max-[700px]:text-sm"
           label="Зарегистрироваться"
           onClick={handleSubmit(onSubmit)}
         />
