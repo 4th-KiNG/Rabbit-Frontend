@@ -13,10 +13,10 @@ export const GetUserInfo = async (token: string): Promise<UserData> => {
   return data;
 };
 
-export const GetProfileAvatar = async (token: string) => {
+export const GetAvatar = async (token: string, id: string) => {
   const { data } = await axios({
     method: "get",
-    url: `${IP}/user/avatar`,
+    url: `${IP}/user/avatar/${id}`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -37,6 +37,34 @@ export const ChangeAvatar = async (newAvatar: File, token: string) => {
       Authorization: `Bearer ${token}`,
     },
     data: avatarFormData,
+  });
+  return data;
+};
+
+export const GetBanner = async (token: string, id: string) => {
+  const { data } = await axios({
+    method: "get",
+    url: `${IP}/user/banner/${id}`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    responseType: "blob",
+  });
+  const image = URL.createObjectURL(data);
+  return image;
+};
+
+export const ChangeBanner = async (newBanner: File, token: string) => {
+  const bannerFormData = new FormData();
+  bannerFormData.append("banner", newBanner);
+
+  const { data } = await axios({
+    method: "post",
+    url: `${IP}/user/banner`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: bannerFormData,
   });
   return data;
 };
