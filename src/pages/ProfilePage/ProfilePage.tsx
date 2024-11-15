@@ -46,7 +46,7 @@ const ProfilePage = () => {
                 <div key={index}>
                   <Button
                     label={btn.label}
-                    className={`rounded-full text-xl font-normal text-white dark:text-black px-10 py-4 h-max ${
+                    className={`rounded-full text-xl font-normal text-black dark:text-white px-10 py-4 h-max ${
                       btn.label === section ? "bg-[#404040]" : "bg-[#272727]"
                     }`}
                     onClick={() => setSection(btn.label)}
@@ -56,18 +56,14 @@ const ProfilePage = () => {
             </div>
           </div>
           <div className="p-6 bg-[#404040] mt-6 rounded-3xl">
-            <p className="text-3xl font-bold text-white dark:text-black">
+            <p className="text-3xl font-bold text-black dark:text-white">
               {user?.username}
             </p>
-            <div className="grid grid-cols-[1fr_1fr] mt-5 gap-y-2">
+            <div className="grid grid-cols-[1fr_1fr] mt-5 gap-y-2 text-black dark:text-white">
               {userInfo.map((info, index) => (
                 <div key={index}>
-                  <p className="text-xl font-bold text-white dark:text-black">
-                    {info.data}
-                  </p>
-                  <p className="text-base font-normal text-white dark:text-black">
-                    {info.title}
-                  </p>
+                  <p className="text-xl font-bold">{info.data}</p>
+                  <p className="text-base font-normal">{info.title}</p>
                 </div>
               ))}
             </div>

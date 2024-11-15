@@ -1,6 +1,5 @@
 import { logo, notifications, search } from "../../../assets";
-import { RabbitTitle } from "../../ui";
-import { Input } from "../../ui";
+import { RabbitTitle, Input } from "../..";
 
 const Header = () => {
   return (
