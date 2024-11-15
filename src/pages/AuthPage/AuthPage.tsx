@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SignInForm, SignUpForm, RabbitTitle, ThemeButton } from "../../share";
+import { SignInForm, SignUpForm, RabbitTitle } from "../../share";
 import { bg } from "../../assets";
 import { isMobile } from "../../utils/styles.utils";
 
@@ -52,7 +52,7 @@ const AuthPage = () => {
             status === "signup" && !isMobile() ? "left-10" : "right-10"
           }`}
         >
-          <ThemeButton />
+          {/* <ThemeButton /> */}
         </div>
       </div>
     </>

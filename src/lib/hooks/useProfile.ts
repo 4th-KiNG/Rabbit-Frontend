@@ -13,6 +13,8 @@ export const useProfile = () => {
     queryKey: ["user"],
     queryFn: () => GetUserInfo(localStorage.getItem("access_token") ?? ""),
     enabled: !!localStorage.getItem("access_token"),
+    retry: 0,
+    staleTime: 0,
   });
 
   const { data: profileAvatar, refetch: refectProfileAvatar } = useQuery({
