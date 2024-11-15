@@ -7,7 +7,6 @@ import ThemeButton from "./ui/ThemeButton/ThemeButton";
 import UserInfo from "./components/UserInfo/UserInfo";
 import Image from "./ui/Image/Image";
 import ProfileBanner from "./components/ProfileBanner/ProfileBanner";
-
 export {
   ProfileBanner,
   SignInForm,
