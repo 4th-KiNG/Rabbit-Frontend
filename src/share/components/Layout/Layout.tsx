@@ -4,11 +4,13 @@ import Header from "../Header/Header";
 
 const Layout = ({ children }: { children: Readonly<ReactNode> }) => {
   return (
-    <div className="min-h-screen relative">
+    <div className="max-h-screen relative">
       <Header />
       <div className="grid grid-cols-[320px_1fr] max-[1300px]:grid-cols-[280px_1fr] max-[900px]:flex">
         <Navbar />
-        {children}
+        <div className="w-full overflow-y-auto max-h-[calc(100vh-80px)] max-[900px]:pb-16">
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -57,9 +57,10 @@ const SignUpForm = () => {
         />
         <Button
           className="bg-[#CE3333] h-12 text-white text-base text-center max-[700px]:text-sm"
-          label="Зарегистрироваться"
           onClick={handleSubmit(onSubmit)}
-        />
+        >
+          Зарегистрироваться
+        </Button>
         {errorText && <p className="text-[#CE3333] text-center">{errorText}</p>}
       </form>
     </>

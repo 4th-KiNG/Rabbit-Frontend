@@ -1,5 +1,5 @@
 import { exitIco, logo, notifications, search } from "../../../assets";
-import { RabbitTitle, Input } from "../..";
+import { RabbitTitle, Input, Image } from "../..";
 import { useAuth } from "../../../lib/hooks/useAuth";
 import { useProfile } from "../../../lib/hooks/useProfile";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ const Header = () => {
           className="flex gap-3 items-center cursor-pointer"
           onClick={() => nav("/")}
         >
-          <img src={logo} className="max-[900px]:h-10" alt="logo" />
+          <Image url={logo} className="h-11 w-10 max-[900px]:h-10" />
           <RabbitTitle />
         </div>
         <div className="flex gap-6 items-center min-w-[400px] max-[900px]:hidden">
@@ -24,7 +24,7 @@ const Header = () => {
             label="Поиск"
             startImage={<img src={search} className="mr-2 w-6" />}
           />
-          <img src={notifications} className="w-6" />
+          <Image url={notifications} className="w-6 h-8" />
         </div>
 
         <div className="flex items-center gap-6">
@@ -33,10 +33,9 @@ const Header = () => {
             onClick={() => nav("/profile")}
           >
             <span className="text-xl max-[900px]:hidden">{user?.username}</span>
-            <img
-              src={profileAvatar}
+            <Image
+              url={profileAvatar}
               className="w-14 max-[900px]:w-9 object-cover h-14 max-[900px]:h-9 rounded-full"
-              alt=""
             />
           </div>
           <div

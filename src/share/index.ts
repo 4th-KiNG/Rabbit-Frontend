@@ -8,7 +8,9 @@ import UserInfo from "./components/UserInfo/UserInfo";
 import Image from "./ui/Image/Image";
 import ProfileBanner from "./components/ProfileBanner/ProfileBanner";
 import Layout from "./components/Layout/Layout";
+import Post from "./components/Post/Post";
 export {
+  Post,
   ProfileBanner,
   SignInForm,
   SignUpForm,

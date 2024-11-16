@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { useProfile } from "./lib/hooks/useProfile";
-import { AuthPage, ProfilePage } from "./pages";
+import { AuthPage, PostsPage, ProfilePage } from "./pages";
 import { Layout } from "./share";
 
 function App() {
@@ -11,6 +11,7 @@ function App() {
   return (
     <Layout>
       <Routes>
+        <Route path="/" element={<PostsPage />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </Layout>

@@ -10,5 +10,23 @@ import changeAvatarIco from "./changeAvatar.svg";
 import editIco from "./editIco.svg";
 import exitIco from "./exit.svg";
 import logo from "./logo.svg";
-import search from './search.svg'
-export { bg, lightThemeIco, darkThemeIco, news, profile, friends, notifications, settings, logo, search, changeAvatarIco, editIco, exitIco };
+import search from "./search.svg";
+import likeIco from "./likeIco.svg";
+import likeIcoActive from "./likeIcoActive.svg";
+export {
+  bg,
+  lightThemeIco,
+  darkThemeIco,
+  news,
+  profile,
+  friends,
+  notifications,
+  settings,
+  logo,
+  search,
+  changeAvatarIco,
+  editIco,
+  exitIco,
+  likeIco,
+  likeIcoActive,
+};
