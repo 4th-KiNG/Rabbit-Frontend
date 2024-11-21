@@ -1,8 +1,9 @@
 import { useProfile } from "../../../lib/hooks/useProfile";
 import { PostProps } from "../../../types/post.types";
-import { Button, Image } from "../..";
+import { Button, DropDownMenu, Image } from "../..";
 import { likeIco, likeIcoActive } from "../../../assets";
 import { useCallback, useMemo, useState } from "react";
+import { dropItems } from "./Post.static";
 
 const Post = (props: PostProps) => {
   const { title, text } = props;
@@ -27,7 +28,7 @@ const Post = (props: PostProps) => {
   }, [user]);
   return (
     <>
-      <div className="w-full bg-[#404040] rounded-2xl p-8 flex flex-col gap-2 max-[900px]:p-6">
+      <div className="w-full bg-[#404040] rounded-2xl p-6 flex flex-col gap-3 max-[900px]:p-5 max-[500px]:p-4">
         <div className="flex justify-between">
           <div className="flex items-center gap-2">
             <Image
@@ -36,7 +37,7 @@ const Post = (props: PostProps) => {
             />
             <p className="text-lg max-[900px]:text-base">username</p>
           </div>
-          <p className="text-lg max-[900px]:text-base">1 день назад</p>
+          <DropDownMenu items={dropItems} />
         </div>
         <h3 className="text-2xl font-bold max-[900px]:text-lg">{title}</h3>
         <p className="text-lg max-[900px]:text-base">{text}</p>
@@ -47,9 +48,9 @@ const Post = (props: PostProps) => {
           >
             <Image
               url={isLikeActive ? likeIcoActive : likeIco}
-              className="w-4 h-4 object-contain"
+              className="w-4 h-4 object-contain max-[500px]:w-3 max-[500px]:h-3"
             />
-            {likes.length > 0 && <p>{likes.length}</p>}
+            {likes.length > 0 && <p className="text-xs">{likes.length}</p>}
           </Button>
         </div>
       </div>

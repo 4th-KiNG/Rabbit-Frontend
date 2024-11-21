@@ -1,4 +1,4 @@
-import { Post } from "../../share";
+import { CreatePostArea, Post } from "../../share";
 import { PostProps } from "../../types/post.types";
 
 const posts: PostProps[] = [
@@ -13,7 +13,7 @@ const posts: PostProps[] = [
     id: "1",
     title: "Давайте обсудим",
     userId: "2",
-    text: "Текст",
+    text: "Очень много текста. Очень много текста.Очень много текста.Очень много текста.Очень много текста.Очень много текста.Очень много текста.Очень много текста.Очень много текста.Очень много текста.Очень много текста.Очень много текста.",
     createDate: new Date(),
   },
   {
@@ -35,7 +35,8 @@ const posts: PostProps[] = [
 const PostsPage = () => {
   return (
     <>
-      <div className="py-8 px-20 flex flex-col gap-8 w-full max-[900px]:px-8">
+      <div className="py-8 px-20 flex flex-col gap-8 w-full max-[900px]:px-8 max-[500px]:gap-3 max-[500px]:p-5">
+        <CreatePostArea />
         {posts.map((post: PostProps, index) => (
           <Post {...post} key={index} />
         ))}
