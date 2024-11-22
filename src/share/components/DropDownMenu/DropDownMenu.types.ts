@@ -17,4 +17,5 @@ export interface DropDownItem {
     | "danger"
     | undefined;
   className?: string;
+  onClick?: () => void;
 }

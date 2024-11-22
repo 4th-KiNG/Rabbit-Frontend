@@ -26,6 +26,7 @@ const DropDownMenu = (props: DropDownMenuProps) => {
             key={item.key}
             color={item.color}
             className={item.className}
+            onClick={item.onClick}
           >
             {item.title}
           </DropdownItem>

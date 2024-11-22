@@ -1,14 +1,30 @@
 import { useProfile } from "../../../lib/hooks/useProfile";
 import { PostProps } from "../../../types/post.types";
-import { Button, DropDownMenu, Image } from "../..";
+import { Button, DropDownMenu, Image, ModalForm } from "../..";
 import { likeIco, likeIcoActive } from "../../../assets";
 import { useCallback, useMemo, useState } from "react";
-import { dropItems } from "./Post.static";
+import { useDisclosure } from "@nextui-org/react";
+import { DropDownItem } from "../DropDownMenu/DropDownMenu.types";
 
 const Post = (props: PostProps) => {
   const { title, text } = props;
   const { profileAvatar, user } = useProfile();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [likes, setLikes] = useState<string[]>([]);
+
+  const dropItems: DropDownItem[] = [
+    {
+      title: "Пожаловаться",
+      key: "",
+      onClick: onOpen,
+    },
+    {
+      title: "Удалить пост",
+      key: "delete",
+      color: "danger",
+      className: "text-danger",
+    },
+  ];
 
   const isLikeActive = useMemo((): boolean => {
     if (likes && user) return likes.includes(user.id);
@@ -38,13 +54,19 @@ const Post = (props: PostProps) => {
             <p className="text-lg max-[900px]:text-base">username</p>
           </div>
           <DropDownMenu items={dropItems} />
+          <ModalForm
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+            title="Поажловаться на контент поста"
+            content="Coming soon..."
+          />
         </div>
         <h3 className="text-2xl font-bold max-[900px]:text-lg">{title}</h3>
         <p className="text-lg max-[900px]:text-base">{text}</p>
         <div className="mt-2">
           <Button
             className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-[#585757]"
-            onClick={() => toggleLike()}
+            onClick={toggleLike}
           >
             <Image
               url={isLikeActive ? likeIcoActive : likeIco}
