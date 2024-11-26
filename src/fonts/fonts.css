@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "Cygre";
+  src: url("Cygre-Thin.ttf") format("truetype");
+  font-weight: thin;
+}
+
+@font-face {
+  font-family: "Cygre";
+  src: url("Cygre-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Cygre";
+  src: url("Cygre-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Cygre";
+  src: url("Cygre-ExtraBold.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Cygre";
+  src: url("Cygre-Bold.ttf") format("truetype");
+  font-weight: bold;
+}

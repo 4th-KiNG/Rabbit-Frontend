@@ -1,5 +1,5 @@
 import { exitIco, logo, notifications, search } from "../../../assets";
-import { RabbitTitle, Input, Image } from "../..";
+import { RabbitTitle, Input, Image, Button } from "../..";
 import { useAuth } from "../../../lib/hooks/useAuth";
 import { useProfile } from "../../../lib/hooks/useProfile";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +24,9 @@ const Header = () => {
             label="Поиск"
             startImage={<img src={search} className="mr-2 w-6" />}
           />
-          <Image url={notifications} className="w-6 h-8" />
+          <Button className="p-3 bg-transparent min-w-0 rounded-full w-13 h-13">
+            <Image url={notifications} className="w-full h-full" />
+          </Button>
         </div>
 
         <div className="flex items-center gap-6">
@@ -39,7 +41,7 @@ const Header = () => {
             />
           </div>
           <div
-            className="bg-gray-700 rounded-full p-3"
+            className="bg-[#272727] rounded-full p-3 cursor-pointer"
             onClick={() => signOut()}
           >
             <img src={exitIco} className="w-8 max-[900px]:w-4" alt="" />

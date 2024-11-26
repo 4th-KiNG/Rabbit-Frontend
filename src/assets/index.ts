@@ -14,7 +14,10 @@ import search from "./search.svg";
 import likeIco from "./likeIco.svg";
 import likeIcoActive from "./likeIcoActive.svg";
 import photoIco from "./photoIco.svg";
+import comingSoonText from "./comingSoonText.png";
+
 export {
+  comingSoonText,
   photoIco,
   bg,
   lightThemeIco,

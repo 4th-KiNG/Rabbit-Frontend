@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
+import "./fonts/fonts.css";
 import "./index.css";
 import { NextUIProvider } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
@@ -11,14 +12,14 @@ const client = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <NextUIProvider>
-      <NextThemesProvider attribute="class" defaultTheme="dark">
-        <QueryClientProvider client={client}>
-          <BrowserRouter>
+    <BrowserRouter>
+      <NextUIProvider>
+        <NextThemesProvider attribute="class" defaultTheme="dark">
+          <QueryClientProvider client={client}>
             <App />
-          </BrowserRouter>
-        </QueryClientProvider>
-      </NextThemesProvider>
-    </NextUIProvider>
+          </QueryClientProvider>
+        </NextThemesProvider>
+      </NextUIProvider>
+    </BrowserRouter>
   </StrictMode>
 );

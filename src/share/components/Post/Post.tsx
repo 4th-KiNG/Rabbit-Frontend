@@ -57,7 +57,7 @@ const Post = (props: PostProps) => {
           <ModalForm
             isOpen={isOpen}
             onOpenChange={onOpenChange}
-            title="Поажловаться на контент поста"
+            title="Пожаловаться на контент поста"
             content="Coming soon..."
           />
         </div>

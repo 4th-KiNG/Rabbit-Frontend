@@ -12,8 +12,10 @@ import Post from "./components/Post/Post";
 import CreatePostArea from "./components/CreatePostArea/CreatePostArea";
 import DropDownMenu from "./components/DropDownMenu/DropDownMenu";
 import ModalForm from "./components/ModalForm/ModalForm";
+import ComingSoon from "./components/ComingSoon/ComingSoon";
 
 export {
+  ComingSoon,
   ModalForm,
   DropDownMenu,
   CreatePostArea,
