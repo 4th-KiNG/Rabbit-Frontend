@@ -12,14 +12,14 @@ const client = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
-      <NextUIProvider>
-        <NextThemesProvider attribute="class" defaultTheme="dark">
-          <QueryClientProvider client={client}>
+    <NextUIProvider>
+      <NextThemesProvider attribute="class" defaultTheme="dark">
+        <QueryClientProvider client={client}>
+          <BrowserRouter>
             <App />
-          </QueryClientProvider>
-        </NextThemesProvider>
-      </NextUIProvider>
-    </BrowserRouter>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </NextThemesProvider>
+    </NextUIProvider>
   </StrictMode>
 );
