@@ -4,11 +4,12 @@
 @tailwind utilities;
 
 * {
-  font-family: "Cygre", sans-serif;
+  font-family: "SuisseIntl", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-weight: 400;
+  letter-spacing: 0.7px;
 }
 
 #root {

@@ -48,7 +48,7 @@ const AuthPage = () => {
           <RabbitTitle />
         </div>
         <div
-          className={`fixed top-10 transition-all duration-400 ease-out ${
+          className={`absolute top-10 transition-all duration-400 ease-out ${
             status === "signup" && !isMobile() ? "left-10" : "right-10"
           }`}
         >

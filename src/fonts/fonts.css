@@ -1,29 +1,23 @@
 @font-face {
-  font-family: "Cygre";
-  src: url("Cygre-Thin.ttf") format("truetype");
+  font-family: "SuisseIntl";
+  src: url("SuisseIntl-Bold.otf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  src: url("SuisseIntl-Light.otf") format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  src: url("SuisseIntl-Regular.otf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "SuisseIntl";
+  src: url("SuisseIntl-Thin.otf") format("truetype");
   font-weight: thin;
-}
-
-@font-face {
-  font-family: "Cygre";
-  src: url("Cygre-Regular.ttf") format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: "Cygre";
-  src: url("Cygre-Bold.ttf") format("truetype");
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: "Cygre";
-  src: url("Cygre-ExtraBold.ttf") format("truetype");
-  font-weight: 600;
-}
-
-@font-face {
-  font-family: "Cygre";
-  src: url("Cygre-Bold.ttf") format("truetype");
-  font-weight: bold;
 }
