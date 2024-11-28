@@ -13,9 +13,9 @@ import logo from "./logo.svg";
 import search from "./search.svg";
 import likeIco from "./likeIco.svg";
 import likeIcoActive from "./likeIcoActive.svg";
+import sort from "./sort.svg";
 import photoIco from "./photoIco.svg";
 import comingSoonText from "./comingSoonText.png";
-
 export {
   comingSoonText,
   photoIco,
@@ -34,4 +34,5 @@ export {
   exitIco,
   likeIco,
   likeIcoActive,
+  sort,
 };
