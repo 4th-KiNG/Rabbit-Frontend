@@ -21,19 +21,19 @@ export const links = [
   },
   {
     title: "Подписчики",
-    url: "/",
+    url: "/subscribers",
     startImg: friends,
     id: 2,
   },
   {
     title: "Уведомления",
-    url: "/",
+    url: "/notifications",
     startImg: notifications,
     id: 3,
   },
   {
     title: "Настройки",
-    url: "/",
+    url: "/settings",
     startImg: settings,
     id: 4,
   },

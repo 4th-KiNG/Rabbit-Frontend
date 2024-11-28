@@ -1,8 +1,11 @@
+import { useLocation } from "react-router-dom";
 import NavLink from "../../ui/NavLink/NavLink";
 import { INavLink } from "../../ui/NavLink/NavLink.types";
 import { links } from "./NavBar.static";
 
 const Navbar = () => {
+  const locaton = useLocation();
+
   return (
     <>
       <div className="bg-[#2A2A2A] h-[calc(100vh-80px)] p-8 max-[900px]:hidden">
@@ -10,7 +13,12 @@ const Navbar = () => {
           {links.map((link: INavLink, index) => {
             return (
               <span key={index}>
-                <NavLink {...link} className="rounded-full w-full" />
+                <NavLink
+                  {...link}
+                  className={`rounded-full w-full ${
+                    locaton.pathname === link.url ? "bg-[#404040]" : ""
+                  }`}
+                />
               </span>
             );
           })}
@@ -23,7 +31,9 @@ const Navbar = () => {
               <span className="flex items-center" key={index}>
                 <NavLink
                   {...link}
-                  className="rounded-full w-full max-[900px]:min-w-6"
+                  className={`rounded-full w-full max-[900px]:min-w-6 ${
+                    locaton.pathname === link.url ? "bg-[#404040]" : ""
+                  }`}
                 />
               </span>
             );
