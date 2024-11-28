@@ -13,6 +13,7 @@ import logo from "./logo.svg";
 import search from "./search.svg";
 import likeIco from "./likeIco.svg";
 import likeIcoActive from "./likeIcoActive.svg";
+import sort from "./sort.svg";
 export {
   bg,
   lightThemeIco,
@@ -29,4 +30,5 @@ export {
   exitIco,
   likeIco,
   likeIcoActive,
+  sort,
 };
