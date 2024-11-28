@@ -16,6 +16,7 @@ import likeIcoActive from "./likeIcoActive.svg";
 import sort from "./sort.svg";
 import photoIco from "./photoIco.svg";
 import comingSoonText from "./comingSoonText.png";
+
 export {
   comingSoonText,
   photoIco,

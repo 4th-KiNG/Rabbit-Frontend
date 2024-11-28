@@ -1,5 +1,4 @@
-import Filters from "../../share/components/Filters/Filters";
-import { CreatePostArea, Post } from "../../share";
+import { CreatePostArea, Post, Filters } from "../../share";
 import { PostProps } from "../../types/post.types";
 
 const posts: PostProps[] = [
@@ -36,9 +35,9 @@ const posts: PostProps[] = [
 const PostsPage = () => {
   return (
     <>
-      <Filters />
       <div className="py-8 px-20 flex flex-col gap-8 w-full max-[900px]:px-8 max-[500px]:gap-3 max-[500px]:p-5">
         <CreatePostArea />
+        <Filters />
         {posts.map((post: PostProps, index) => (
           <Post {...post} key={index} />
         ))}
