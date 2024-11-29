@@ -1,5 +1,6 @@
 # Rabbit
 Ссылка на фигму: https://www.figma.com/design/zv91JtGhd3Aty5uDAdKRPX/Rabbit?node-id=0-1&t=6T5lnsJUW95WaRaN-1
+
 Ссылка на Backend: https://github.com/4th-KiNG/Rabbit-Backend
 
 ## Состав команды:
