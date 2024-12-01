@@ -37,7 +37,10 @@ const CreatePostArea = () => {
         }`}
         ref={areaRef}
       >
-        <Image url={profileAvatar} className="w-10 h-10 rounded-full" />
+        <Image
+          url={profileAvatar}
+          className="w-10 h-10 rounded-full object-cover"
+        />
         <div className="w-full">
           <input
             type="text"
