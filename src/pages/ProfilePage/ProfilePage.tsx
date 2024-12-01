@@ -32,7 +32,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <div className="px-20 py-6 relative z-0 max-[900px]:w-full max-[900px]:px-8">
+      <div className="relative z-0 max-[900px]:w-full max-[900px]:px-8">
         <ProfileBanner banner={profileBanner} />
         <div className="grid grid-cols-[1fr_320px] max-[1300px]:flex">
           <div className="-mt-8 flex flex-col gap-6 max-[1300px]:w-full">

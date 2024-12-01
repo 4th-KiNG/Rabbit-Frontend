@@ -35,7 +35,7 @@ const posts: PostProps[] = [
 const PostsPage = () => {
   return (
     <>
-      <div className="py-8 px-20 flex flex-col gap-8 w-full max-[900px]:px-8 max-[500px]:gap-3 max-[500px]:p-5">
+      <div className=" flex flex-col gap-8 w-full  max-[500px]:gap-3">
         <CreatePostArea />
         <Filters />
         {posts.map((post: PostProps, index) => (
