@@ -32,7 +32,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <div className="relative z-0 max-[900px]:w-full max-[900px]:px-8">
+      <div className="relative z-0 max-[900px]:w-full">
         <ProfileBanner banner={profileBanner} />
         <div className="grid grid-cols-[1fr_320px] max-[1300px]:flex">
           <div className="-mt-8 flex flex-col gap-6 max-[1300px]:w-full">
@@ -49,7 +49,7 @@ const ProfilePage = () => {
                 </div>
               ))}
             </div>
-            <div className="flex gap-3 max-[500px]:flex-wrap">
+            <div className="flex gap-3 max-[900px]:flex-wrap">
               {sectionButtons.map((btn, index) => (
                 <div key={index}>
                   <Button
