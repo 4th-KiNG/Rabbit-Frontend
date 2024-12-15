@@ -1,5 +1,5 @@
 import { exitIco, logo, notifications, search } from "../../../assets";
-import { RabbitTitle, Input, Image, Button } from "../..";
+import { RabbitTitle, Input, Image, Button, ThemeButton } from "../..";
 import { useAuth } from "../../../lib/hooks/useAuth";
 import { useProfile } from "../../../lib/hooks/useProfile";
 import { useNavigate } from "react-router-dom";
@@ -40,12 +40,13 @@ const Header = () => {
               className="w-14 max-[900px]:w-9 object-cover h-14 max-[900px]:h-9 rounded-full"
             />
           </div>
-          <div
+          <ThemeButton />
+          {/* <div
             className="bg-[#272727] rounded-full p-3 cursor-pointer"
             onClick={() => signOut()}
           >
             <img src={exitIco} className="w-8 max-[900px]:w-4" alt="" />
-          </div>
+          </div> */}
         </div>
       </header>
     </>
