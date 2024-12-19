@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CheckboxGroup } from "@nextui-org/react";
 
-import { sort } from "../../../assets";
+import { sort } from "../../../assets";``
 
 import { checkboxes } from "./Filters.static";
 import { ICheckbox } from "../../ui/Checkbox/Checkbox.types";
@@ -18,7 +18,7 @@ const Filters = () => {
       >
         <div className="max-w-[620px] flex flex-row flex-wrap gap-y-4">
           <Button
-            className="bg-[#2A2A2A] rounded-full py-2 px-4 mr-2"
+            className="rounded-full py-2 px-4 mr-2 bg-[#eeeeee] dark:bg-[#2A2A2A]"
             onClick={() => setIsActive(!isActive)}
           >
             <span>Сортировать</span>

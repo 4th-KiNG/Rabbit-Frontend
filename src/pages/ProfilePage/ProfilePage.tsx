@@ -41,7 +41,7 @@ const ProfilePage = () => {
               userId={user?.id ?? ""}
               userAvatar={profileAvatar}
             />
-            <div className="hidden max-[1300px]:flex w-full justify-around bg-[#272727] py-3 rounded-xl">
+            <div className="hidden max-[1300px]:flex w-full justify-around py-3 rounded-xl">
               {userInfo.map((info, index) => (
                 <div key={index} className="flex flex-col items-center">
                   <p className="text-base font-bold">{info.data}</p>
@@ -54,7 +54,7 @@ const ProfilePage = () => {
                 <div key={index}>
                   <Button
                     className={`rounded-full text-xl max-[1500px]:text-medium max-[500px]:text-sm font-normal text-black dark:text-white px-10 max-[1500px]:px-6 max-[500px]:px-4 py-4 max-[1500px]:py-3 h-max ${
-                      btn.label === section ? "bg-[#404040]" : "bg-[#272727]"
+                      btn.label === section ? "bg-[#E3E3E3] dark:bg-[#404040]" : "bg-[#eeeeee] dark:bg-[#272727]"
                     }`}
                     onClick={() => setSection(btn.label)}
                   >
@@ -64,7 +64,7 @@ const ProfilePage = () => {
               ))}
             </div>
           </div>
-          <div className="p-6 bg-[#404040] mt-6 rounded-3xl max-[1500px]:p-5 max-[1300px]:hidden">
+          <div className="p-6 bg-[#eeeeee] dark:bg-[#404040] mt-6 rounded-3xl max-[1500px]:p-5 max-[1300px]:hidden">
             <p className="text-3xl max-[1500px]:text-2xl font-bold text-black dark:text-white">
               {user?.username}
             </p>

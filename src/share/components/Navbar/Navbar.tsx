@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="bg-[#2A2A2A] h-[calc(100vh-80px)] p-8 max-[900px]:hidden">
+      <div className="h-[calc(100vh-80px)] p-8 max-[900px]:hidden bg-[#EDEDED] dark:bg-[#2A2A2A]">
         <nav className="flex gap-3 flex-col">
           {links.map((link: INavLink, index) => {
             return (
@@ -16,7 +16,7 @@ const Navbar = () => {
                 <NavLink
                   {...link}
                   className={`rounded-full w-full ${
-                    locaton.pathname === link.url ? "bg-[#404040]" : ""
+                    locaton.pathname === link.url ? "bg-[#E3E3E3] dark:bg-[#404040]" : ""
                   }`}
                 />
               </span>

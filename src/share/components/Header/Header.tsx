@@ -10,7 +10,7 @@ const Header = () => {
   const nav = useNavigate();
   return (
     <>
-      <header className="bg-[#181717] w-full h-20 max-[900px]:h-16 flex items-center px-10 max-[900px]:px-4 justify-between">
+      <header className="w-full h-20 max-[900px]:h-16 flex items-center px-10 max-[900px]:px-4 justify-between bg-[#E3E3E3] dark:bg-[#181717]">
         <div
           className="flex gap-3 items-center cursor-pointer"
           onClick={() => nav("/")}

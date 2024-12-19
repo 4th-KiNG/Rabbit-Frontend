@@ -32,7 +32,7 @@ const CreatePostArea = () => {
   return (
     <>
       <div
-        className={`bg-[#404040] rounded-2xl p-4 max-[500px]:p-3 flex ${
+        className={` rounded-2xl p-4 max-[500px]:p-3 flex bg-[#eeeeee] dark:bg-[#404040] ${
           !isFocus ? "min-h-10" : "min-h-52"
         }`}
         ref={areaRef}
