@@ -1,9 +1,8 @@
-import axios from "axios";
-import { IP } from "../../../constants/api";
+import { Http, IP } from "../../../constants/api";
 import { ISignUp, ISignIn } from "./authApi.types";
 
 export const SignUp = async (userData: ISignUp) => {
-  const { data } = await axios({
+  const { data } = await Http({
     method: "post",
     url: `${IP}/auth/signup`,
     data: {
@@ -12,11 +11,12 @@ export const SignUp = async (userData: ISignUp) => {
       password: userData.password,
     },
   });
+  Http.defaults.headers["Authorization"] = `Bearer ${data.access_token}`;
   localStorage.setItem("access_token", data.access_token);
 };
 
 export const SignIn = async (userData: ISignIn) => {
-  const { data } = await axios({
+  const { data } = await Http({
     method: "post",
     url: `${IP}/auth/signin`,
     data: {
@@ -24,6 +24,7 @@ export const SignIn = async (userData: ISignIn) => {
       password: userData.password,
     },
   });
+  Http.defaults.headers["Authorization"] = `Bearer ${data.access_token}`;
   localStorage.setItem("access_token", data.access_token);
 };
 

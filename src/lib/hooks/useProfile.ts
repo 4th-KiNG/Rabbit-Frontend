@@ -17,41 +17,31 @@ export const useProfile = () => {
     staleTime: 0,
   });
 
-  const { data: profileAvatar, refetch: refectProfileAvatar } = useQuery({
+  const { data: profileAvatar, refetch: refetchProfileAvatar } = useQuery({
     queryKey: ["avatar"],
-    queryFn: () =>
-      GetAvatar(
-        localStorage.getItem("access_token") ?? "",
-        user ? user.id : ""
-      ),
+    queryFn: () => GetAvatar(user ? user.id : ""),
     enabled: !!localStorage.getItem("access_token") && !!user,
   });
 
   const { data: profileBanner, refetch: refectProfileBanner } = useQuery({
     queryKey: ["banner"],
-    queryFn: () =>
-      GetBanner(
-        localStorage.getItem("access_token") ?? "",
-        user ? user.id : ""
-      ),
+    queryFn: () => GetBanner(user ? user.id : ""),
     enabled: !!localStorage.getItem("access_token") && !!user,
   });
 
   const { mutate: changeAvatar } = useMutation({
     mutationKey: ["changeAvatar"],
-    mutationFn: (newAvatar: File) =>
-      ChangeAvatar(newAvatar, localStorage.getItem("access_token") ?? ""),
+    mutationFn: (newAvatar: File) => ChangeAvatar(newAvatar),
     onSuccess: () => {
       setTimeout(() => {
-        refectProfileAvatar();
+        refetchProfileAvatar();
       }, 100);
     },
   });
 
   const { mutate: changeBanner } = useMutation({
     mutationKey: ["changeBanner"],
-    mutationFn: (newBanner: File) =>
-      ChangeBanner(newBanner, localStorage.getItem("access_token") ?? ""),
+    mutationFn: (newBanner: File) => ChangeBanner(newBanner),
     onSuccess: () => {
       setTimeout(() => {
         refectProfileBanner();
@@ -66,7 +56,7 @@ export const useProfile = () => {
     refetchUserInfo,
     changeAvatar,
     changeBanner,
-    refectProfileAvatar,
+    refetchProfileAvatar,
     refectProfileBanner,
   };
 };

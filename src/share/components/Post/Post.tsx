@@ -5,11 +5,13 @@ import { likeIco, likeIcoActive } from "../../../assets";
 import { useCallback, useMemo, useState } from "react";
 import { useDisclosure } from "@nextui-org/react";
 import { DropDownItem } from "../DropDownMenu/DropDownMenu.types";
+import usePosts from "../../../lib/hooks/usePosts";
 
 const Post = (props: PostProps) => {
-  const { title, text } = props;
+  const { title, text, id } = props;
   const { profileAvatar, user } = useProfile();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { deletePost } = usePosts();
   const [likes, setLikes] = useState<string[]>([]);
 
   const dropItems: DropDownItem[] = [
@@ -23,6 +25,7 @@ const Post = (props: PostProps) => {
       key: "delete",
       color: "danger",
       className: "text-danger",
+      onClick: () => deletePost(id),
     },
   ];
 

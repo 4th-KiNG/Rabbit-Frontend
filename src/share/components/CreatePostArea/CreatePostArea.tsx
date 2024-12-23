@@ -2,6 +2,7 @@ import { useProfile } from "../../../lib/hooks/useProfile";
 import { Button, Image } from "../..";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { photoIco } from "../../../assets";
+import usePosts from "../../../lib/hooks/usePosts";
 
 const CreatePostArea = () => {
   const { profileAvatar } = useProfile();
@@ -9,6 +10,7 @@ const CreatePostArea = () => {
   const areaRef = useRef<HTMLDivElement>(null);
   const [textTitle, setTextTitle] = useState("");
   const [textArea, setTextArea] = useState("");
+  const { createPost } = usePosts();
 
   const handleChangeTextTitle = (e: ChangeEvent<HTMLInputElement>) =>
     setTextTitle(e.target.value);
@@ -18,6 +20,18 @@ const CreatePostArea = () => {
 
   const handleClickOutside = (e: MouseEvent) => {
     if (areaRef.current && !areaRef.current.contains(e.target as Node)) {
+      setFocus(false);
+      setTextArea("");
+      setTextTitle("");
+    }
+  };
+
+  const handleCreatePost = () => {
+    if (textTitle !== "" && textTitle !== "") {
+      createPost({
+        text: textArea,
+        title: textTitle,
+      });
       setFocus(false);
       setTextArea("");
       setTextTitle("");
@@ -62,7 +76,10 @@ const CreatePostArea = () => {
                 <Button className="p-2 min-w-max h-max rounded-full">
                   <Image url={photoIco} className="w-6 h-6" />
                 </Button>
-                <Button className="rounded-full bg-[#CE3333]">
+                <Button
+                  className="rounded-full bg-[#CE3333]"
+                  onClick={handleCreatePost}
+                >
                   <p>Опубликовать</p>
                 </Button>
               </div>
