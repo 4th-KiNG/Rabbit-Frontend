@@ -11,7 +11,6 @@ export const CreatePost = async (createPostDto: ICreatePost) => {
       text: text,
     },
   });
-  console.log(data);
   return data;
 };
 
@@ -20,7 +19,6 @@ export const GetPosts = async () => {
     method: "get",
     url: `${IP}/posts`,
   });
-  console.log(data);
   return data;
 };
 
@@ -29,6 +27,5 @@ export const DeletePost = async (postId: string) => {
     method: "delete",
     url: `${IP}/posts/${postId}`,
   });
-  console.log(data);
   return data;
 };
