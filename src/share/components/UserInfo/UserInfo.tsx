@@ -10,7 +10,7 @@ const UserInfo = (props: UserInfoProps) => {
   const { changeAvatar } = useProfile();
 
   const handleAvatarChange = () => {
-    if (changeAvatarRef.current?.files) {
+    if (changeAvatarRef.current?.files && changeAvatarRef.current.files[0]) {
       changeAvatar(changeAvatarRef.current.files[0]);
     }
   };

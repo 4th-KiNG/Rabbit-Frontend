@@ -9,7 +9,20 @@ import Image from "./ui/Image/Image";
 import ProfileBanner from "./components/ProfileBanner/ProfileBanner";
 import Layout from "./components/Layout/Layout";
 import Post from "./components/Post/Post";
+import CreatePostArea from "./components/CreatePostArea/CreatePostArea";
+import DropDownMenu from "./components/DropDownMenu/DropDownMenu";
+import ModalForm from "./components/ModalForm/ModalForm";
+import ComingSoon from "./components/ComingSoon/ComingSoon";
+import Filters from "./components/Filters/Filters";
+import Checkbox from "./ui/Checkbox/Checkbox";
+
 export {
+  Checkbox,
+  Filters,
+  ComingSoon,
+  ModalForm,
+  DropDownMenu,
+  CreatePostArea,
   Post,
   ProfileBanner,
   SignInForm,
