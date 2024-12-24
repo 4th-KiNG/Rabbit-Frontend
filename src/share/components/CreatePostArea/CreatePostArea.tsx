@@ -59,7 +59,7 @@ const CreatePostArea = () => {
                 onChange={handleChangeTextArea}
               />
               <div className="flex items-center justify-end gap-4 mt-4">
-                <Button className="p-2 min-w-max h-max rounded-full">
+                <Button className="p-2 min-w-max h-max rounded-full bg-[#E3E3E3] dark:bg-transparent">
                   <Image url={photoIco} className="w-6 h-6" />
                 </Button>
                 <Button className="rounded-full bg-[#CE3333]">

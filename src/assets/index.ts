@@ -16,6 +16,8 @@ import likeIcoActive from "./likeIcoActive.svg";
 import sort from "./sort.svg";
 import photoIco from "./photoIco.svg";
 import comingSoonText from "./comingSoonText.png";
+import sortBlack from "./sortBlack.svg";
+import searchBlack from "./searchBlack.svg";
 
 export {
   comingSoonText,
@@ -36,4 +38,6 @@ export {
   likeIco,
   likeIcoActive,
   sort,
+  sortBlack,
+  searchBlack,
 };

@@ -54,7 +54,7 @@ const ProfilePage = () => {
                 <div key={index}>
                   <Button
                     className={`rounded-full text-xl max-[1500px]:text-medium max-[500px]:text-sm font-normal text-black dark:text-white px-10 max-[1500px]:px-6 max-[500px]:px-4 py-4 max-[1500px]:py-3 h-max ${
-                      btn.label === section ? "bg-[#E3E3E3] dark:bg-[#404040]" : "bg-[#eeeeee] dark:bg-[#272727]"
+                      btn.label === section ? "bg-[#d6d6d6] dark:bg-[#404040]" : "bg-[#EDEDED] dark:bg-[#272727]"
                     }`}
                     onClick={() => setSection(btn.label)}
                   >

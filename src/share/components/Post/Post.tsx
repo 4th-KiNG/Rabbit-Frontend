@@ -65,7 +65,7 @@ const Post = (props: PostProps) => {
         <p className="text-lg max-[900px]:text-base">{text}</p>
         <div className="mt-2">
           <Button
-            className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-[#585757]"
+            className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-white dark:bg-[#585757]"
             onClick={toggleLike}
           >
             <Image
