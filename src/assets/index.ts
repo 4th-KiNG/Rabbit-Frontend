@@ -16,8 +16,12 @@ import likeIcoActive from "./likeIcoActive.svg";
 import sort from "./sort.svg";
 import photoIco from "./photoIco.svg";
 import comingSoonText from "./comingSoonText.png";
+import crossDark from "./crossDark.svg";
+import crossLight from "./crossLight.svg";
 
 export {
+  crossDark,
+  crossLight,
   comingSoonText,
   photoIco,
   bg,

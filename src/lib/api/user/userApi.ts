@@ -1,25 +1,15 @@
 import { UserData } from "../../../types/user.types";
-import { Http, IP } from "../../../constants/api";
+import { Http, API } from "../../../constants/api";
 
 export const GetUserInfo = async (token: string): Promise<UserData> => {
   const { data } = await Http({
     method: "get",
-    url: `${IP}/user`,
+    url: `${API}/user`,
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
   return data;
-};
-
-export const GetAvatar = async (id: string) => {
-  const { data } = await Http({
-    method: "get",
-    url: `${IP}/user/avatar/${id}`,
-    responseType: "blob",
-  });
-  const image = URL.createObjectURL(data);
-  return image;
 };
 
 export const ChangeAvatar = async (newAvatar: File) => {
@@ -28,20 +18,10 @@ export const ChangeAvatar = async (newAvatar: File) => {
 
   const { data } = await Http({
     method: "post",
-    url: `${IP}/user/avatar`,
+    url: `${API}/user/avatar`,
     data: avatarFormData,
   });
   return data;
-};
-
-export const GetBanner = async (id: string) => {
-  const { data } = await Http({
-    method: "get",
-    url: `${IP}/user/banner/${id}`,
-    responseType: "blob",
-  });
-  const image = URL.createObjectURL(data);
-  return image;
 };
 
 export const ChangeBanner = async (newBanner: File) => {
@@ -50,7 +30,7 @@ export const ChangeBanner = async (newBanner: File) => {
 
   const { data } = await Http({
     method: "post",
-    url: `${IP}/user/banner`,
+    url: `${API}/user/banner`,
     data: bannerFormData,
   });
   return data;

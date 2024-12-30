@@ -1,7 +1,8 @@
 import axios from "axios";
 
 //export const IP = "http://rabbit-vm.ddns.net/api";
-export const IP = "http://localhost:3000";
+export const API = "http://localhost:3000";
+export const STORAGE_API = API + "/static";
 
 export const Http = axios.create();
 

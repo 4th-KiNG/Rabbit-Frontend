@@ -1,15 +1,20 @@
-import { Http, IP } from "../../../constants/api";
+import { Http, API } from "../../../constants/api";
 import { ICreatePost } from "../../../types/post.types";
 
 export const CreatePost = async (createPostDto: ICreatePost) => {
-  const { title, text } = createPostDto;
+  const { title, text, images } = createPostDto;
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("text", text);
+  if (images && images.length > 0) {
+    images.forEach((image, index) => {
+      formData.append("images", image, image.name || `image_${index}`);
+    });
+  }
   const { data } = await Http({
     method: "post",
-    url: `${IP}/posts`,
-    data: {
-      title: title,
-      text: text,
-    },
+    url: `${API}/posts`,
+    data: formData,
   });
   return data;
 };
@@ -17,7 +22,7 @@ export const CreatePost = async (createPostDto: ICreatePost) => {
 export const GetPosts = async () => {
   const { data } = await Http({
     method: "get",
-    url: `${IP}/posts`,
+    url: `${API}/posts`,
   });
   return data;
 };
@@ -25,7 +30,7 @@ export const GetPosts = async () => {
 export const DeletePost = async (postId: string) => {
   const { data } = await Http({
     method: "delete",
-    url: `${IP}/posts/${postId}`,
+    url: `${API}/posts/${postId}`,
   });
   return data;
 };

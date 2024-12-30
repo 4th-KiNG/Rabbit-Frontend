@@ -1,10 +1,10 @@
-import { Http, IP } from "../../../constants/api";
+import { Http, API } from "../../../constants/api";
 import { ISignUp, ISignIn } from "./authApi.types";
 
 export const SignUp = async (userData: ISignUp) => {
   const { data } = await Http({
     method: "post",
-    url: `${IP}/auth/signup`,
+    url: `${API}/auth/signup`,
     data: {
       username: userData.username,
       email: userData.email,
@@ -18,7 +18,7 @@ export const SignUp = async (userData: ISignUp) => {
 export const SignIn = async (userData: ISignIn) => {
   const { data } = await Http({
     method: "post",
-    url: `${IP}/auth/signin`,
+    url: `${API}/auth/signin`,
     data: {
       email: userData.email,
       password: userData.password,

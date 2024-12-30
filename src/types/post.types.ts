@@ -7,9 +7,11 @@ export interface PostProps {
   text?: string;
   image?: string;
   createDate: Date;
+  images: [];
 }
 
 export interface ICreatePost {
   title: string;
   text: string;
+  images: File[];
 }

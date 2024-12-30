@@ -1,12 +1,9 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import {
-  ChangeAvatar,
-  ChangeBanner,
-  GetAvatar,
-  GetBanner,
-  GetUserInfo,
-} from "../api/user/userApi";
+import { ChangeAvatar, ChangeBanner, GetUserInfo } from "../api/user/userApi";
 import { UserData } from "../../types/user.types";
+import { AVATARS_STORAGE, BANNERS_STORAGE } from "../../constants/storage";
+import { GetImage } from "../../utils/images.utils";
+import { useMemo } from "react";
 
 export const useProfile = () => {
   const { data: user, refetch: refetchUserInfo } = useQuery<UserData>({
@@ -17,46 +14,34 @@ export const useProfile = () => {
     staleTime: 0,
   });
 
-  const { data: profileAvatar, refetch: refetchProfileAvatar } = useQuery({
-    queryKey: ["avatar"],
-    queryFn: () => GetAvatar(user ? user.id : ""),
-    enabled: !!localStorage.getItem("access_token") && !!user,
-  });
-
-  const { data: profileBanner, refetch: refectProfileBanner } = useQuery({
-    queryKey: ["banner"],
-    queryFn: () => GetBanner(user ? user.id : ""),
-    enabled: !!localStorage.getItem("access_token") && !!user,
-  });
-
   const { mutate: changeAvatar } = useMutation({
     mutationKey: ["changeAvatar"],
     mutationFn: (newAvatar: File) => ChangeAvatar(newAvatar),
-    onSuccess: () => {
-      setTimeout(() => {
-        refetchProfileAvatar();
-      }, 100);
-    },
+    onSuccess: () => setTimeout(() => refetchUserInfo(), 200),
   });
 
   const { mutate: changeBanner } = useMutation({
     mutationKey: ["changeBanner"],
     mutationFn: (newBanner: File) => ChangeBanner(newBanner),
-    onSuccess: () => {
-      setTimeout(() => {
-        refectProfileBanner();
-      }, 100);
-    },
+    onSuccess: () => setTimeout(() => refetchUserInfo(), 200),
   });
 
+  const avatar = useMemo(
+    () => GetImage(AVATARS_STORAGE, user?.avatar ?? "default-avatar.png"),
+    [user?.avatar]
+  );
+
+  const banner = GetImage(
+    BANNERS_STORAGE,
+    user?.banner ?? "default-banner.png"
+  );
+
   return {
-    profileAvatar,
-    profileBanner,
     user,
+    avatar,
+    banner,
     refetchUserInfo,
     changeAvatar,
     changeBanner,
-    refetchProfileAvatar,
-    refectProfileBanner,
   };
 };

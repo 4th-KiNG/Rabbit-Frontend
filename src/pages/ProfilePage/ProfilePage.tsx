@@ -10,7 +10,7 @@ const sectionButtons: SectionButtonsTypes[] = [
 ];
 
 const ProfilePage = () => {
-  const { user, profileAvatar, profileBanner } = useProfile();
+  const { user, avatar, banner } = useProfile();
   const [section, setSection] = useState<
     "Посты" | "Комментарии" | "Личные данные"
   >("Посты");
@@ -33,13 +33,13 @@ const ProfilePage = () => {
   return (
     <>
       <div className="relative z-0 max-[900px]:w-full">
-        <ProfileBanner banner={profileBanner} />
+        <ProfileBanner banner={banner} />
         <div className="grid grid-cols-[1fr_320px] max-[1300px]:flex">
           <div className="-mt-8 flex flex-col gap-6 max-[1300px]:w-full">
             <UserInfo
               username={user?.username ?? ""}
               userId={user?.id ?? ""}
-              userAvatar={profileAvatar}
+              userAvatar={avatar}
             />
             <div className="hidden max-[1300px]:flex w-full justify-around bg-[#272727] py-3 rounded-xl">
               {userInfo.map((info, index) => (

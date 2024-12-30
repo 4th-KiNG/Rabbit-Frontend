@@ -9,4 +9,6 @@ export interface UserData {
   subscribersId?: string[];
   subscriptionsId?: string[];
   sex?: string;
+  avatar?: string;
+  banner?: string;
 }

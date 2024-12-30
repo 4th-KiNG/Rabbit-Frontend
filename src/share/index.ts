@@ -15,6 +15,7 @@ import ModalForm from "./components/ModalForm/ModalForm";
 import ComingSoon from "./components/ComingSoon/ComingSoon";
 import Filters from "./components/Filters/Filters";
 import Checkbox from "./ui/Checkbox/Checkbox";
+import ImageModal from "./components/ImageModal/ImageModal";
 
 export {
   Checkbox,
@@ -34,4 +35,5 @@ export {
   UserInfo,
   Image,
   Layout,
+  ImageModal,
 };
