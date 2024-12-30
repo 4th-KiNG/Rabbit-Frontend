@@ -9,16 +9,9 @@ import {
   SubscribersPage,
 } from "./pages";
 import { Layout } from "./share";
-import { useTheme } from "next-themes";
-import { useEffect } from "react";
 
 function App() {
   const { user } = useProfile();
-  const { setTheme } = useTheme();
-
-  useEffect(() => {
-    setTheme("dark");
-  }, [setTheme]);
 
   if (!user) {
     return <AuthPage />;

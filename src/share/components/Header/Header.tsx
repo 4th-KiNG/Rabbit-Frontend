@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { signOut } = useAuth();
-  const { user, profileAvatar } = useProfile();
+  const { user, avatar } = useProfile();
   const nav = useNavigate();
   return (
     <>
@@ -36,7 +36,7 @@ const Header = () => {
           >
             <span className="text-xl max-[900px]:hidden">{user?.username}</span>
             <Image
-              url={profileAvatar}
+              url={avatar}
               className="w-14 max-[900px]:w-9 object-cover h-14 max-[900px]:h-9 rounded-full"
             />
           </div>
