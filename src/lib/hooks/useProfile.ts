@@ -31,9 +31,9 @@ export const useProfile = () => {
     [user?.avatar]
   );
 
-  const banner = GetImage(
-    BANNERS_STORAGE,
-    user?.banner ?? "default-banner.png"
+  const banner = useMemo(
+    () => GetImage(BANNERS_STORAGE, user?.banner ?? "default-banner.png"),
+    [user?.banner]
   );
 
   return {

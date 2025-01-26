@@ -35,3 +35,12 @@ export const ChangeBanner = async (newBanner: File) => {
   });
   return data;
 };
+
+export const GetByUserId = async (userId: string): Promise<UserData> => {
+  const { data } = await Http({
+    method: "get",
+    url: `${API}/user/${userId}`,
+  });
+
+  return data;
+};

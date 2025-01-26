@@ -4,8 +4,6 @@ export interface UserData {
   email: string;
   regDate: string;
   birthDate?: string;
-  commentsId?: string[];
-  postsId?: string[];
   subscribersId?: string[];
   subscriptionsId?: string[];
   sex?: string;

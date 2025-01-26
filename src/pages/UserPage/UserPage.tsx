@@ -1,7 +1,9 @@
-import { useProfile } from "../../lib/hooks/useProfile";
-import { Button, ProfileBanner, UserInfo } from "../../share";
 import { useState } from "react";
-import { SectionButtonsTypes } from "./ProfilePage.types";
+import { Button } from "@nextui-org/react";
+import { ProfileBanner, UserInfo } from "../../share";
+import { useUser } from "../../lib/hooks/useUser";
+import { SectionButtonsTypes } from "../ProfilePage/ProfilePage.types";
+import { useParams } from "react-router-dom";
 
 const sectionButtons: SectionButtonsTypes[] = [
   { label: "Посты" },
@@ -9,8 +11,11 @@ const sectionButtons: SectionButtonsTypes[] = [
   { label: "Личные данные" },
 ];
 
-const ProfilePage = () => {
-  const { user, avatar, banner } = useProfile();
+const UserPage = () => {
+  const { id } = useParams();
+
+  const { userData, avatar, banner } = useUser(id ?? "");
+
   const [section, setSection] = useState<
     "Посты" | "Комментарии" | "Личные данные"
   >("Посты");
@@ -18,7 +23,7 @@ const ProfilePage = () => {
   const userInfo = [
     {
       title: "подписчики",
-      data: user?.subscribersId?.length ?? 0,
+      data: 0,
     },
     {
       title: "посты",
@@ -33,14 +38,13 @@ const ProfilePage = () => {
   return (
     <>
       <div className="relative z-0 max-[900px]:w-full">
-        <ProfileBanner banner={banner} isProfile />
+        <ProfileBanner banner={banner} />
         <div className="grid grid-cols-[1fr_320px] max-[1300px]:flex">
           <div className="-mt-8 flex flex-col gap-6 max-[1300px]:w-full">
             <UserInfo
-              username={user?.username ?? ""}
-              userId={user?.id ?? ""}
+              username={userData?.username ?? ""}
+              userId={userData?.id ?? ""}
               userAvatar={avatar}
-              isProfile
             />
             <div className="hidden max-[1300px]:flex w-full justify-around bg-[#272727] py-3 rounded-xl">
               {userInfo.map((info, index) => (
@@ -67,7 +71,7 @@ const ProfilePage = () => {
           </div>
           <div className="p-6 bg-[#404040] mt-6 rounded-3xl max-[1500px]:p-5 max-[1300px]:hidden">
             <p className="text-3xl max-[1500px]:text-2xl font-bold text-black dark:text-white">
-              {user?.username}
+              {userData?.username}
             </p>
             <div className="grid grid-cols-[1fr_1fr] mt-5 gap-y-2 text-black dark:text-white">
               {userInfo.map((info, index) => (
@@ -88,4 +92,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default UserPage;

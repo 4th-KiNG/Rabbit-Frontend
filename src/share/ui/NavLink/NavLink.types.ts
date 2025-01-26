@@ -3,4 +3,5 @@ export interface INavLink {
   url: string;
   startImg: string;
   className?: string;
+  isOpen: boolean;
 }

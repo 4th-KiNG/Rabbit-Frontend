@@ -7,6 +7,7 @@ import {
   ProfilePage,
   SettingsPage,
   SubscribersPage,
+  UserPage,
 } from "./pages";
 import { Layout } from "./share";
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/subscribers" element={<SubscribersPage />} />
         <Route path="/notifications" element={<NotificationPage />} />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/user/:id" element={<UserPage />} />
       </Routes>
     </Layout>
   );
