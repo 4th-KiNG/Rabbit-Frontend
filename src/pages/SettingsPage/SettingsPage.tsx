@@ -1,13 +1,9 @@
 import Button from "../../share/ui/Button/Button";
 import { SettingsInput, SettingsInputPasswword } from "./SettingsInput/SettingsInput";
-import { inputContent, passwordContent } from "./SettingsInput/SettingsInput.static"
+import { inputContent, passwordContent, genders } from "./SettingsInput/SettingsInput.static"
 import { IInput } from "./SettingsInput/SettingsInput.types"
 import { Select, SelectItem } from "@nextui-org/react";
 
-const genders = [
-  {key: "female", label: "Женский"},
-  {key: "Male", label: "Мужской"},
-];
 const SettingsPage = () => {
   return (
     <>

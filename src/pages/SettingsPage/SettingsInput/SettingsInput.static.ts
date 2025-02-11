@@ -32,3 +32,8 @@ export const inputContent = [
 ]
 
 export const passwordContent = ["Старый пароль", "Новый пароль", "Повторите пароль"];
+
+export const genders = [ 
+   {key: "female", label: "Женский"},
+   {key: "Male", label: "Мужской"},
+ ];
