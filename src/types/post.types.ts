@@ -13,5 +13,6 @@ export interface PostProps {
 export interface ICreatePost {
   title: string;
   text: string;
+  tags: string[];
   images: File[];
 }

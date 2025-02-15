@@ -2,10 +2,11 @@ import { Http, API } from "../../../constants/api";
 import { ICreatePost } from "../../../types/post.types";
 
 export const CreatePost = async (createPostDto: ICreatePost) => {
-  const { title, text, images } = createPostDto;
+  const { title, text, images, tags } = createPostDto;
   const formData = new FormData();
   formData.append("title", title);
   formData.append("text", text);
+  tags.forEach((tag) => formData.append("tags", tag));
   if (images && images.length > 0) {
     images.forEach((image, index) => {
       formData.append("images", image, image.name || `image_${index}`);

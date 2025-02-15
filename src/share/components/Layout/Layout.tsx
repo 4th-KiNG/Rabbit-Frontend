@@ -10,7 +10,7 @@ const Layout = ({ children }: { children: Readonly<ReactNode> }) => {
       <div
         className={`grid ${isOpenNavbar && "grid-cols-[320px_1fr]"} ${
           !isOpenNavbar && "grid-cols-[auto_1fr]"
-        } max-[1300px]:grid-cols-[280px_1fr] max-[900px]:flex max-[900px]:h-[calc(100vh-64px)]`}
+        } max-[900px]:flex max-[900px]:h-[calc(100vh-64px)]`}
       >
         <Navbar
           isOpen={isOpenNavbar}

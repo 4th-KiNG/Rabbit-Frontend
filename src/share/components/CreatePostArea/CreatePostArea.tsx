@@ -1,8 +1,9 @@
 import { useProfile } from "../../../lib/hooks/useProfile";
-import { Button, Image } from "../..";
+import { Button, Image, TagInput } from "../..";
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 import { crossLight, photoIco } from "../../../assets";
 import usePosts from "../../../lib/hooks/usePosts";
+import { Tag } from "react-tag-input";
 
 const CreatePostArea = () => {
   const { avatar } = useProfile();
@@ -12,6 +13,7 @@ const CreatePostArea = () => {
   const [textTitle, setTextTitle] = useState("");
   const [textArea, setTextArea] = useState("");
   const [uploadFiles, setUploadFiles] = useState<File[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
   const { createPost } = usePosts();
 
   const handleChangeTextTitle = useCallback(
@@ -48,19 +50,21 @@ const CreatePostArea = () => {
     [areaRef]
   );
 
-  const handleCreatePost = () => {
-    if (textTitle !== "" && textTitle !== "") {
+  const handleCreatePost = useCallback(() => {
+    if (textTitle !== "") {
       createPost({
         text: textArea,
         title: textTitle,
         images: uploadFiles,
+        tags: tags.map((tag) => tag.text),
       });
       setFocus(false);
       setTextArea("");
       setTextTitle("");
       setUploadFiles([]);
+      setTags([]);
     }
-  };
+  }, [textTitle, textArea, uploadFiles, createPost, tags]);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -86,7 +90,7 @@ const CreatePostArea = () => {
             onChange={handleChangeTextTitle}
           />
           {isFocus && (
-            <>
+            <div className="flex flex-col gap-3">
               <textarea
                 className="w-full inline-table text-md p-2 bg-transparent outline-none border-noned h-auto"
                 placeholder="Текст обсуждения"
@@ -95,7 +99,7 @@ const CreatePostArea = () => {
               />
               {uploadFiles.length > 0 && (
                 <>
-                  <p className="mb-3">Загруженные файлы:</p>
+                  <p>Загруженные файлы:</p>
                   <div className="flex gap-3 flex-wrap">
                     {uploadFiles.map((file) => (
                       <>
@@ -116,6 +120,8 @@ const CreatePostArea = () => {
                   </div>
                 </>
               )}
+              <div>Теги вашего поста (максимум 15 штук):</div>
+              <TagInput tags={tags} setTags={setTags} />
               <div className="flex items-center justify-end gap-4 mt-4">
                 <Button
                   className="p-2 min-w-max h-max rounded-full"
@@ -130,7 +136,7 @@ const CreatePostArea = () => {
                   <p>Опубликовать</p>
                 </Button>
               </div>
-            </>
+            </div>
           )}
         </div>
       </div>
