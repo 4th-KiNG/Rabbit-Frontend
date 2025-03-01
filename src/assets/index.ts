@@ -18,6 +18,8 @@ import photoIco from "./photoIco.svg";
 import comingSoonText from "./comingSoonText.png";
 import crossDark from "./crossDark.svg";
 import crossLight from "./crossLight.svg";
+import eye from "./eye.svg";
+import eyeClosed from "./eyeClosed.svg";
 
 export {
   crossDark,
@@ -40,4 +42,6 @@ export {
   likeIco,
   likeIcoActive,
   sort,
+  eye,
+  eyeClosed
 };
