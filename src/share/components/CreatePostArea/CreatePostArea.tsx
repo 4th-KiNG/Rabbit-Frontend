@@ -1,33 +1,75 @@
 import { useProfile } from "../../../lib/hooks/useProfile";
-import { Button, Image } from "../..";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { photoIco } from "../../../assets";
+import { Button, Image, TagInput } from "../..";
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
+import { crossLight, photoIco } from "../../../assets";
+import usePosts from "../../../lib/hooks/usePosts";
+import { Tag } from "react-tag-input";
 
 const CreatePostArea = () => {
-  const { profileAvatar } = useProfile();
+  const { avatar } = useProfile();
   const [isFocus, setFocus] = useState<boolean>(false);
   const areaRef = useRef<HTMLDivElement>(null);
+  const imagesRef = useRef<HTMLInputElement>(null);
   const [textTitle, setTextTitle] = useState("");
   const [textArea, setTextArea] = useState("");
+  const [uploadFiles, setUploadFiles] = useState<File[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
+  const { createPost } = usePosts();
 
-  const handleChangeTextTitle = (e: ChangeEvent<HTMLInputElement>) =>
-    setTextTitle(e.target.value);
+  const handleChangeTextTitle = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => setTextTitle(e.target.value),
+    []
+  );
 
-  const handleChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) =>
-    setTextArea(e.target.value);
+  const handleChangeTextArea = useCallback(
+    (e: ChangeEvent<HTMLTextAreaElement>) => setTextArea(e.target.value),
+    []
+  );
 
-  const handleClickOutside = (e: MouseEvent) => {
-    if (areaRef.current && !areaRef.current.contains(e.target as Node)) {
+  const handleUploadFile = useCallback(() => {
+    if (imagesRef.current && imagesRef.current.files)
+      setUploadFiles([...uploadFiles, ...imagesRef.current.files]);
+  }, [imagesRef, uploadFiles]);
+
+  const handleRemoveFile = useCallback(
+    (file: File) => {
+      setUploadFiles(uploadFiles.filter((uploadFile) => uploadFile !== file));
+    },
+    [uploadFiles]
+  );
+
+  const handleClickOutside = useCallback(
+    (e: MouseEvent) => {
+      if (areaRef.current && !areaRef.current.contains(e.target as Node)) {
+        setFocus(false);
+        setTextArea("");
+        setTextTitle("");
+        setUploadFiles([]);
+      }
+    },
+    [areaRef]
+  );
+
+  const handleCreatePost = useCallback(() => {
+    if (textTitle !== "") {
+      createPost({
+        text: textArea,
+        title: textTitle,
+        images: uploadFiles,
+        tags: tags.map((tag) => tag.text),
+      });
       setFocus(false);
       setTextArea("");
       setTextTitle("");
+      setUploadFiles([]);
+      setTags([]);
     }
-  };
+  }, [textTitle, textArea, uploadFiles, createPost, tags]);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [handleClickOutside]);
 
   return (
     <>
@@ -37,10 +79,7 @@ const CreatePostArea = () => {
         }`}
         ref={areaRef}
       >
-        <Image
-          url={profileAvatar}
-          className="w-10 h-10 rounded-full object-cover"
-        />
+        <Image url={avatar} className="w-10 h-10 rounded-full object-cover" />
         <div className="w-full">
           <input
             type="text"
@@ -51,25 +90,64 @@ const CreatePostArea = () => {
             onChange={handleChangeTextTitle}
           />
           {isFocus && (
-            <>
+            <div className="flex flex-col gap-3">
               <textarea
                 className="w-full inline-table text-md p-2 bg-transparent outline-none border-noned h-auto"
                 placeholder="Текст обсуждения"
                 value={textArea}
                 onChange={handleChangeTextArea}
               />
+              {uploadFiles.length > 0 && (
+                <>
+                  <p>Загруженные файлы:</p>
+                  <div className="flex gap-3 flex-wrap">
+                    {uploadFiles.map((file) => (
+                      <>
+                        <div className="relative">
+                          <Image
+                            url={URL.createObjectURL(file)}
+                            className="w-16 h-16 object-cover"
+                          />
+                          <Button
+                            className="absolute -top-2 -right-2 p-1 min-w-0 h-max bg-black rounded-full"
+                            onClick={() => handleRemoveFile(file)}
+                          >
+                            <Image url={crossLight} className="w-5 h-5" />
+                          </Button>
+                        </div>
+                      </>
+                    ))}
+                  </div>
+                </>
+              )}
+              <div>Теги вашего поста (максимум 15 штук):</div>
+              <TagInput tags={tags} setTags={setTags} />
               <div className="flex items-center justify-end gap-4 mt-4">
-                <Button className="p-2 min-w-max h-max rounded-full bg-[#E3E3E3] dark:bg-transparent">
+                <Button
+                  className="p-2 min-w-max h-max rounded-full bg-[#E3E3E3] dark:bg-transparent"
+                  onClick={() => imagesRef.current?.click()}
+                >
                   <Image url={photoIco} className="w-6 h-6" />
                 </Button>
-                <Button className="rounded-full bg-[#CE3333]">
+                <Button
+                  className="rounded-full bg-[#CE3333]"
+                  onClick={handleCreatePost}
+                >
                   <p>Опубликовать</p>
                 </Button>
               </div>
-            </>
+            </div>
           )}
         </div>
       </div>
+      <input
+        type="file"
+        className="hidden"
+        onChange={handleUploadFile}
+        ref={imagesRef}
+        accept=".png,.jpg,.jpeg"
+        multiple
+      />
     </>
   );
 };

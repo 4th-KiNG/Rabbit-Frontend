@@ -5,7 +5,7 @@ import { Image } from "../../";
 import { useProfile } from "../../../lib/hooks/useProfile";
 
 const UserInfo = (props: UserInfoProps) => {
-  const { username, userAvatar } = props;
+  const { username, userAvatar, isProfile } = props;
   const changeAvatarRef = useRef<HTMLInputElement>(null);
   const { changeAvatar } = useProfile();
 
@@ -23,20 +23,24 @@ const UserInfo = (props: UserInfoProps) => {
             url={userAvatar ?? ""}
             className="w-[108px] h-[108px] max-[900px]:w-20 max-[900px]:h-20 rounded-full object-cover relative z-0"
           />
-          <img
-            src={changeAvatarIco}
-            className="absolute bottom-0 left-0 z-10"
-            alt=""
-          />
+          {isProfile && (
+            <img
+              src={changeAvatarIco}
+              className="absolute bottom-0 left-0 z-10"
+              alt=""
+            />
+          )}
         </div>
         <p className="text-3xl font-bold">{username}</p>
 
-        <input
-          type="file"
-          ref={changeAvatarRef}
-          className="hidden"
-          onChange={handleAvatarChange}
-        />
+        {isProfile && (
+          <input
+            type="file"
+            ref={changeAvatarRef}
+            className="hidden"
+            onChange={handleAvatarChange}
+          />
+        )}
       </div>
     </>
   );

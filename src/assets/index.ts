@@ -18,8 +18,14 @@ import photoIco from "./photoIco.svg";
 import comingSoonText from "./comingSoonText.png";
 import sortBlack from "./sortBlack.svg";
 import searchBlack from "./searchBlack.svg";
+import crossDark from "./crossDark.svg";
+import crossLight from "./crossLight.svg";
+import eye from "./eye.svg";
+import eyeClosed from "./eyeClosed.svg";
 
 export {
+  crossDark,
+  crossLight,
   comingSoonText,
   photoIco,
   bg,
@@ -40,4 +46,6 @@ export {
   sort,
   sortBlack,
   searchBlack,
+  eye,
+  eyeClosed
 };

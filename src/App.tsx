@@ -1,28 +1,22 @@
 import { Route, Routes } from "react-router-dom";
-import { useProfile } from "./lib/hooks/useProfile";
+//import { useProfile } from "./lib/hooks/useProfile";
 import {
-  AuthPage,
+  //AuthPage,
   NotificationPage,
   PostsPage,
   ProfilePage,
   SettingsPage,
   SubscribersPage,
+  UserPage,
 } from "./pages";
 import { Layout } from "./share";
-import { useTheme } from "next-themes";
-import { useEffect } from "react";
 
 function App() {
-  const { user } = useProfile();
-  const { setTheme } = useTheme();
+  // const { user } = useProfile();
 
-  useEffect(() => {
-    setTheme("dark");
-  }, [setTheme]);
-
-  if (!user) {
-    return <AuthPage />;
-  }
+  // if (!user) {
+  //   return <AuthPage />;
+  // }
   return (
     <Layout>
       <Routes>
@@ -31,6 +25,7 @@ function App() {
         <Route path="/subscribers" element={<SubscribersPage />} />
         <Route path="/notifications" element={<NotificationPage />} />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/user/:id" element={<UserPage />} />
       </Routes>
     </Layout>
   );
