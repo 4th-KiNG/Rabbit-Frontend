@@ -16,19 +16,19 @@ const Navbar = ({
 
   return (
     <>
-      <div className="bg-[#2A2A2A] h-[calc(100vh-80px)] p-4 max-[900px]:hidden flex items-center flex-col gap-3">
+      <div className="h-[calc(100vh-80px)] p-8 max-[900px]:hidden bg-[#EDEDED] dark:bg-[#2A2A2A]">
         <Button className="min-w-20 rounded-full" onClick={setOpen}>
           <img src={sort} className={`w-3 ${!isOpen && "rotate-180"}`} alt="" />
         </Button>
-        <nav className="flex gap-3 flex-col w-full">
-          {links.map((link: Omit<INavLink, "isOpen">, index) => {
+        <nav className="flex gap-3 flex-col">
+          {links.map((link: INavLink, index) => {
             return (
               <span key={index}>
                 <NavLink
                   {...link}
                   isOpen={isOpen}
                   className={`rounded-full w-full ${
-                    locaton.pathname === link.url ? "bg-[#404040]" : ""
+                    locaton.pathname === link.url ? "bg-[#E3E3E3] dark:bg-[#404040]" : ""
                   }`}
                 />
               </span>

@@ -6,7 +6,7 @@ const Checkbox = (props: ICheckbox) => {
   return (
     <>
       <CheckboxUI
-        className="bg-[#2A2A2A] rounded-full py-2 px-4"
+        className="rounded-full py-2 px-4 bg-[#eeeeee] dark:bg-[#2A2A2A]"
         value={value}
         defaultSelected
         radius="full"
