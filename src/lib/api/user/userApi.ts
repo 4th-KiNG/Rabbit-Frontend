@@ -1,5 +1,6 @@
 import { UserData } from "../../../types/user.types";
 import { Http, API } from "../../../constants/api";
+import { CompressionImage } from "../../../utils/images.utils";
 
 export const GetUserInfo = async (token: string): Promise<UserData> => {
   const { data } = await Http({
@@ -14,7 +15,8 @@ export const GetUserInfo = async (token: string): Promise<UserData> => {
 
 export const ChangeAvatar = async (newAvatar: File) => {
   const avatarFormData = new FormData();
-  avatarFormData.append("avatar", newAvatar);
+  const smallAvatar = await CompressionImage(newAvatar);
+  avatarFormData.append("avatar", smallAvatar);
 
   const { data } = await Http({
     method: "post",
@@ -26,7 +28,8 @@ export const ChangeAvatar = async (newAvatar: File) => {
 
 export const ChangeBanner = async (newBanner: File) => {
   const bannerFormData = new FormData();
-  bannerFormData.append("banner", newBanner);
+  const smallBanner = await CompressionImage(newBanner);
+  bannerFormData.append("banner", smallBanner);
 
   const { data } = await Http({
     method: "post",

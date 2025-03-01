@@ -1,5 +1,6 @@
 import { Http, API } from "../../../constants/api";
 import { ICreatePost } from "../../../types/post.types";
+import { CompressionImage } from "../../../utils/images.utils";
 
 export const CreatePost = async (createPostDto: ICreatePost) => {
   const { title, text, images, tags } = createPostDto;
@@ -8,9 +9,14 @@ export const CreatePost = async (createPostDto: ICreatePost) => {
   formData.append("text", text);
   tags.forEach((tag) => formData.append("tags", tag));
   if (images && images.length > 0) {
-    images.forEach((image, index) => {
-      formData.append("images", image, image.name || `image_${index}`);
-    });
+    for (const [index, image] of images.entries()) {
+      const smallImage = await CompressionImage(image);
+      formData.append(
+        "images",
+        smallImage,
+        smallImage.name || `image_${index}`
+      );
+    }
   }
   const { data } = await Http({
     method: "post",
