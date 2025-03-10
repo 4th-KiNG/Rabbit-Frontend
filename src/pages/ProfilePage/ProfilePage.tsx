@@ -2,6 +2,7 @@ import { useProfile } from "../../lib/hooks/useProfile";
 import { Button, ProfileBanner, UserInfo } from "../../share";
 import { useState } from "react";
 import { SectionButtonsTypes } from "./ProfilePage.types";
+import PersonalInformation from "./PersonalInformation/PersonalInformation";
 
 const sectionButtons: SectionButtonsTypes[] = [
   { label: "Посты" },
@@ -57,7 +58,7 @@ const ProfilePage = () => {
                     className={`rounded-full text-xl max-[1500px]:text-medium max-[500px]:text-sm font-normal text-black dark:text-white px-10 max-[1500px]:px-6 max-[500px]:px-4 py-4 max-[1500px]:py-3 h-max ${
                       btn.label === section ? "bg-[#404040]" : "bg-[#272727]"
                     }`}
-                    onClick={() => setSection(btn.label)}
+                    onClick={() => {setSection(btn.label); console.log(section)}}
                   >
                     {btn.label}
                   </Button>
@@ -83,6 +84,7 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
+        {section == "Личные данные" ? <PersonalInformation />: ''}
       </div>
     </>
   );

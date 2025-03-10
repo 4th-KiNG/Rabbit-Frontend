@@ -68,7 +68,7 @@ const UserPage = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div>         
           <div className="p-6 bg-[#404040] mt-6 rounded-3xl max-[1500px]:p-5 max-[1300px]:hidden">
             <p className="text-3xl max-[1500px]:text-2xl font-bold text-black dark:text-white">
               {userData?.username}
