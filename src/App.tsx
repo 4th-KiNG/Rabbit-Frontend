@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-//import { useProfile } from "./lib/hooks/useProfile";
+import { useProfile } from "./lib/hooks/useProfile";
 import {
-  //AuthPage,
+  AuthPage,
   NotificationPage,
   PostsPage,
   ProfilePage,
@@ -12,10 +12,10 @@ import {
 import { Layout } from "./share";
 
 function App() {
-  // const { user } = useProfile();
-  // if (!user) {
-  //   return <AuthPage />;
-  // }
+  const { user } = useProfile();
+  if (!user) {
+    return <AuthPage />;
+  }
   return (
     <Layout>
       <Routes>
