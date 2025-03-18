@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Button } from "@nextui-org/react";
-import { ProfileBanner, UserInfo } from "../../share";
+import { Post, ProfileBanner, UserInfo } from "../../share";
 import { useUser } from "../../lib/hooks/useUser";
 import { SectionButtonsTypes } from "../ProfilePage/ProfilePage.types";
 import { useParams } from "react-router-dom";
+import usePosts from "../../lib/hooks/usePosts";
 
 const sectionButtons: SectionButtonsTypes[] = [
   { label: "Посты" },
@@ -15,6 +16,7 @@ const UserPage = () => {
   const { id } = useParams();
 
   const { userData, avatar, banner } = useUser(id ?? "");
+  const { posts } = usePosts(userData?.id);
 
   const [section, setSection] = useState<
     "Посты" | "Комментарии" | "Личные данные"
@@ -68,6 +70,13 @@ const UserPage = () => {
                 </div>
               ))}
             </div>
+            {section === "Посты" && posts && (
+              <div>
+                {posts.map((post) => (
+                  <Post {...post} />
+                ))}
+              </div>
+            )}
           </div>
           <div className="p-6 bg-[#404040] mt-6 rounded-3xl max-[1500px]:p-5 max-[1300px]:hidden">
             <p className="text-3xl max-[1500px]:text-2xl font-bold text-black dark:text-white">

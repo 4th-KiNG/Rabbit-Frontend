@@ -26,10 +26,17 @@ export const CreatePost = async (createPostDto: ICreatePost) => {
   return data;
 };
 
-export const GetPosts = async () => {
+export const GetPosts = async (
+  ownerId?: string,
+  searchString?: string | null
+) => {
   const { data } = await Http({
     method: "get",
     url: `${API}/posts`,
+    params: {
+      ownerId: ownerId,
+      search_string: searchString,
+    },
   });
   return data;
 };

@@ -1,13 +1,38 @@
 import { exitIco, logo, notifications, search } from "../../../assets";
-import { RabbitTitle, Input, Image, Button } from "../..";
+import { RabbitTitle, Image, Button } from "../..";
 import { useAuth } from "../../../lib/hooks/useAuth";
 import { useProfile } from "../../../lib/hooks/useProfile";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Input as InputUI } from "@nextui-org/react";
+import { isMobile } from "../../../utils/styles.utils";
+import { useDebouncedCallback } from "use-debounce";
 
 const Header = () => {
   const { signOut } = useAuth();
   const { user, avatar } = useProfile();
+  const [searchString, setSearchString] = useState<string>();
+  const [, setSearchParams] = useSearchParams();
   const nav = useNavigate();
+
+  const handleSetSearchString = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target) {
+      setSearchString(e.target.value);
+    }
+  };
+
+  const debounceSearchString = useDebouncedCallback((value) => {
+    if (value) {
+      setSearchParams({ search_string: value });
+    } else {
+      setSearchParams({});
+    }
+  }, 1000);
+
+  useEffect(() => {
+    debounceSearchString(searchString);
+  }, [searchString, debounceSearchString]);
+
   return (
     <>
       <header className="bg-[#181717] w-full h-20 max-[900px]:h-16 flex items-center px-10 max-[900px]:px-4 justify-between">
@@ -19,10 +44,15 @@ const Header = () => {
           <RabbitTitle />
         </div>
         <div className="flex gap-6 items-center min-w-[400px] max-[900px]:hidden">
-          <Input
-            type="search"
-            label="Поиск"
-            startImage={<img src={search} className="mr-2 w-6" />}
+          <InputUI
+            size={`${isMobile() ? "md" : "lg"}`}
+            placeholder={"Поиск"}
+            style={{ fontSize: `${isMobile() ? "14px" : "16px"}` }}
+            type={"search"}
+            radius="full"
+            startContent={<img src={search} className="mr-2 w-6" />}
+            value={searchString}
+            onChange={handleSetSearchString}
           />
           <Button className="p-3 bg-transparent min-w-0 rounded-full w-13 h-13">
             <Image url={notifications} className="w-full h-full" />

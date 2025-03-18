@@ -1,7 +1,8 @@
 import { useProfile } from "../../lib/hooks/useProfile";
-import { Button, ProfileBanner, UserInfo } from "../../share";
+import { Button, Post, ProfileBanner, UserInfo } from "../../share";
 import { useState } from "react";
 import { SectionButtonsTypes } from "./ProfilePage.types";
+import usePosts from "../../lib/hooks/usePosts";
 
 const sectionButtons: SectionButtonsTypes[] = [
   { label: "Посты" },
@@ -11,6 +12,7 @@ const sectionButtons: SectionButtonsTypes[] = [
 
 const ProfilePage = () => {
   const { user, avatar, banner } = useProfile();
+  const { posts } = usePosts(user?.id);
   const [section, setSection] = useState<
     "Посты" | "Комментарии" | "Личные данные"
   >("Посты");
@@ -34,7 +36,7 @@ const ProfilePage = () => {
     <>
       <div className="relative z-0 max-[900px]:w-full">
         <ProfileBanner banner={banner} isProfile />
-        <div className="grid grid-cols-[1fr_320px] max-[1300px]:flex">
+        <div className="grid grid-cols-[1fr_320px] gap-6 max-[1300px]:flex">
           <div className="-mt-8 flex flex-col gap-6 max-[1300px]:w-full">
             <UserInfo
               username={user?.username ?? ""}
@@ -64,6 +66,13 @@ const ProfilePage = () => {
                 </div>
               ))}
             </div>
+            {section === "Посты" && posts && (
+              <div>
+                {posts.map((post) => (
+                  <Post {...post} />
+                ))}
+              </div>
+            )}
           </div>
           <div className="p-6 bg-[#404040] mt-6 rounded-3xl max-[1500px]:p-5 max-[1300px]:hidden">
             <p className="text-3xl max-[1500px]:text-2xl font-bold text-black dark:text-white">
