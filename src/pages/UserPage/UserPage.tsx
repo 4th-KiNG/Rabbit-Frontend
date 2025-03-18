@@ -1,35 +1,48 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Button } from "@nextui-org/react";
 import { Post, ProfileBanner, UserInfo } from "../../share";
 import { useUser } from "../../lib/hooks/useUser";
 import { SectionButtonsTypes } from "../ProfilePage/ProfilePage.types";
 import { useParams } from "react-router-dom";
 import usePosts from "../../lib/hooks/usePosts";
+import { useProfile } from "../../lib/hooks/useProfile";
 
 const sectionButtons: SectionButtonsTypes[] = [
   { label: "Посты" },
   { label: "Комментарии" },
-  { label: "Личные данные" },
 ];
 
 const UserPage = () => {
   const { id } = useParams();
 
-  const { userData, avatar, banner } = useUser(id ?? "");
+  const { userData, avatar, banner, subToUser, unSubToUser } = useUser(
+    id ?? ""
+  );
+  const { user } = useProfile();
   const { posts } = usePosts(userData?.id);
 
-  const [section, setSection] = useState<
-    "Посты" | "Комментарии" | "Личные данные"
-  >("Посты");
+  const [section, setSection] = useState<"Посты" | "Комментарии">("Посты");
+
+  const isSub = useMemo((): boolean => {
+    return (
+      !!userData?.subscribersId &&
+      !!user?.id &&
+      userData.subscribersId.includes(user.id)
+    );
+  }, [userData, user]);
 
   const userInfo = [
     {
       title: "подписчики",
-      data: 0,
+      data: userData?.subscribersId?.length ?? 0,
+    },
+    {
+      title: "подписки",
+      data: userData?.subscriptionsId?.length ?? 0,
     },
     {
       title: "посты",
-      data: 0,
+      data: posts?.length ?? 0,
     },
     {
       title: "комментарии",
@@ -41,7 +54,7 @@ const UserPage = () => {
     <>
       <div className="relative z-0 max-[900px]:w-full">
         <ProfileBanner banner={banner} />
-        <div className="grid grid-cols-[1fr_320px] max-[1300px]:flex">
+        <div className="grid grid-cols-[1fr_320px] gap-6 max-[1300px]:flex">
           <div className="-mt-8 flex flex-col gap-6 max-[1300px]:w-full">
             <UserInfo
               username={userData?.username ?? ""}
@@ -71,28 +84,41 @@ const UserPage = () => {
               ))}
             </div>
             {section === "Посты" && posts && (
-              <div>
+              <div className="flex flex-col gap-8 max-[500px]:gap-3">
                 {posts.map((post) => (
                   <Post {...post} />
                 ))}
               </div>
             )}
           </div>
-          <div className="p-6 bg-[#404040] mt-6 rounded-3xl max-[1500px]:p-5 max-[1300px]:hidden">
-            <p className="text-3xl max-[1500px]:text-2xl font-bold text-black dark:text-white">
-              {userData?.username}
-            </p>
-            <div className="grid grid-cols-[1fr_1fr] mt-5 gap-y-2 text-black dark:text-white">
-              {userInfo.map((info, index) => (
-                <div key={index}>
-                  <p className="text-xl max-[1500px]:text-lg font-bold">
-                    {info.data}
-                  </p>
-                  <p className="text-base max-[1500px]:text-sm font-normal">
-                    {info.title}
-                  </p>
-                </div>
-              ))}
+          <div>
+            <Button
+              className={`mt-6 w-full rounded-full text-xl max-[1500px]:text-medium max-[500px]:text-sm font-normal ${
+                isSub ? "bg-[#404040]" : "bg-[#CE3333]"
+              } text-black dark:text-white px-10 max-[1500px]:px-6 max-[500px]:px-4 py-4 max-[1500px]:py-3 h-max`}
+              onClick={() => {
+                if (!isSub) subToUser();
+                else unSubToUser();
+              }}
+            >
+              {isSub ? "Отписаться" : "Подписаться"}
+            </Button>
+            <div className="p-6 bg-[#404040] mt-6 rounded-3xl max-[1500px]:p-5 max-[1300px]:hidden">
+              <p className="text-3xl max-[1500px]:text-2xl font-bold text-black dark:text-white">
+                {userData?.username}
+              </p>
+              <div className="grid grid-cols-[1fr_1fr] mt-5 gap-y-2 text-black dark:text-white">
+                {userInfo.map((info, index) => (
+                  <div key={index}>
+                    <p className="text-xl max-[1500px]:text-lg font-bold">
+                      {info.data}
+                    </p>
+                    <p className="text-base max-[1500px]:text-sm font-normal">
+                      {info.title}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

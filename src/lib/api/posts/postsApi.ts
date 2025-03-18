@@ -48,3 +48,41 @@ export const DeletePost = async (postId: string) => {
   });
   return data;
 };
+
+export const LikePost = async (postId: string) => {
+  const { data } = await Http({
+    method: "patch",
+    url: `${API}/posts/${postId}/likes`,
+    params: {
+      status: "like",
+    },
+  });
+  return data;
+};
+
+export const DislikePost = async (postId: string) => {
+  const { data } = await Http({
+    method: "patch",
+    url: `${API}/posts/${postId}/likes`,
+    params: {
+      status: "dislike",
+    },
+  });
+  return data;
+};
+
+export const GetLikes = async (postId: string) => {
+  const { data } = await Http({
+    method: "get",
+    url: `${API}/posts/${postId}/likes`,
+  });
+  return data;
+};
+
+export const GetPost = async (postId: string) => {
+  const { data } = await Http({
+    method: "get",
+    url: `${API}/posts/${postId}`,
+  });
+  return data;
+};

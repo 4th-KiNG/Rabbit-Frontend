@@ -24,7 +24,6 @@ const usePosts = (ownerId?: string) => {
   });
 
   useEffect(() => {
-    console.log(searchString);
     if (searchString && searchString.length > 0) {
       refetchPosts();
     }

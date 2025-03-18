@@ -27,6 +27,7 @@ const DropDownMenu = (props: DropDownMenuProps) => {
             color={item.color}
             className={item.className}
             onClick={item.onClick}
+            onTouchEnd={item.onClick}
           >
             {item.title}
           </DropdownItem>

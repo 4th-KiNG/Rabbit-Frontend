@@ -8,33 +8,29 @@ import { DropDownItem } from "../DropDownMenu/DropDownMenu.types";
 import usePosts from "../../../lib/hooks/usePosts";
 import { GetImage } from "../../../utils/images.utils";
 import { useUser } from "../../../lib/hooks/useUser";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { usePost } from "../../../lib/hooks/usePost";
 
 const Post = (props: PostProps) => {
   const { title, text, id, images, ownerId } = props;
   const { user } = useProfile();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { deletePost } = usePosts();
-  const [likes, setLikes] = useState<string[]>([]);
+  const { likes, likePost, dislikePost } = usePost(id);
   const [openImage, setOpenImage] = useState("");
   const [isOpenModal, setOpenModal] = useState(false);
+  const nav = useNavigate();
 
   const { userData, avatar } = useUser(ownerId);
 
-  const dropItems: DropDownItem[] = [
+  const [dropItems] = useState<DropDownItem[]>([
     {
       title: "Пожаловаться",
-      key: "",
+      key: "report",
       onClick: onOpen,
     },
-    {
-      title: "Удалить пост",
-      key: "delete",
-      color: "danger",
-      className: "text-danger",
-      onClick: () => deletePost(id),
-    },
-  ];
+    { title: "Открыть пост", key: "open", onClick: () => nav(`/post/${id}`) },
+  ]);
 
   const isLikeActive = useMemo((): boolean => {
     if (likes && user) return likes.includes(user.id);
@@ -42,16 +38,9 @@ const Post = (props: PostProps) => {
   }, [likes, user]);
 
   const toggleLike = useCallback(() => {
-    if (user) {
-      setLikes((prevLikes) => {
-        if (prevLikes.includes(user.id)) {
-          const newLikes = prevLikes.filter((like) => like !== user.id);
-          return newLikes;
-        }
-        return [...prevLikes, user.id];
-      });
-    }
-  }, [user]);
+    if (isLikeActive) dislikePost();
+    else likePost();
+  }, [isLikeActive, dislikePost, likePost]);
 
   return (
     <>
@@ -60,8 +49,8 @@ const Post = (props: PostProps) => {
           <Link
             to={`${
               user && userData && userData?.id === user?.id
-                ? "profile"
-                : `user/${userData?.id}`
+                ? "/profile"
+                : `/user/${userData?.id}`
             }`}
             className="flex items-center gap-2 cursor-pointer"
           >
@@ -73,7 +62,22 @@ const Post = (props: PostProps) => {
               {userData?.username}
             </p>
           </Link>
-          <DropDownMenu items={dropItems} />
+          <DropDownMenu
+            items={
+              userData?.id && user?.id && userData.id === user.id
+                ? [
+                    ...dropItems,
+                    {
+                      title: "Удалить пост",
+                      key: "delete",
+                      color: "danger",
+                      className: "text-danger",
+                      onClick: () => deletePost(id),
+                    },
+                  ]
+                : dropItems
+            }
+          />
           <ModalForm
             isOpen={isOpen}
             onOpenChange={onOpenChange}
@@ -109,7 +113,9 @@ const Post = (props: PostProps) => {
               url={isLikeActive ? likeIcoActive : likeIco}
               className="w-4 h-4 object-contain max-[500px]:w-3 max-[500px]:h-3"
             />
-            {likes.length > 0 && <p className="text-xs">{likes.length}</p>}
+            {likes && likes.length > 0 && (
+              <p className="text-xs">{likes.length}</p>
+            )}
           </Button>
         </div>
       </div>

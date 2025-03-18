@@ -7,15 +7,12 @@ import usePosts from "../../lib/hooks/usePosts";
 const sectionButtons: SectionButtonsTypes[] = [
   { label: "Посты" },
   { label: "Комментарии" },
-  { label: "Личные данные" },
 ];
 
 const ProfilePage = () => {
   const { user, avatar, banner } = useProfile();
   const { posts } = usePosts(user?.id);
-  const [section, setSection] = useState<
-    "Посты" | "Комментарии" | "Личные данные"
-  >("Посты");
+  const [section, setSection] = useState<"Посты" | "Комментарии">("Посты");
 
   const userInfo = [
     {
@@ -23,8 +20,12 @@ const ProfilePage = () => {
       data: user?.subscribersId?.length ?? 0,
     },
     {
+      title: "подписки",
+      data: user?.subscriptionsId?.length ?? 0,
+    },
+    {
       title: "посты",
-      data: 0,
+      data: posts?.length ?? 0,
     },
     {
       title: "комментарии",
@@ -67,7 +68,7 @@ const ProfilePage = () => {
               ))}
             </div>
             {section === "Посты" && posts && (
-              <div>
+              <div className="flex flex-col gap-8 max-[500px]:gap-3">
                 {posts.map((post) => (
                   <Post {...post} />
                 ))}

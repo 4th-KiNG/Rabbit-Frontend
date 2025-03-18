@@ -3,6 +3,7 @@ import { useProfile } from "./lib/hooks/useProfile";
 import {
   AuthPage,
   NotificationPage,
+  PostPage,
   PostsPage,
   ProfilePage,
   SettingsPage,
@@ -25,6 +26,7 @@ function App() {
         <Route path="/notifications" element={<NotificationPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/user/:id" element={<UserPage />} />
+        <Route path="/post/:id" element={<PostPage />} />
       </Routes>
     </Layout>
   );

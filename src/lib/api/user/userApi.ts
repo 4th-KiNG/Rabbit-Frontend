@@ -47,3 +47,25 @@ export const GetByUserId = async (userId: string): Promise<UserData> => {
 
   return data;
 };
+
+export const SubToUser = async (userId: string) => {
+  const { data } = await Http({
+    method: "patch",
+    url: `${API}/user/${userId}`,
+    params: {
+      status: "subscribe",
+    },
+  });
+  return data;
+};
+
+export const UnSubToUser = async (userId: string) => {
+  const { data } = await Http({
+    method: "patch",
+    url: `${API}/user/${userId}`,
+    params: {
+      status: "unsubscribe",
+    },
+  });
+  return data;
+};

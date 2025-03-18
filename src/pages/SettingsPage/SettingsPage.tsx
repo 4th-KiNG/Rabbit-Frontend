@@ -1,15 +1,6 @@
 import Button from "../../share/ui/Button/Button";
-import {
-  SettingsInput,
-  SettingsInputPasswword,
-} from "./SettingsInput/SettingsInput";
-import {
-  inputContent,
-  passwordContent,
-  genders,
-} from "./SettingsInput/SettingsInput.static";
-import { IInput } from "./SettingsInput/SettingsInput.types";
-import { Select, SelectItem } from "@nextui-org/react";
+import { SettingsInputPasswword } from "./SettingsInput/SettingsInput";
+import { passwordContent } from "./SettingsInput/SettingsInput.static";
 
 const SettingsPage = () => {
   return (
@@ -21,7 +12,7 @@ const SettingsPage = () => {
         className="max-w-[664px] w-full gap-y-11 flex flex-col max-[475px]:gap-y-8"
         action="#"
       >
-        <div>
+        {/* <div>
           <h2 className="text-[2.5rem] font-bold text-[#7F7F7F] mb-6 max-[475px]:text-[1.5rem]">
             Личные данные
           </h2>
@@ -47,7 +38,7 @@ const SettingsPage = () => {
           >
             Сохранить изменения
           </Button>
-        </div>
+        </div> */}
         <div>
           <h2 className="text-[2.5rem] font-bold text-[#7F7F7F] mb-6 max-[475px]:text-[1.5rem]">
             Пароль
