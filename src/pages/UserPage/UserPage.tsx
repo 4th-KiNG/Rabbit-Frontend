@@ -1,9 +1,9 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@nextui-org/react";
 import { Post, ProfileBanner, UserInfo } from "../../share";
 import { useUser } from "../../lib/hooks/useUser";
 import { SectionButtonsTypes } from "../ProfilePage/ProfilePage.types";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import usePosts from "../../lib/hooks/usePosts";
 import { useProfile } from "../../lib/hooks/useProfile";
 
@@ -20,6 +20,7 @@ const UserPage = () => {
   );
   const { user } = useProfile();
   const { posts } = usePosts(userData?.id);
+  const nav = useNavigate();
 
   const [section, setSection] = useState<"Посты" | "Комментарии">("Посты");
 
@@ -50,6 +51,10 @@ const UserPage = () => {
     },
   ];
 
+  useEffect(() => {
+    if (user && userData && user.id === userData.id) nav("/profile");
+  }, [user, userData, nav]);
+
   return (
     <>
       <div className="relative z-0 max-[900px]:w-full">
@@ -61,6 +66,17 @@ const UserPage = () => {
               userId={userData?.id ?? ""}
               userAvatar={avatar}
             />
+            <Button
+              className={`hidden w-full rounded-full text-xl max-[1500px]:text-medium max-[500px]:text-sm font-normal ${
+                isSub ? "bg-[#404040]" : "bg-[#CE3333]"
+              } text-black dark:text-white px-10 max-[1500px]:px-6 max-[500px]:px-4 py-4 max-[1500px]:py-3 h-max max-[1300px]:block`}
+              onClick={() => {
+                if (!isSub) subToUser();
+                else unSubToUser();
+              }}
+            >
+              {isSub ? "Отписаться" : "Подписаться"}
+            </Button>
             <div className="hidden max-[1300px]:flex w-full justify-around bg-[#272727] py-3 rounded-xl">
               {userInfo.map((info, index) => (
                 <div key={index} className="flex flex-col items-center">
@@ -69,6 +85,7 @@ const UserPage = () => {
                 </div>
               ))}
             </div>
+
             <div className="flex gap-3 max-[900px]:flex-wrap">
               {sectionButtons.map((btn, index) => (
                 <div key={index}>
@@ -91,7 +108,7 @@ const UserPage = () => {
               </div>
             )}
           </div>
-          <div>
+          <div className="max-[1300px]:hidden">
             <Button
               className={`mt-6 w-full rounded-full text-xl max-[1500px]:text-medium max-[500px]:text-sm font-normal ${
                 isSub ? "bg-[#404040]" : "bg-[#CE3333]"
@@ -103,7 +120,7 @@ const UserPage = () => {
             >
               {isSub ? "Отписаться" : "Подписаться"}
             </Button>
-            <div className="p-6 bg-[#404040] mt-6 rounded-3xl max-[1500px]:p-5 max-[1300px]:hidden">
+            <div className="p-6 bg-[#404040] mt-6 rounded-3xl max-[1500px]:p-5">
               <p className="text-3xl max-[1500px]:text-2xl font-bold text-black dark:text-white">
                 {userData?.username}
               </p>

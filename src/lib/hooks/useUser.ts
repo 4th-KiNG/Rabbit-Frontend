@@ -14,13 +14,13 @@ export const useUser = (userId: string) => {
   const { mutate: subToUser } = useMutation({
     mutationKey: ["sub to user", userId],
     mutationFn: () => SubToUser(userId),
-    onSuccess: () => refetchUserData(),
+    onSuccess: () => setTimeout(() => refetchUserData(), 200),
   });
 
   const { mutate: unSubToUser } = useMutation({
     mutationKey: ["unsub to user", userId],
     mutationFn: () => UnSubToUser(userId),
-    onSuccess: () => refetchUserData(),
+    onSuccess: () => setTimeout(() => refetchUserData(), 200),
   });
 
   const avatar = useMemo(

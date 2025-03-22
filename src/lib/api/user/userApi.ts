@@ -1,6 +1,7 @@
 import { UserData } from "../../../types/user.types";
 import { Http, API } from "../../../constants/api";
 import { CompressionImage } from "../../../utils/images.utils";
+import { ChangePasswordValues } from "../../../pages/SettingsPage/SettingsInput/SettingsInput.types";
 
 export const GetUserInfo = async (token: string): Promise<UserData> => {
   const { data } = await Http({
@@ -66,6 +67,26 @@ export const UnSubToUser = async (userId: string) => {
     params: {
       status: "unsubscribe",
     },
+  });
+  return data;
+};
+
+export const SendNewPassword = async (email: string) => {
+  const { data } = await Http({
+    method: "get",
+    url: `${API}/auth/recoverPassword`,
+    params: {
+      email: email,
+    },
+  });
+  return data;
+};
+
+export const ChangePassword = async (values: ChangePasswordValues) => {
+  const { data } = await Http({
+    method: "post",
+    url: `${API}/user/changePassword`,
+    data: values,
   });
   return data;
 };

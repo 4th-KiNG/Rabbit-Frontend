@@ -20,14 +20,14 @@ export const SettingsInput = (props: IInput) => {
   );
 };
 
-export const SettingsInputPasswword = (props: IInputPass) => {
+export const SettingsInputPassword = (props: IInputPass) => {
   const [eyeIsActive, setEyeIsActive] = useState(false);
   return (
     <SInput
       type={eyeIsActive ? "text" : "password"}
-      label={props.label}
-      labelPlacement="outside"
-      placeholder="********"
+      placeholder={props.label}
+      value={props.value}
+      onChange={props.onChange}
       endContent={
         <button
           className="focus:outline-0"
@@ -40,7 +40,7 @@ export const SettingsInputPasswword = (props: IInputPass) => {
         </button>
       }
       className={`${correctInput} 
-         ${isMobileSettings() ? "max-w-[156px]" : "max-w-[200px]"}`}
+         ${"max-w-[240px] w-full"}`}
     />
   );
 };

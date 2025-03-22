@@ -79,7 +79,10 @@ const CreatePostArea = () => {
         }`}
         ref={areaRef}
       >
-        <Image url={avatar} className="w-10 h-10 rounded-full object-cover" />
+        <Image
+          url={avatar}
+          className="w-10 h-10 rounded-full object-cover max-[900px]:w-8 max-[900px]:h-8"
+        />
         <div className="w-full">
           <input
             type="text"
@@ -120,7 +123,9 @@ const CreatePostArea = () => {
                   </div>
                 </>
               )}
-              <div>Теги вашего поста (максимум 15 штук):</div>
+              <p className="text-base max-[550px]:text-sm">
+                Теги вашего поста (максимум 15 штук):
+              </p>
               <TagInput tags={tags} setTags={setTags} />
               <div className="flex items-center justify-end gap-4 mt-4">
                 <Button

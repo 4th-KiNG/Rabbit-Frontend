@@ -25,6 +25,7 @@ const TagInput = (props: TagInputProps) => {
     newTags.splice(newPos, 0, tag);
     setTags(newTags);
   };
+
   return (
     <>
       <ReactTags
@@ -38,13 +39,13 @@ const TagInput = (props: TagInputProps) => {
         maxTags={15}
         allowAdditionFromPaste
         classNames={{
-          tagInputField: `bg-transparent border-0 w-full outline-0 ${
+          tagInputField: `bg-transparent border-0 w-full text-base outline-0 max-[550px]:text-sm ${
             tags.length === 15 ? "hidden" : "block"
           }`,
           tagInput: "flex-1",
           selected:
             "bg-[rgba(0,0,0,0.3)] p-3 flex gap-2 items-center min-w-64 min-h-[56px] rounded-xl flex-wrap max-[900px]:min-w-0",
-          tag: "flex gap-1 bg-[#404040] rounded-[8px] px-2 py-1",
+          tag: "flex gap-1 text-base bg-[#404040] rounded-[8px] px-2 py-1 max-[550px]:text-sm",
           remove: "outline-0",
         }}
         placeholder=""

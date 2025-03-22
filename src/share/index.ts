@@ -17,6 +17,7 @@ import Filters from "./components/Filters/Filters";
 import Checkbox from "./ui/Checkbox/Checkbox";
 import ImageModal from "./components/ImageModal/ImageModal";
 import TagInput from "./components/TagInput/TagInput";
+import RecoveryModal from "./components/RecoveryModal/RecoveryModal";
 
 export {
   Checkbox,
@@ -38,4 +39,5 @@ export {
   Layout,
   ImageModal,
   TagInput,
+  RecoveryModal,
 };

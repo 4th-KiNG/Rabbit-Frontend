@@ -1,10 +1,17 @@
 import { useState } from "react";
-import { SignInForm, SignUpForm, RabbitTitle } from "../../share";
+import {
+  SignInForm,
+  SignUpForm,
+  RabbitTitle,
+  RecoveryModal,
+} from "../../share";
 import { bg } from "../../assets";
 import { isMobile } from "../../utils/styles.utils";
+import { useDisclosure } from "@nextui-org/react";
 
 const AuthPage = () => {
   const [status, setStatus] = useState<"signin" | "signup">("signin");
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   return (
     <>
       <img src={bg} className="fixed top-0 left-0 w-full h-full" alt="" />
@@ -26,6 +33,13 @@ const AuthPage = () => {
                 Зарегистрироваться
               </p>
             </div>
+            <button
+              className="flex justify-end w-full border-none outline-none max-w-[500px]"
+              onClick={onOpen}
+            >
+              <p className="text-blue-500">Забыли пароль?</p>
+            </button>
+            <RecoveryModal isOpen={isOpen} onOpenChange={onOpenChange} />
           </>
         ) : (
           <>
