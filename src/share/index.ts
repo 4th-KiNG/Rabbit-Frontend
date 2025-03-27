@@ -18,6 +18,7 @@ import Checkbox from "./ui/Checkbox/Checkbox";
 import ImageModal from "./components/ImageModal/ImageModal";
 import TagInput from "./components/TagInput/TagInput";
 import RecoveryModal from "./components/RecoveryModal/RecoveryModal";
+import Comment from "./components/Comment/Comment";
 
 export {
   Checkbox,
@@ -40,4 +41,5 @@ export {
   ImageModal,
   TagInput,
   RecoveryModal,
+  Comment,
 };

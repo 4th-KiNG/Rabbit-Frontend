@@ -1,8 +1,21 @@
+import TextareaAutosize from "react-textarea-autosize";
 import { useProfile } from "../../../lib/hooks/useProfile";
 import { PostProps } from "../../../types/post.types";
-import { Button, DropDownMenu, Image, ImageModal, ModalForm } from "../..";
-import { likeIco, likeIcoActive } from "../../../assets";
-import { useCallback, useMemo, useState } from "react";
+import {
+  Button,
+  Comment,
+  DropDownMenu,
+  Image,
+  ImageModal,
+  ModalForm,
+} from "../..";
+import {
+  commentIco,
+  crossLight,
+  likeIco,
+  likeIcoActive,
+} from "../../../assets";
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { useDisclosure } from "@nextui-org/react";
 import { DropDownItem } from "../DropDownMenu/DropDownMenu.types";
 import usePosts from "../../../lib/hooks/usePosts";
@@ -10,6 +23,8 @@ import { GetImage } from "../../../utils/images.utils";
 import { useUser } from "../../../lib/hooks/useUser";
 import { Link, useNavigate } from "react-router-dom";
 import { usePost } from "../../../lib/hooks/usePost";
+import { useComments } from "../../../lib/hooks/useComments";
+import { IReplyItem } from "../../../types/comment";
 
 const Post = (props: PostProps) => {
   const { title, text, id, images, ownerId } = props;
@@ -17,8 +32,19 @@ const Post = (props: PostProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { deletePost } = usePosts();
   const { likes, likePost, dislikePost } = usePost(id);
+  const { comments, createComment, deleteComment } = useComments(id, "post");
   const [openImage, setOpenImage] = useState("");
   const [isOpenModal, setOpenModal] = useState(false);
+  const [commentValue, setCommentValue] = useState<string>("");
+  const [refetchId, setRefetchId] = useState<string | null>(null);
+  const initialReplyItem: IReplyItem = useMemo(() => {
+    return {
+      parentId: id,
+      parentType: "post",
+      replyText: null,
+    };
+  }, [id]);
+  const [replyItem, setReplyItem] = useState<IReplyItem>(initialReplyItem);
   const nav = useNavigate();
 
   const { userData, avatar } = useUser(ownerId);
@@ -41,6 +67,35 @@ const Post = (props: PostProps) => {
     if (isLikeActive) dislikePost();
     else likePost();
   }, [isLikeActive, dislikePost, likePost]);
+
+  const handleChangeCommentValue = (
+    event: ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    if (event.target) {
+      setCommentValue(event.target.value);
+    }
+  };
+
+  const handleCreateComment = useCallback(() => {
+    if (commentValue.length > 0) {
+      createComment({
+        parentId: replyItem.parentId,
+        parentType: replyItem.parentType,
+        text: commentValue,
+      });
+      setCommentValue("");
+      setRefetchId(replyItem.parentId);
+      setReplyItem(initialReplyItem);
+    }
+  }, [replyItem, commentValue, createComment, initialReplyItem]);
+
+  const handleDeleteComment = useCallback(
+    (commentId: string, parentType: "post" | "comment", parentId: string) => {
+      deleteComment({ commentId: commentId, parentType: parentType });
+      setRefetchId(parentId);
+    },
+    [deleteComment]
+  );
 
   return (
     <>
@@ -104,7 +159,7 @@ const Post = (props: PostProps) => {
             </>
           ))}
         </div>
-        <div className="mt-2">
+        <div className="mt-2 flex gap-3">
           <Button
             className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-[#585757]"
             onClick={toggleLike}
@@ -117,7 +172,64 @@ const Post = (props: PostProps) => {
               <p className="text-xs">{likes.length}</p>
             )}
           </Button>
+          <Button
+            className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-[#585757]"
+            onClick={() => nav(`/post/${id}`)}
+          >
+            <Image
+              url={commentIco}
+              className="w-4 h-4 object-contain max-[500px]:w-3 max-[500px]:h-3"
+            />
+            {comments && comments.length > 0 && (
+              <p className="text-xs">{comments.length}</p>
+            )}
+          </Button>
         </div>
+        {location.pathname.includes("post") && (
+          <div className="flex flex-col gap-5">
+            <div className="mt-7 flex flex-col gap-3">
+              {comments &&
+                comments.map((comment) => (
+                  <Comment
+                    {...comment}
+                    setReplyItem={setReplyItem}
+                    deleteComment={handleDeleteComment}
+                    refetchId={refetchId}
+                    clearRefetchId={() => setRefetchId(null)}
+                  />
+                ))}
+            </div>
+            {replyItem.replyText && (
+              <div className="bg-[#585757] p-2 w-max rounded-2xl flex items-center gap-2">
+                <p>
+                  Ответ на комментарий:{" "}
+                  {replyItem.replyText.length < 10
+                    ? replyItem.replyText
+                    : replyItem.replyText.slice(0, 11) + "..."}
+                </p>
+                <Image
+                  url={crossLight}
+                  className="w-4 h-4 cursor-pointer"
+                  onClick={() => setReplyItem(initialReplyItem)}
+                />
+              </div>
+            )}
+            <div className="bg-[#2A2A2A] rounded-xl p-5 flex flex-col items-end gap-4">
+              <TextareaAutosize
+                className="w-full resize-none bg-transparent border-none outline-none"
+                placeholder="Добавьте комментарий"
+                value={commentValue}
+                onChange={handleChangeCommentValue}
+              />
+              <Button
+                className="max-w-max max-h-max min-w-0 px-4 py-2 rounded-full bg-[#CE3333]"
+                onClick={handleCreateComment}
+              >
+                Отправить
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
       {isOpenModal && (
         <ImageModal image={openImage} closeModal={() => setOpenModal(false)} />

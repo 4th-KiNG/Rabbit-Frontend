@@ -20,6 +20,8 @@ import crossDark from "./crossDark.svg";
 import crossLight from "./crossLight.svg";
 import eye from "./eye.svg";
 import eyeClosed from "./eyeClosed.svg";
+import commentIco from "./commentIco.svg";
+import plusIcon from "./plus.svg";
 
 export {
   crossDark,
@@ -43,5 +45,7 @@ export {
   likeIcoActive,
   sort,
   eye,
-  eyeClosed
+  eyeClosed,
+  commentIco,
+  plusIcon,
 };
