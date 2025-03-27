@@ -21,7 +21,7 @@ import { DropDownItem } from "../DropDownMenu/DropDownMenu.types";
 import usePosts from "../../../lib/hooks/usePosts";
 import { GetImage } from "../../../utils/images.utils";
 import { useUser } from "../../../lib/hooks/useUser";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { usePost } from "../../../lib/hooks/usePost";
 import { useComments } from "../../../lib/hooks/useComments";
 import { IReplyItem } from "../../../types/comment";
@@ -37,6 +37,7 @@ const Post = (props: PostProps) => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [commentValue, setCommentValue] = useState<string>("");
   const [refetchId, setRefetchId] = useState<string | null>(null);
+  const location = useLocation();
   const initialReplyItem: IReplyItem = useMemo(() => {
     return {
       parentId: id,
@@ -127,7 +128,12 @@ const Post = (props: PostProps) => {
                       key: "delete",
                       color: "danger",
                       className: "text-danger",
-                      onClick: () => deletePost(id),
+                      onClick: () => {
+                        deletePost(id);
+                        if (location.pathname.includes("post")) {
+                          nav("/");
+                        }
+                      },
                     },
                   ]
                 : dropItems
