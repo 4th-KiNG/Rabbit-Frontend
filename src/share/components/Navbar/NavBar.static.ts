@@ -1,10 +1,4 @@
-import {
-  news,
-  profile,
-  friends,
-  notifications,
-  settings,
-} from "../../../assets";
+import { news, profile, friends, settings } from "../../../assets";
 
 export const links = [
   {
@@ -26,15 +20,9 @@ export const links = [
     id: 2,
   },
   {
-    title: "Уведомления",
-    url: "/notifications",
-    startImg: notifications,
-    id: 3,
-  },
-  {
     title: "Настройки",
     url: "/settings",
     startImg: settings,
-    id: 4,
+    id: 3,
   },
 ];

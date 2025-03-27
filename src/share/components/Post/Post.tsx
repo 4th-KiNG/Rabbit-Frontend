@@ -140,8 +140,10 @@ const Post = (props: PostProps) => {
             content="Coming soon..."
           />
         </div>
-        <h3 className="text-2xl font-bold max-[900px]:text-lg">{title}</h3>
-        <p className="text-lg max-[900px]:text-base">{text}</p>
+        <h3 className="text-2xl font-bold break-words max-[900px]:text-lg">
+          {title}
+        </h3>
+        <p className="text-lg break-words max-[900px]:text-base">{text}</p>
         <div className="grid grid-cols-3 grid-rows-1 gap-3 max-[768px]:grid-cols-2 max-[500px]:grid-cols-1">
           {images.map((image) => (
             <>

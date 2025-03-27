@@ -4,6 +4,7 @@ import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 import { crossLight, photoIco } from "../../../assets";
 import usePosts from "../../../lib/hooks/usePosts";
 import { Tag } from "react-tag-input";
+import TextareaAutosize from "react-textarea-autosize";
 
 const CreatePostArea = () => {
   const { avatar } = useProfile();
@@ -94,7 +95,7 @@ const CreatePostArea = () => {
           />
           {isFocus && (
             <div className="flex flex-col gap-3">
-              <textarea
+              <TextareaAutosize
                 className="w-full inline-table text-md p-2 bg-transparent outline-none border-noned h-auto"
                 placeholder="Текст обсуждения"
                 value={textArea}

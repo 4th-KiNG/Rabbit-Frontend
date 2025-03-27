@@ -1,8 +1,8 @@
-import { exitIco, logo, notifications, search } from "../../../assets";
-import { RabbitTitle, Image, Button } from "../..";
+import { exitIco, logo, search } from "../../../assets";
+import { RabbitTitle, Image } from "../..";
 import { useAuth } from "../../../lib/hooks/useAuth";
 import { useProfile } from "../../../lib/hooks/useProfile";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { ChangeEvent, useEffect, useState } from "react";
 import { Input as InputUI } from "@nextui-org/react";
 import { isMobile } from "../../../utils/styles.utils";
@@ -14,6 +14,7 @@ const Header = () => {
   const [searchString, setSearchString] = useState<string>();
   const [, setSearchParams] = useSearchParams();
   const nav = useNavigate();
+  const location = useLocation();
 
   const handleSetSearchString = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target) {
@@ -31,7 +32,7 @@ const Header = () => {
 
   useEffect(() => {
     debounceSearchString(searchString);
-  }, [searchString, debounceSearchString]);
+  }, [searchString, debounceSearchString, location.pathname]);
 
   return (
     <>
@@ -54,9 +55,6 @@ const Header = () => {
             value={searchString}
             onChange={handleSetSearchString}
           />
-          <Button className="p-3 bg-transparent min-w-0 rounded-full w-13 h-13">
-            <Image url={notifications} className="w-full h-full" />
-          </Button>
         </div>
 
         <div className="flex items-center gap-6">

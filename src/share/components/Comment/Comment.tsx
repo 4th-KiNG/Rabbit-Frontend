@@ -49,7 +49,7 @@ const Comment = (props: IComment) => {
   }, [refetchId, refetchComments, id, clearRefetchId]);
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 max-w-full">
       {userData && (
         <Link
           to={`${
@@ -66,8 +66,10 @@ const Comment = (props: IComment) => {
           <p className="text-lg max-[900px]:text-base">{userData?.username}</p>
         </Link>
       )}
-      <div className="pl-10 flex flex-col gap-3">
-        <p>{text}</p>
+      <div className="pl-10 flex flex-col gap-3 max-w-full">
+        <p className="max-w-full text-balance whitespace-normal break-words">
+          {text}
+        </p>
         <div className="mt-2 flex gap-3 items-center">
           <Button
             className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-[#585757]"
