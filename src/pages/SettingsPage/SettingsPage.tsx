@@ -14,7 +14,8 @@ const initialValues: ChangePasswordValues = {
 const SettingsPage = () => {
   const [formValues, setFormValues] = useState(initialValues);
   const [errorText, setErrorText] = useState("");
-  const { changePassword, changePasswordError } = useAuth();
+  const { changePassword, changePasswordError, isSuccessChangePassword } =
+    useAuth();
 
   const handleChangeOldPassword = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +47,14 @@ const SettingsPage = () => {
   useEffect(() => {
     if (changePasswordError)
       setErrorText((changePasswordError as ServerError)?.response.data.message);
+    else setErrorText("");
   }, [changePasswordError]);
+
+  useEffect(() => {
+    if (isSuccessChangePassword) {
+      setFormValues(initialValues);
+    }
+  }, [isSuccessChangePassword]);
 
   return (
     <>
@@ -104,6 +112,11 @@ const SettingsPage = () => {
             {errorText.length > 0 && (
               <p className="text-[#CE3333] text-base max-[550px]:text-sm text-center">
                 {errorText}
+              </p>
+            )}
+            {isSuccessChangePassword && (
+              <p className="text-[#fff] text-base max-[550px]:text-sm text-center">
+                Новый пароль установлен!
               </p>
             )}
           </div>

@@ -17,7 +17,8 @@ const RecoveryModal = (props: RecoveryModalProps) => {
   const { isOpen, onOpenChange } = props;
   const [email, setEmail] = useState("");
   const [errorText, setErrorText] = useState("");
-  const { sendNewPassword, newPasswordError } = useAuth();
+  const { sendNewPassword, newPasswordError, isSuccessSendPassword } =
+    useAuth();
 
   const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setErrorText("");
@@ -33,6 +34,7 @@ const RecoveryModal = (props: RecoveryModalProps) => {
   useEffect(() => {
     if (newPasswordError)
       setErrorText((newPasswordError as ServerError)?.response.data.message);
+    else setErrorText("");
   }, [newPasswordError]);
 
   return (
@@ -59,6 +61,11 @@ const RecoveryModal = (props: RecoveryModalProps) => {
                 {errorText.length > 0 && (
                   <p className="text-center text-[#CE3333] max-w-72 w-full">
                     {errorText}
+                  </p>
+                )}
+                {isSuccessSendPassword && (
+                  <p className="text-center text-[#fff] max-w-72 w-full">
+                    Временный пароль отправлен на вашу почту!
                   </p>
                 )}
               </ModalBody>

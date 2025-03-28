@@ -26,12 +26,20 @@ export const useAuth = () => {
     onSuccess: () => refetchUserInfo(),
   });
 
-  const { mutate: sendNewPassword, error: newPasswordError } = useMutation({
+  const {
+    mutate: sendNewPassword,
+    error: newPasswordError,
+    isSuccess: isSuccessSendPassword,
+  } = useMutation({
     mutationKey: ["recover password"],
     mutationFn: (email: string) => SendNewPassword(email),
   });
 
-  const { mutate: changePassword, error: changePasswordError } = useMutation({
+  const {
+    mutate: changePassword,
+    error: changePasswordError,
+    isSuccess: isSuccessChangePassword,
+  } = useMutation({
     mutationKey: ["change password"],
     mutationFn: (values: ChangePasswordValues) => ChangePassword(values),
   });
@@ -46,5 +54,7 @@ export const useAuth = () => {
     newPasswordError,
     changePassword,
     changePasswordError,
+    isSuccessSendPassword,
+    isSuccessChangePassword,
   };
 };
