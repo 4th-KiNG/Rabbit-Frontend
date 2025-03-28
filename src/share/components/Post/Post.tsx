@@ -25,6 +25,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { usePost } from "../../../lib/hooks/usePost";
 import { useComments } from "../../../lib/hooks/useComments";
 import { IReplyItem } from "../../../types/comment";
+import { isMobile } from "../../../utils/styles.utils";
 
 const Post = (props: PostProps) => {
   const { title, text, id, images, ownerId } = props;
@@ -158,8 +159,10 @@ const Post = (props: PostProps) => {
               <>
                 <div
                   onClick={() => {
-                    setOpenImage(GetImage("posts-images", image));
-                    setOpenModal(true);
+                    if (!isMobile()) {
+                      setOpenImage(GetImage("posts-images", image));
+                      setOpenModal(true);
+                    }
                   }}
                 >
                   <Image
