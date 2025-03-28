@@ -28,7 +28,11 @@ const CreatePostArea = () => {
   );
 
   const handleUploadFile = useCallback(() => {
-    if (imagesRef.current && imagesRef.current.files)
+    if (
+      imagesRef.current &&
+      imagesRef.current.files &&
+      imagesRef.current.files.length + uploadFiles.length <= 5
+    )
       setUploadFiles([...uploadFiles, ...imagesRef.current.files]);
   }, [imagesRef, uploadFiles]);
 
@@ -103,7 +107,7 @@ const CreatePostArea = () => {
               />
               {uploadFiles.length > 0 && (
                 <>
-                  <p>Загруженные файлы:</p>
+                  <p>Загруженные файлы (максимум 5 штук):</p>
                   <div className="flex gap-3 flex-wrap">
                     {uploadFiles.map((file) => (
                       <>

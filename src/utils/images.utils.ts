@@ -7,7 +7,7 @@ export const GetImage = (busketName: string, fileName: string): string => {
 
 export const CompressionImage = async (image: File) => {
   const options = {
-    maxSizeMB: 1,
+    maxSizeMB: 0.5,
     useWebWorker: true,
   };
   try {

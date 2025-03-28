@@ -1,8 +1,11 @@
 import { WithContext as ReactTags, Tag } from "react-tag-input";
 import { TagInputProps } from "./TagInput.types";
+import { useCallback, useState } from "react";
 
 const TagInput = (props: TagInputProps) => {
   const { tags, setTags } = props;
+  const [currentTag, setCurrentTag] = useState<string>("");
+
   const handleDelete = (index: number) => {
     setTags(tags.filter((_, i) => i !== index));
   };
@@ -13,11 +16,17 @@ const TagInput = (props: TagInputProps) => {
     setTags(updatedTags);
   };
 
-  const handleAddition = (tag: Tag) => {
-    setTags((prevTags) => {
-      return [...prevTags, tag];
-    });
-  };
+  const handleAddition = useCallback(
+    (tag: Tag) => {
+      if (currentTag.length > 2) {
+        setTags((prevTags) => {
+          return [...prevTags, tag];
+        });
+        setCurrentTag("");
+      }
+    },
+    [setTags, currentTag]
+  );
 
   const handleDrag = (tag: Tag, currPos: number, newPos: number) => {
     const newTags = tags.slice();
@@ -25,6 +34,23 @@ const TagInput = (props: TagInputProps) => {
     newTags.splice(newPos, 0, tag);
     setTags(newTags);
   };
+
+  // Кастомный обработчик для поля ввода
+  const handleChangeInput = useCallback(
+    (value: string) => {
+      if (value.includes(" ") && value.length > 2) {
+        handleAddition({
+          id: Date.now().toString(),
+          text: value.split(" ")[0],
+          className: "",
+        });
+        setCurrentTag("");
+      } else {
+        setCurrentTag(value);
+      }
+    },
+    [handleAddition]
+  );
 
   return (
     <>
@@ -38,6 +64,8 @@ const TagInput = (props: TagInputProps) => {
         onTagUpdate={onTagUpdate}
         maxTags={15}
         allowAdditionFromPaste
+        handleInputChange={handleChangeInput}
+        inputValue={currentTag}
         classNames={{
           tagInputField: `bg-transparent border-0 w-full text-base outline-0 max-[550px]:text-sm ${
             tags.length === 15 ? "hidden" : "block"

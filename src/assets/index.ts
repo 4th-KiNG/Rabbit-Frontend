@@ -22,6 +22,7 @@ import eye from "./eye.svg";
 import eyeClosed from "./eyeClosed.svg";
 import commentIco from "./commentIco.svg";
 import plusIcon from "./plus.svg";
+import minusIcon from "./minus.svg";
 
 export {
   crossDark,
@@ -48,4 +49,5 @@ export {
   eyeClosed,
   commentIco,
   plusIcon,
+  minusIcon,
 };

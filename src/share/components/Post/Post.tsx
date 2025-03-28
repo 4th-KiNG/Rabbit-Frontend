@@ -149,24 +149,28 @@ const Post = (props: PostProps) => {
         <h3 className="text-2xl font-bold break-words max-[900px]:text-lg">
           {title}
         </h3>
-        <p className="text-lg break-words max-[900px]:text-base">{text}</p>
-        <div className="grid grid-cols-3 grid-rows-1 gap-3 max-[768px]:grid-cols-2 max-[500px]:grid-cols-1">
-          {images.map((image) => (
-            <>
-              <div
-                onClick={() => {
-                  setOpenImage(GetImage("posts-images", image));
-                  setOpenModal(true);
-                }}
-              >
-                <Image
-                  url={GetImage("posts-images", image)}
-                  className="rounded-md h-full"
-                />
-              </div>
-            </>
-          ))}
-        </div>
+        {text && (
+          <p className="text-lg break-words max-[900px]:text-base">{text}</p>
+        )}
+        {images.length > 0 && (
+          <div className="grid grid-cols-3 grid-rows-1 gap-3 max-[768px]:grid-cols-2 max-[500px]:grid-cols-1">
+            {images.map((image) => (
+              <>
+                <div
+                  onClick={() => {
+                    setOpenImage(GetImage("posts-images", image));
+                    setOpenModal(true);
+                  }}
+                >
+                  <Image
+                    url={GetImage("posts-images", image)}
+                    className="rounded-md h-full"
+                  />
+                </div>
+              </>
+            ))}
+          </div>
+        )}
         <div className="mt-2 flex gap-3">
           <Button
             className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-[#585757]"
@@ -195,7 +199,7 @@ const Post = (props: PostProps) => {
         </div>
         {location.pathname.includes("post") && (
           <div className="flex flex-col gap-5">
-            <div className="mt-7 flex flex-col gap-3">
+            <div className="mt-5 flex flex-col gap-3">
               {comments &&
                 comments.map((comment) => (
                   <Comment

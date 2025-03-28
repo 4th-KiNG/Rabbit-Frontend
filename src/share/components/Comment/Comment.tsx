@@ -4,7 +4,13 @@ import { IComment } from "../../../types/comment";
 import Image from "../../ui/Image/Image";
 import { useProfile } from "../../../lib/hooks/useProfile";
 import { Button, DropDownMenu, ModalForm } from "../..";
-import { commentIco, likeIco, likeIcoActive, plusIcon } from "../../../assets";
+import {
+  commentIco,
+  likeIco,
+  likeIcoActive,
+  minusIcon,
+  plusIcon,
+} from "../../../assets";
 import { useEffect, useState } from "react";
 import { useComments } from "../../../lib/hooks/useComments";
 import { DropDownItem } from "../DropDownMenu/DropDownMenu.types";
@@ -129,7 +135,7 @@ const Comment = (props: IComment) => {
             className="w-max max-w-max max-h-max min-w-0 px-1 py-2 rounded-full"
             onClick={() => setShowReplies(!isShowReplies)}
           >
-            <Image url={plusIcon} />
+            <Image url={isShowReplies ? minusIcon : plusIcon} />
             <p className="text-base text-[#CE3333]">
               {isShowReplies ? "Скрыть" : "Показать"} {comments.length} ответов
             </p>
