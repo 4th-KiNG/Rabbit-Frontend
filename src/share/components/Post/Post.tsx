@@ -101,7 +101,9 @@ const Post = (props: PostProps) => {
 
   return (
     <>
-      <div className="w-full bg-[#404040] rounded-2xl p-6 flex flex-col gap-3 max-[900px]:p-5 max-[500px]:p-4">
+      <div
+        className={`w-full ${id} bg-[#404040] rounded-2xl p-6 flex flex-col gap-3 max-[900px]:p-5 max-[500px]:p-4`}
+      >
         <div className="flex justify-between">
           <Link
             to={`${
