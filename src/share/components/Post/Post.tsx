@@ -153,7 +153,7 @@ const Post = (props: PostProps) => {
           <p className="text-lg break-words max-[900px]:text-base">{text}</p>
         )}
         {images.length > 0 && (
-          <div className="grid grid-cols-3 grid-rows-1 gap-3 max-[768px]:grid-cols-2 max-[500px]:grid-cols-1">
+          <div className="relative grid grid-cols-3 grid-rows-1 gap-3 max-[768px]:grid-cols-2 max-[500px]:grid-cols-1">
             {images.map((image) => (
               <>
                 <div
@@ -164,7 +164,7 @@ const Post = (props: PostProps) => {
                 >
                   <Image
                     url={GetImage("posts-images", image)}
-                    className="rounded-md h-full"
+                    className="rounded-md w-full object-cover"
                   />
                 </div>
               </>
@@ -212,8 +212,8 @@ const Post = (props: PostProps) => {
                 ))}
             </div>
             {replyItem.replyText && (
-              <div className="bg-[#585757] p-2 w-max rounded-2xl flex items-center gap-2">
-                <p>
+              <div className="bg-[#585757] p-2 w-max rounded-2xl flex items-center gap-2 max-w-full">
+                <p className="break-words">
                   Ответ на комментарий:{" "}
                   {replyItem.replyText.length < 10
                     ? replyItem.replyText
