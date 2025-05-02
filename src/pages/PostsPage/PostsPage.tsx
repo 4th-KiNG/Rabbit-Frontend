@@ -19,10 +19,13 @@ const PostsPage = () => {
   useEffect(() => {
     const prevPostId = sessionStorage.getItem("postId");
     if (prevPostId) {
-      const scrollPost = document.getElementsByClassName(prevPostId)[0];
-      scrollPost.scrollIntoView();
+      const scrollPost = document.getElementsByClassName(prevPostId);
+      if (scrollPost.length > 0 && scrollPost[0]) {
+        scrollPost[0].scrollIntoView();
+        sessionStorage.removeItem("postId");
+      }
     }
-  }, []);
+  }, [posts]);
 
   return (
     <>
