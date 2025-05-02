@@ -28,7 +28,8 @@ export const CreatePost = async (createPostDto: ICreatePost) => {
 
 export const GetPosts = async (
   ownerId?: string,
-  searchString?: string | null
+  searchString?: string | null,
+  page?: number
 ) => {
   const { data } = await Http({
     method: "get",
@@ -36,6 +37,7 @@ export const GetPosts = async (
     params: {
       ownerId: ownerId,
       search_string: searchString,
+      page: page,
     },
   });
   return data;

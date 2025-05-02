@@ -19,6 +19,7 @@ import ImageModal from "./components/ImageModal/ImageModal";
 import TagInput from "./components/TagInput/TagInput";
 import RecoveryModal from "./components/RecoveryModal/RecoveryModal";
 import Comment from "./components/Comment/Comment";
+import Pagination from "./components/Pagination/Pagination";
 
 export {
   Checkbox,
@@ -42,4 +43,5 @@ export {
   TagInput,
   RecoveryModal,
   Comment,
+  Pagination,
 };

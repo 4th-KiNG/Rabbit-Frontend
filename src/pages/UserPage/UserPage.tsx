@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@nextui-org/react";
-import { Post, ProfileBanner, UserInfo } from "../../share";
+import { Pagination, Post, ProfileBanner, UserInfo } from "../../share";
 import { useUser } from "../../lib/hooks/useUser";
 import { SectionButtonsTypes } from "../ProfilePage/ProfilePage.types";
 import { useNavigate, useParams } from "react-router-dom";
@@ -105,6 +105,7 @@ const UserPage = () => {
                 {posts.map((post) => (
                   <Post {...post} />
                 ))}
+                <Pagination />
               </div>
             )}
           </div>

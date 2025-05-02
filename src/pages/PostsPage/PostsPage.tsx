@@ -1,11 +1,13 @@
 import { useSearchParams } from "react-router-dom";
 import usePosts from "../../lib/hooks/usePosts";
-import { CreatePostArea, Post } from "../../share";
+import { CreatePostArea, Pagination, Post } from "../../share";
 import { PostProps } from "../../types/post.types";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const PostsPage = () => {
   const [searchParams] = useSearchParams();
+  const postPageRef = useRef<HTMLDivElement>(null);
+
   const { posts, setSearchString } = usePosts();
 
   useEffect(() => {
@@ -29,11 +31,14 @@ const PostsPage = () => {
 
   return (
     <>
-      <div className=" flex flex-col gap-8 w-full max-[500px]:gap-3">
+      <div
+        className="flex flex-col gap-8 w-full max-[500px]:gap-3"
+        ref={postPageRef}
+      >
         <CreatePostArea />
-        {/* <Filters /> */}
         {posts &&
           posts.map((post: PostProps, index) => <Post {...post} key={index} />)}
+        <Pagination />
       </div>
     </>
   );

@@ -2,13 +2,15 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { ICreatePost, PostProps } from "../../types/post.types";
 import { CreatePost, DeletePost, GetPosts } from "../api/posts/postsApi";
 import { useEffect, useState } from "react";
+import { usePaginate } from "./usePaginate";
 
 const usePosts = (ownerId?: string) => {
   const [searchString, setSearchString] = useState<string | null>();
+  const { currentPage: page } = usePaginate();
 
   const { data: posts, refetch: refetchPosts } = useQuery<PostProps[]>({
-    queryKey: ["posts", ownerId, searchString],
-    queryFn: () => GetPosts(ownerId, searchString),
+    queryKey: ["posts", ownerId, searchString, page],
+    queryFn: () => GetPosts(ownerId, searchString, page),
   });
 
   const { mutate: createPost } = useMutation({

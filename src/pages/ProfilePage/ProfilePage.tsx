@@ -1,5 +1,5 @@
 import { useProfile } from "../../lib/hooks/useProfile";
-import { Button, Post, ProfileBanner, UserInfo } from "../../share";
+import { Button, Pagination, Post, ProfileBanner, UserInfo } from "../../share";
 import { useState } from "react";
 import { SectionButtonsTypes } from "./ProfilePage.types";
 import usePosts from "../../lib/hooks/usePosts";
@@ -72,6 +72,7 @@ const ProfilePage = () => {
                 {posts.map((post) => (
                   <Post {...post} />
                 ))}
+                <Pagination />
               </div>
             )}
           </div>

@@ -24,9 +24,15 @@ const Header = () => {
 
   const debounceSearchString = useDebouncedCallback((value) => {
     if (value) {
-      setSearchParams({ search_string: value });
+      setSearchParams((params) => {
+        params.set("search_string", value);
+        return params;
+      });
     } else {
-      setSearchParams({});
+      setSearchParams((params) => {
+        params.delete("search_string");
+        return params;
+      });
     }
   }, 1000);
 
