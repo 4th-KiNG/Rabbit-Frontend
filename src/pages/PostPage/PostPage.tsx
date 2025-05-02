@@ -1,11 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { usePost } from "../../lib/hooks/usePost";
-import { Post } from "../../share";
+import { Button, Post } from "../../share";
 import { useEffect } from "react";
 
 const PostPage = () => {
   const { id } = useParams();
   const { postData } = usePost(id ?? "1");
+  const nav = useNavigate();
 
   useEffect(() => {
     if (id) {
@@ -13,7 +14,17 @@ const PostPage = () => {
     }
   }, [id]);
 
-  return <>{postData && <Post {...postData} />}</>;
+  return (
+    <div className="flex flex-col items-start gap-2">
+      <Button
+        className="text-sm bg-[#404040] rounded-full"
+        onClick={() => nav("/")}
+      >
+        <p>Назад</p>
+      </Button>
+      {postData && <Post {...postData} />}
+    </div>
+  );
 };
 
 export default PostPage;

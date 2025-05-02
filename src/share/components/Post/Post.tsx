@@ -17,7 +17,6 @@ import {
 } from "../../../assets";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { useDisclosure } from "@nextui-org/react";
-import { DropDownItem } from "../DropDownMenu/DropDownMenu.types";
 import usePosts from "../../../lib/hooks/usePosts";
 import { GetImage } from "../../../utils/images.utils";
 import { useUser } from "../../../lib/hooks/useUser";
@@ -51,14 +50,17 @@ const Post = (props: PostProps) => {
 
   const { userData, avatar } = useUser(ownerId);
 
-  const [dropItems] = useState<DropDownItem[]>([
-    {
-      title: "Пожаловаться",
-      key: "report",
-      onClick: onOpen,
-    },
-    { title: "Открыть пост", key: "open", onClick: () => nav(`/post/${id}`) },
-  ]);
+  const dropItems = useMemo(
+    () => [
+      {
+        title: "Пожаловаться",
+        key: "report",
+        onClick: onOpen,
+      },
+      { title: "Открыть пост", key: "open", onClick: () => nav(`/post/${id}`) },
+    ],
+    [id, nav, onOpen]
+  );
 
   const isLikeActive = useMemo((): boolean => {
     if (likes && user) return likes.includes(user.id);
