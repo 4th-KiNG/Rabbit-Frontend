@@ -3,6 +3,9 @@ import {
   CreateComment,
   DeleteComment,
   GetComments,
+  GetLikes,
+  SendReport,
+  ToggleLikeComment,
 } from "../api/comments/commentsApi";
 import { IComment, ICreateComment, IDeleteComment } from "../../types/comment";
 
@@ -33,10 +36,35 @@ export const useComments = (
     },
   });
 
+  const { mutate: sendReport } = useMutation({
+    mutationKey: ["send report", parentId, parentType],
+    mutationFn: ({
+      commentId,
+      reason,
+    }: {
+      commentId: string;
+      reason: string;
+    }) => SendReport(commentId, reason),
+  });
+
+  const { mutate: toggleLike } = useMutation({
+    mutationKey: ["like or dislike comment"],
+    mutationFn: () => ToggleLikeComment(parentId, parentType),
+    onSuccess: () => refetchLikes(),
+  });
+
+  const { data: likes, refetch: refetchLikes } = useQuery({
+    queryKey: ["likes", parentId, parentType],
+    queryFn: () => GetLikes(parentId, parentType),
+  });
+
   return {
     comments,
     createComment,
     refetchComments,
     deleteComment,
+    sendReport,
+    toggleLike,
+    likes,
   };
 };

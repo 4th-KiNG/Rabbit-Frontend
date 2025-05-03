@@ -1,5 +1,12 @@
 import { useProfile } from "../../lib/hooks/useProfile";
-import { Button, Pagination, Post, ProfileBanner, UserInfo } from "../../share";
+import {
+  Button,
+  Comment,
+  Pagination,
+  Post,
+  ProfileBanner,
+  UserInfo,
+} from "../../share";
 import { useState } from "react";
 import { SectionButtonsTypes } from "./ProfilePage.types";
 import usePosts from "../../lib/hooks/usePosts";
@@ -10,8 +17,8 @@ const sectionButtons: SectionButtonsTypes[] = [
 ];
 
 const ProfilePage = () => {
-  const { user, avatar, banner } = useProfile();
-  const { posts } = usePosts(user?.id);
+  const { user, avatar, banner, userComments } = useProfile();
+  const { postsData } = usePosts(user?.id);
   const [section, setSection] = useState<"Посты" | "Комментарии">("Посты");
 
   const userInfo = [
@@ -25,7 +32,7 @@ const ProfilePage = () => {
     },
     {
       title: "посты",
-      data: posts?.length ?? 0,
+      data: postsData?.posts.length ?? 0,
     },
     {
       title: "комментарии",
@@ -67,12 +74,21 @@ const ProfilePage = () => {
                 </div>
               ))}
             </div>
-            {section === "Посты" && posts && (
+            {section === "Посты" && postsData && (
               <div className="flex flex-col gap-8 max-[500px]:gap-3">
-                {posts.map((post) => (
+                {postsData.posts.map((post) => (
                   <Post {...post} />
                 ))}
-                <Pagination />
+                {postsData.total > 10 && <Pagination total={postsData.total} />}
+              </div>
+            )}
+            {section === "Комментарии" && userComments && (
+              <div className="flex flex-col gap-8 max-[500px]:gap-3">
+                {userComments.map((comment) => (
+                  <div className="bg-[#404040] p-4 rounded-xl">
+                    <Comment {...comment} />
+                  </div>
+                ))}
               </div>
             )}
           </div>

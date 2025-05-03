@@ -17,7 +17,10 @@ const Navbar = ({
   return (
     <>
       <div className="bg-[#2A2A2A] h-[calc(100vh-80px)] p-4 max-[900px]:hidden flex items-center flex-col gap-3">
-        <Button className="min-w-20 rounded-full" onClick={setOpen}>
+        <Button
+          className="min-w-20 rounded-full bg-[#404040]"
+          onClick={setOpen}
+        >
           <img src={sort} className={`w-3 ${!isOpen && "rotate-180"}`} alt="" />
         </Button>
         <nav className="flex gap-3 flex-col w-full">

@@ -7,7 +7,7 @@ import {
   DropDownMenu,
   Image,
   ImageModal,
-  ModalForm,
+  ReportModal,
 } from "../..";
 import {
   commentIco,
@@ -31,7 +31,7 @@ const Post = (props: PostProps) => {
   const { user } = useProfile();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { deletePost } = usePosts();
-  const { likes, likePost, dislikePost } = usePost(id);
+  const { likes, toggleLike, sendReport } = usePost(id);
   const { comments, createComment, deleteComment } = useComments(id, "post");
   const [openImage, setOpenImage] = useState("");
   const [isOpenModal, setOpenModal] = useState(false);
@@ -67,11 +67,6 @@ const Post = (props: PostProps) => {
     return false;
   }, [likes, user]);
 
-  const toggleLike = useCallback(() => {
-    if (isLikeActive) dislikePost();
-    else likePost();
-  }, [isLikeActive, dislikePost, likePost]);
-
   const handleChangeCommentValue = (
     event: ChangeEvent<HTMLTextAreaElement>
   ) => {
@@ -99,6 +94,13 @@ const Post = (props: PostProps) => {
       setRefetchId(parentId);
     },
     [deleteComment]
+  );
+
+  const handleSendReport = useCallback(
+    (reason: string) => {
+      if (reason.length > 1) sendReport(reason);
+    },
+    [sendReport]
   );
 
   const [showText, isShowText] = useState(true);
@@ -138,7 +140,7 @@ const Post = (props: PostProps) => {
                       onClick: () => {
                         deletePost(id);
                         if (location.pathname.includes("post")) {
-                          nav("/");
+                          nav(-1);
                         }
                       },
                     },
@@ -146,11 +148,11 @@ const Post = (props: PostProps) => {
                 : dropItems
             }
           />
-          <ModalForm
+          <ReportModal
             isOpen={isOpen}
             onOpenChange={onOpenChange}
-            title="Пожаловаться на контент поста"
-            content="Coming soon..."
+            type="post"
+            sendReport={handleSendReport}
           />
         </div>
         <h3 className="text-2xl font-bold break-words max-[900px]:text-lg">

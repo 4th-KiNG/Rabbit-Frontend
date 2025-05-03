@@ -62,13 +62,10 @@ export const LikePost = async (postId: string) => {
   return data;
 };
 
-export const DislikePost = async (postId: string) => {
+export const ToggleLikePost = async (postId: string) => {
   const { data } = await Http({
     method: "patch",
     url: `${API}/posts/${postId}/likes`,
-    params: {
-      status: "dislike",
-    },
   });
   return data;
 };
@@ -85,6 +82,17 @@ export const GetPost = async (postId: string) => {
   const { data } = await Http({
     method: "get",
     url: `${API}/posts/${postId}`,
+  });
+  return data;
+};
+
+export const SendReport = async (postId: string, reason: string) => {
+  const { data } = await Http({
+    method: "post",
+    url: `${API}/posts/${postId}/report`,
+    data: {
+      reason: reason,
+    },
   });
   return data;
 };

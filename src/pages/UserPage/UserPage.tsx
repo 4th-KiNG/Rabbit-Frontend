@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@nextui-org/react";
-import { Pagination, Post, ProfileBanner, UserInfo } from "../../share";
+import {
+  Comment,
+  Pagination,
+  Post,
+  ProfileBanner,
+  UserInfo,
+} from "../../share";
 import { useUser } from "../../lib/hooks/useUser";
 import { SectionButtonsTypes } from "../ProfilePage/ProfilePage.types";
 import { useNavigate, useParams } from "react-router-dom";
@@ -15,11 +21,10 @@ const sectionButtons: SectionButtonsTypes[] = [
 const UserPage = () => {
   const { id } = useParams();
 
-  const { userData, avatar, banner, subToUser, unSubToUser } = useUser(
-    id ?? ""
-  );
+  const { userData, avatar, banner, subToUser, unSubToUser, userComments } =
+    useUser(id ?? "");
   const { user } = useProfile();
-  const { posts } = usePosts(userData?.id);
+  const { postsData } = usePosts(userData?.id);
   const nav = useNavigate();
 
   const [section, setSection] = useState<"Посты" | "Комментарии">("Посты");
@@ -43,7 +48,7 @@ const UserPage = () => {
     },
     {
       title: "посты",
-      data: posts?.length ?? 0,
+      data: postsData?.posts.length ?? 0,
     },
     {
       title: "комментарии",
@@ -100,12 +105,21 @@ const UserPage = () => {
                 </div>
               ))}
             </div>
-            {section === "Посты" && posts && (
+            {section === "Посты" && postsData && (
               <div className="flex flex-col gap-8 max-[500px]:gap-3">
-                {posts.map((post) => (
+                {postsData.posts.map((post) => (
                   <Post {...post} />
                 ))}
-                <Pagination />
+                {postsData.total > 10 && <Pagination total={postsData.total} />}
+              </div>
+            )}
+            {section === "Комментарии" && userComments && (
+              <div className="flex flex-col gap-8 max-[500px]:gap-3">
+                {userComments.map((comment) => (
+                  <div className="bg-[#404040] p-4 rounded-xl">
+                    <Comment {...comment} />
+                  </div>
+                ))}
               </div>
             )}
           </div>

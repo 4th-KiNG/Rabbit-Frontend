@@ -8,7 +8,7 @@ const PostsPage = () => {
   const [searchParams] = useSearchParams();
   const postPageRef = useRef<HTMLDivElement>(null);
 
-  const { posts, setSearchString } = usePosts();
+  const { postsData, setSearchString } = usePosts();
 
   useEffect(() => {
     if (searchParams.get("search_string")) {
@@ -27,7 +27,7 @@ const PostsPage = () => {
         sessionStorage.removeItem("postId");
       }
     }
-  }, [posts]);
+  }, [postsData]);
 
   return (
     <>
@@ -36,9 +36,14 @@ const PostsPage = () => {
         ref={postPageRef}
       >
         <CreatePostArea />
-        {posts &&
-          posts.map((post: PostProps, index) => <Post {...post} key={index} />)}
-        <Pagination />
+        {postsData && (
+          <>
+            {postsData.posts.map((post: PostProps, index) => (
+              <Post {...post} key={index} />
+            ))}
+            {postsData.total > 10 && <Pagination total={postsData.total} />}
+          </>
+        )}
       </div>
     </>
   );

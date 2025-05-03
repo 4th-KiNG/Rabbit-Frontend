@@ -1,9 +1,9 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
-  DislikePost,
   GetLikes,
   GetPost,
-  LikePost,
+  SendReport,
+  ToggleLikePost,
 } from "../api/posts/postsApi";
 import { PostProps } from "../../types/post.types";
 
@@ -13,15 +13,9 @@ export const usePost = (postId: string) => {
     queryFn: () => GetPost(postId),
   });
 
-  const { mutate: likePost } = useMutation({
-    mutationKey: ["post like"],
-    mutationFn: () => LikePost(postId),
-    onSuccess: () => refetchLikes(),
-  });
-
-  const { mutate: dislikePost } = useMutation({
+  const { mutate: toggleLike } = useMutation({
     mutationKey: ["dislike post"],
-    mutationFn: () => DislikePost(postId),
+    mutationFn: () => ToggleLikePost(postId),
     onSuccess: () => refetchLikes(),
   });
 
@@ -30,9 +24,14 @@ export const usePost = (postId: string) => {
     queryFn: () => GetLikes(postId),
   });
 
+  const { mutate: sendReport } = useMutation({
+    mutationKey: ["send report", postId],
+    mutationFn: (reason: string) => SendReport(postId, reason),
+  });
+
   return {
-    likePost,
-    dislikePost,
+    sendReport,
+    toggleLike,
     likes,
     postData,
   };

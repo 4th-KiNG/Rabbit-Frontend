@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useUser } from "../../../lib/hooks/useUser";
 import { IComment } from "../../../types/comment";
 import Image from "../../ui/Image/Image";
 import { useProfile } from "../../../lib/hooks/useProfile";
-import { Button, DropDownMenu, ModalForm } from "../..";
+import { Button, DropDownMenu, ReportModal } from "../..";
 import {
   commentIco,
   likeIco,
@@ -11,7 +11,7 @@ import {
   minusIcon,
   plusIcon,
 } from "../../../assets";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useComments } from "../../../lib/hooks/useComments";
 import { DropDownItem } from "../DropDownMenu/DropDownMenu.types";
 import { useDisclosure } from "@nextui-org/react";
@@ -30,10 +30,11 @@ const Comment = (props: IComment) => {
   } = props;
   const { userData, avatar } = useUser(ownerId);
   const { user } = useProfile();
-  const { comments, refetchComments } = useComments(id, "comment");
+  const { comments, refetchComments, sendReport, toggleLike, likes } =
+    useComments(id, "comment");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [isLikeActive, setLikeActive] = useState(false);
   const [isShowReplies, setShowReplies] = useState(false);
+  const location = useLocation();
   const [dropItems] = useState<DropDownItem[]>([
     {
       title: "Пожаловаться",
@@ -42,8 +43,10 @@ const Comment = (props: IComment) => {
     },
   ]);
 
-  const toggleLike = () => setLikeActive(!isLikeActive);
-  const likes: string[] = [];
+  const isLikeActive = useMemo((): boolean => {
+    if (likes && user) return likes.includes(user.id);
+    return false;
+  }, [likes, user]);
 
   useEffect(() => {
     if (refetchId === id) {
@@ -53,6 +56,13 @@ const Comment = (props: IComment) => {
       }, 200);
     }
   }, [refetchId, refetchComments, id, clearRefetchId]);
+
+  const handleSendReport = useCallback(
+    (reason: string) => {
+      if (reason.length > 0) sendReport({ commentId: id, reason: reason });
+    },
+    [sendReport, id]
+  );
 
   return (
     <div className="flex flex-col gap-3 max-w-full">
@@ -89,24 +99,26 @@ const Comment = (props: IComment) => {
               <p className="text-xs">{likes.length}</p>
             )}
           </Button>
-          <Button className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-[#585757]">
-            <Image
-              url={commentIco}
-              className="w-4 h-4 object-contain max-[500px]:w-3 max-[500px]:h-3"
-            />
-            <p
-              className="text-xs"
-              onClick={() =>
-                setReplyItem({
-                  parentId: id,
-                  parentType: "comment",
-                  replyText: text,
-                })
-              }
-            >
-              Ответить
-            </p>
-          </Button>
+          {location.pathname.includes("post") && (
+            <Button className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-[#585757]">
+              <Image
+                url={commentIco}
+                className="w-4 h-4 object-contain max-[500px]:w-3 max-[500px]:h-3"
+              />
+              <p
+                className="text-xs"
+                onClick={() =>
+                  setReplyItem({
+                    parentId: id,
+                    parentType: "comment",
+                    replyText: text,
+                  })
+                }
+              >
+                Ответить
+              </p>
+            </Button>
+          )}
           <DropDownMenu
             items={
               userData?.id && user?.id && userData.id === user.id
@@ -123,11 +135,11 @@ const Comment = (props: IComment) => {
                 : dropItems
             }
           />
-          <ModalForm
+          <ReportModal
             isOpen={isOpen}
             onOpenChange={onOpenChange}
-            title="Пожаловаться на контент комментария"
-            content="Coming soon..."
+            type="comment"
+            sendReport={handleSendReport}
           />
         </div>
         {comments && comments.length > 0 && (

@@ -20,7 +20,7 @@ const PostPage = () => {
         className="text-sm bg-[#404040] rounded-full"
         onClick={() => nav("/")}
       >
-        <p>Назад</p>
+        <p>К постам</p>
       </Button>
       {postData && <Post {...postData} />}
     </div>

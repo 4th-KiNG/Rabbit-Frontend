@@ -1,12 +1,18 @@
 import { useMemo } from "react";
 import { usePaginate } from "../../../lib/hooks/usePaginate";
 import { Pagination as PaginationUI } from "@nextui-org/react";
+import { generateOrderedArray } from "../../../utils/posts.utils";
 
-const Pagination = () => {
+interface PaginationProps {
+  total: number;
+}
+
+const Pagination = (props: PaginationProps) => {
+  const { total } = props;
   const { currentPage, setCurrentPage } = usePaginate();
   const postsPaginate = useMemo(() => {
-    return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-  }, []);
+    return generateOrderedArray(total);
+  }, [total]);
 
   return (
     <div className="flex items-center justify-center flex-wrap gap-3">

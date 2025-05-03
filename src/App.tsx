@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import { useProfile } from "./lib/hooks/useProfile";
 import {
   AuthPage,
-  NotificationPage,
   PostPage,
   PostsPage,
   ProfilePage,
@@ -23,7 +22,6 @@ function App() {
         <Route path="/" element={<PostsPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/subscribers" element={<SubscribersPage />} />
-        <Route path="/notifications" element={<NotificationPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/user/:id" element={<UserPage />} />
         <Route path="/post/:id" element={<PostPage />} />

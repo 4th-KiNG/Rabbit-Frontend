@@ -4,6 +4,8 @@ import { UserData } from "../../types/user.types";
 import { useMemo } from "react";
 import { GetImage } from "../../utils/images.utils";
 import { AVATARS_STORAGE, BANNERS_STORAGE } from "../../constants/storage";
+import { IComment } from "../../types/comment";
+import { GetCommentsByOwnerId } from "../api/comments/commentsApi";
 
 export const useUser = (userId: string) => {
   const { data: userData, refetch: refetchUserData } = useQuery<UserData>({
@@ -23,6 +25,12 @@ export const useUser = (userId: string) => {
     onSuccess: () => setTimeout(() => refetchUserData(), 200),
   });
 
+  const { data: userComments } = useQuery<IComment[]>({
+    queryKey: ["get comments by owner id", userData?.id],
+    queryFn: () => GetCommentsByOwnerId(userData?.id ?? ""),
+    enabled: !!userData,
+  });
+
   const avatar = useMemo(
     () => GetImage(AVATARS_STORAGE, userData?.avatar ?? "default-avatar.png"),
     [userData?.avatar]
@@ -39,5 +47,6 @@ export const useUser = (userId: string) => {
     banner,
     subToUser,
     unSubToUser,
+    userComments,
   };
 };

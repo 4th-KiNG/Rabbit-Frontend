@@ -1,3 +1,8 @@
+export interface PostsResponse {
+  posts: PostProps[];
+  total: number;
+}
+
 export interface PostProps {
   id: string;
   title: string;
