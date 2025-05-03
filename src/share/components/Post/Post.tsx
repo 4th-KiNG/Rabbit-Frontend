@@ -103,7 +103,7 @@ const Post = (props: PostProps) => {
     [sendReport]
   );
 
-  const [showText, isShowText] = useState(true);
+  const [showText, setShowText] = useState(true);
 
   return (
     <>
@@ -160,32 +160,30 @@ const Post = (props: PostProps) => {
         </h3>
         {text && (
           <p className="text-lg break-words max-[900px]:text-base">
-            {text.length > 100 && showText ? (
-              <>
-                {text.slice(0, 100)}
-                <button
-                  onClick={() => {
-                    isShowText(!showText);
-                  }}
-                  className="text-[#ecedee86] ml-2"
-                >
-                  ...Показать ещё
-                </button>
-              </>
-            ) : !showText ? (
-              <>
-                {text}
-                <button
-                  onClick={() => {
-                    isShowText(!showText);
-                  }}
-                  className="text-[#ecedee86] ml-2"
-                >
-                  Скрыть текст
-                </button>
-              </>
+            {text.length > 100 ? (
+              showText ? (
+                <>
+                  {text}
+                  <button
+                    onClick={() => setShowText(false)}
+                    className="text-[#ecedee86] ml-2"
+                  >
+                    Скрыть текст
+                  </button>
+                </>
+              ) : (
+                <>
+                  {text.slice(0, 100)}...
+                  <button
+                    onClick={() => setShowText(true)}
+                    className="text-[#ecedee86] ml-2"
+                  >
+                    Показать ещё
+                  </button>
+                </>
+              )
             ) : (
-              ""
+              <>{text}</>
             )}
           </p>
         )}
