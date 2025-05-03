@@ -34,6 +34,7 @@ const Comment = (props: IComment) => {
     useComments(id, "comment");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isShowReplies, setShowReplies] = useState(false);
+  const [showText, setShowText] = useState(false);
   const location = useLocation();
   const [dropItems] = useState<DropDownItem[]>([
     {
@@ -83,9 +84,28 @@ const Comment = (props: IComment) => {
         </Link>
       )}
       <div className="pl-10 flex flex-col gap-3 max-w-full">
-        <p className="max-w-full text-balance whitespace-normal break-words">
-          {text}
-        </p>
+        {text && (
+          <p className="max-w-full text-balance whitespace-normal break-words">
+            {text.length < 100 || showText ? text : text.slice(0, 100) + "..."}
+            {text.length > 100 &&
+              (showText ? (
+                <button
+                  onClick={() => setShowText(false)}
+                  className="text-[#ecedee86] ml-2"
+                >
+                  Скрыть текст
+                </button>
+              ) : (
+                <button
+                  onClick={() => setShowText(true)}
+                  className="text-[#ecedee86] ml-2"
+                >
+                  Показать ещё
+                </button>
+              ))}
+          </p>
+        )}
+
         <div className="mt-2 flex gap-3 items-center">
           <Button
             className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-[#585757]"

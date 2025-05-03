@@ -37,6 +37,7 @@ const Post = (props: PostProps) => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [commentValue, setCommentValue] = useState<string>("");
   const [refetchId, setRefetchId] = useState<string | null>(null);
+  const [showText, setShowText] = useState(false);
   const location = useLocation();
   const initialReplyItem: IReplyItem = useMemo(() => {
     return {
@@ -103,8 +104,6 @@ const Post = (props: PostProps) => {
     [sendReport]
   );
 
-  const [showText, setShowText] = useState(true);
-
   return (
     <>
       <div
@@ -160,31 +159,23 @@ const Post = (props: PostProps) => {
         </h3>
         {text && (
           <p className="text-lg break-words max-[900px]:text-base">
-            {text.length > 100 ? (
-              showText ? (
-                <>
-                  {text}
-                  <button
-                    onClick={() => setShowText(false)}
-                    className="text-[#ecedee86] ml-2"
-                  >
-                    Скрыть текст
-                  </button>
-                </>
+            {text.length < 100 || showText ? text : text.slice(0, 100) + "..."}
+            {text.length > 100 &&
+              (showText ? (
+                <button
+                  onClick={() => setShowText(false)}
+                  className="text-[#ecedee86] ml-2"
+                >
+                  Скрыть текст
+                </button>
               ) : (
-                <>
-                  {text.slice(0, 100)}...
-                  <button
-                    onClick={() => setShowText(true)}
-                    className="text-[#ecedee86] ml-2"
-                  >
-                    Показать ещё
-                  </button>
-                </>
-              )
-            ) : (
-              <>{text}</>
-            )}
+                <button
+                  onClick={() => setShowText(true)}
+                  className="text-[#ecedee86] ml-2"
+                >
+                  Показать ещё
+                </button>
+              ))}
           </p>
         )}
         {images.length > 0 && (
