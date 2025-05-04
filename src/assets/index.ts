@@ -16,6 +16,8 @@ import likeIcoActive from "./likeIcoActive.svg";
 import sort from "./sort.svg";
 import photoIco from "./photoIco.svg";
 import comingSoonText from "./comingSoonText.png";
+import sortBlack from "./sortBlack.svg";
+import searchBlack from "./searchBlack.svg";
 import crossDark from "./crossDark.svg";
 import crossLight from "./crossLight.svg";
 import eye from "./eye.svg";
@@ -45,6 +47,8 @@ export {
   likeIco,
   likeIcoActive,
   sort,
+  sortBlack,
+  searchBlack,
   eye,
   eyeClosed,
   commentIco,

@@ -79,7 +79,7 @@ const CreatePostArea = () => {
   return (
     <>
       <div
-        className={`bg-[#404040] rounded-2xl p-4 max-[500px]:p-3 flex ${
+        className={`bg-[#eeeeee] dark:bg-[#404040] rounded-2xl p-4 max-[500px]:p-3 flex ${
           !isFocus ? "min-h-10" : "min-h-50"
         } createArea`}
         ref={areaRef}
@@ -134,7 +134,7 @@ const CreatePostArea = () => {
               <TagInput tags={tags} setTags={setTags} />
               <div className="flex items-center justify-end gap-4 mt-4">
                 <Button
-                  className="p-2 min-w-max h-max rounded-full"
+                  className="p-2 min-w-max h-max rounded-full bg-[#E3E3E3] dark:bg-transparent"
                   onClick={() => imagesRef.current?.click()}
                 >
                   <Image url={photoIco} className="w-6 h-6" />

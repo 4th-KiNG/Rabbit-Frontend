@@ -107,7 +107,7 @@ const Post = (props: PostProps) => {
   return (
     <>
       <div
-        className={`w-full ${id} bg-[#404040] rounded-2xl p-6 flex flex-col gap-3 max-[900px]:p-5 max-[500px]:p-4`}
+        className={`w-full ${id} bg-[#eeeeee] dark:bg-[#404040] rounded-2xl p-6 flex flex-col gap-3 max-[900px]:p-5 max-[500px]:p-4`}
       >
         <div className="flex justify-between">
           <Link
@@ -203,7 +203,7 @@ const Post = (props: PostProps) => {
         )}
         <div className="mt-2 flex gap-3">
           <Button
-            className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-[#585757]"
+            className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-white dark:bg-[#585757]"
             onClick={toggleLike}
           >
             <Image

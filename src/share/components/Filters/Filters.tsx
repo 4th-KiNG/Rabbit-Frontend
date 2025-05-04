@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { CheckboxGroup } from "@nextui-org/react";
+import { useTheme } from "next-themes";
 
-import { sort } from "../../../assets";
+import { sort, sortBlack } from "../../../assets";
 
 import { checkboxes } from "./Filters.static";
 import { ICheckbox } from "../../ui/Checkbox/Checkbox.types";
@@ -9,6 +10,7 @@ import { Button, Checkbox } from "../..";
 
 const Filters = () => {
   const [isActive, setIsActive] = useState(false);
+  const { theme } = useTheme();
 
   return (
     <>
@@ -18,7 +20,7 @@ const Filters = () => {
       >
         <div className="max-w-[620px] flex flex-row flex-wrap gap-y-4">
           <Button
-            className="bg-[#2A2A2A] rounded-full py-2 px-4 mr-2"
+            className="rounded-full py-2 px-4 mr-2 bg-[#eeeeee] dark:bg-[#2A2A2A]"
             onClick={() => setIsActive(!isActive)}
           >
             <span>Сортировать</span>
@@ -26,7 +28,7 @@ const Filters = () => {
               className={`${
                 !isActive ? "-scale-100" : ""
               } transition-transform duration-150 ease-linear`}
-              src={sort}
+              src={theme == "light" ? sortBlack : sort}
               alt="arrow"
             />
           </Button>

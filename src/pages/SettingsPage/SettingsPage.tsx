@@ -4,6 +4,7 @@ import { SettingsInputPassword } from "./SettingsInput/SettingsInput";
 import { ChangePasswordValues } from "./SettingsInput/SettingsInput.types";
 import { useAuth } from "../../lib/hooks/useAuth";
 import { ServerError } from "../../types/errors.types";
+import { ThemeButton } from "../../share";
 
 const initialValues: ChangePasswordValues = {
   oldPassword: "",
@@ -101,6 +102,12 @@ const SettingsPage = () => {
           >
             Изменить пароль
           </Button>
+        </div>
+        <div>
+          <h2 className="text-[2.5rem] font-bold text-[#7F7F7F] mb-6 max-[475px]:text-[1.5rem] max-[475px]:mb-3">
+            Светлая/Темная тема
+          </h2>
+          <ThemeButton />
         </div>
       </div>
     </>

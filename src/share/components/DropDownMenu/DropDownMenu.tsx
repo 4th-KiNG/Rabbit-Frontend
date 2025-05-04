@@ -11,7 +11,7 @@ const DropDownMenu = (props: DropDownMenuProps) => {
   const { items } = props;
   return (
     <Dropdown className="relative z-20">
-      <DropdownTrigger>
+      <DropdownTrigger className="bg-[#E3E3E3] dark:bg-transparent">
         <Button className="p-2 min-w-0 rounded-full h-max">
           <div className="flex gap-1 w-6 h-6 justify-center items-center rounded-full">
             <div className="w-1 h-1 bg-white rounded-full" />
