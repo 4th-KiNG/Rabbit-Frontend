@@ -88,7 +88,7 @@ const SettingsPage = () => {
               </p>
             )}
             {isSuccessChangePassword && (
-              <p className="text-[#fff] text-base max-[550px]:text-sm text-center">
+              <p className="text-black dark:text-[#fff] text-base max-[550px]:text-sm text-center">
                 Новый пароль установлен!
               </p>
             )}

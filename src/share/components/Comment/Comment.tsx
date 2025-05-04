@@ -60,9 +60,12 @@ const Comment = (props: IComment) => {
 
   const handleSendReport = useCallback(
     (reason: string) => {
-      if (reason.length > 0) sendReport({ commentId: id, reason: reason });
+      if (reason.length > 0) {
+        sendReport({ commentId: id, reason: reason });
+        onOpenChange();
+      }
     },
-    [sendReport, id]
+    [sendReport, id, onOpenChange]
   );
 
   return (

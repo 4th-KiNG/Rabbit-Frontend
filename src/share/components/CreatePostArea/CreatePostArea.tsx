@@ -72,8 +72,8 @@ const CreatePostArea = () => {
   }, [textTitle, textArea, uploadFiles, createPost, tags]);
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mouseup", handleClickOutside);
+    return () => document.removeEventListener("mouseup", handleClickOutside);
   }, [handleClickOutside]);
 
   return (

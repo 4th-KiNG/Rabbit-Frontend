@@ -36,7 +36,7 @@ export const useComments = (
     },
   });
 
-  const { mutate: sendReport } = useMutation({
+  const { mutate: sendReport, isSuccess: isSuccessSendReport } = useMutation({
     mutationKey: ["send report", parentId, parentType],
     mutationFn: ({
       commentId,
@@ -66,5 +66,6 @@ export const useComments = (
     sendReport,
     toggleLike,
     likes,
+    isSuccessSendReport,
   };
 };

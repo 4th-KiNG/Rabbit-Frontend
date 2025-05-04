@@ -133,7 +133,7 @@ const UserPage = () => {
             <Button
               className={`mt-6 w-full rounded-full text-xl max-[1500px]:text-medium text-white max-[500px]:text-sm font-normal ${
                 isSub
-                  ? "bg-[#eeeeee] dark:bg-[#404040] text-black"
+                  ? "bg-[#eeeeee] dark:bg-[#404040] text-black dark:text-white"
                   : "bg-[#CE3333]"
               }  px-10 max-[1500px]:px-6 max-[500px]:px-4 py-4 max-[1500px]:py-3 h-max`}
               onClick={() => {

@@ -24,7 +24,7 @@ export const usePost = (postId: string) => {
     queryFn: () => GetLikes(postId),
   });
 
-  const { mutate: sendReport } = useMutation({
+  const { mutate: sendReport, isSuccess: isSuccessSendReport } = useMutation({
     mutationKey: ["send report", postId],
     mutationFn: (reason: string) => SendReport(postId, reason),
   });
@@ -34,5 +34,6 @@ export const usePost = (postId: string) => {
     toggleLike,
     likes,
     postData,
+    isSuccessSendReport,
   };
 };
