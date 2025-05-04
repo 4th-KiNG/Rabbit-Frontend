@@ -74,7 +74,7 @@ const UserPage = () => {
             <Button
               className={`hidden w-full rounded-full text-xl max-[1500px]:text-medium max-[500px]:text-sm font-normal ${
                 isSub ? "bg-[#404040]" : "bg-[#CE3333]"
-              } text-black dark:text-white px-10 max-[1500px]:px-6 max-[500px]:px-4 py-4 max-[1500px]:py-3 h-max max-[1300px]:block`}
+              } text-white px-10 max-[1500px]:px-6 max-[500px]:px-4 py-4 max-[1500px]:py-3 h-max max-[1300px]:block`}
               onClick={() => {
                 if (!isSub) subToUser();
                 else unSubToUser();
@@ -82,11 +82,15 @@ const UserPage = () => {
             >
               {isSub ? "Отписаться" : "Подписаться"}
             </Button>
-            <div className="hidden max-[1300px]:flex w-full justify-around bg-[#272727] py-3 rounded-xl">
+            <div className="hidden max-[1300px]:flex w-full justify-around bg-[#eeeeee] dark:bg-[#404040] py-3 rounded-xl">
               {userInfo.map((info, index) => (
                 <div key={index} className="flex flex-col items-center">
-                  <p className="text-base font-bold">{info.data}</p>
-                  <p className="text-sm font-normal">{info.title}</p>
+                  <p className="text-base font-bold max-[500px]:text-[12px]">
+                    {info.data}
+                  </p>
+                  <p className="text-sm font-normal max-[500px]:text-[10px]">
+                    {info.title}
+                  </p>
                 </div>
               ))}
             </div>
@@ -96,7 +100,9 @@ const UserPage = () => {
                 <div key={index}>
                   <Button
                     className={`rounded-full text-xl max-[1500px]:text-medium max-[500px]:text-sm font-normal text-black dark:text-white px-10 max-[1500px]:px-6 max-[500px]:px-4 py-4 max-[1500px]:py-3 h-max ${
-                      btn.label === section ? "bg-[#404040]" : "bg-[#272727]"
+                      btn.label === section
+                        ? "bg-[#d6d6d6] dark:bg-[#404040]"
+                        : "bg-[#EDEDED] dark:bg-[#272727]"
                     }`}
                     onClick={() => setSection(btn.label)}
                   >
@@ -116,7 +122,7 @@ const UserPage = () => {
             {section === "Комментарии" && userComments && (
               <div className="flex flex-col gap-8 max-[500px]:gap-3">
                 {userComments.map((comment) => (
-                  <div className="bg-[#404040] p-4 rounded-xl">
+                  <div className="bg-[#eeeeee] dark:bg-[#404040] p-4 rounded-xl">
                     <Comment {...comment} />
                   </div>
                 ))}
@@ -125,9 +131,11 @@ const UserPage = () => {
           </div>
           <div className="max-[1300px]:hidden">
             <Button
-              className={`mt-6 w-full rounded-full text-xl max-[1500px]:text-medium max-[500px]:text-sm font-normal ${
-                isSub ? "bg-[#404040]" : "bg-[#CE3333]"
-              } text-black dark:text-white px-10 max-[1500px]:px-6 max-[500px]:px-4 py-4 max-[1500px]:py-3 h-max`}
+              className={`mt-6 w-full rounded-full text-xl max-[1500px]:text-medium text-white max-[500px]:text-sm font-normal ${
+                isSub
+                  ? "bg-[#eeeeee] dark:bg-[#404040] text-black"
+                  : "bg-[#CE3333]"
+              }  px-10 max-[1500px]:px-6 max-[500px]:px-4 py-4 max-[1500px]:py-3 h-max`}
               onClick={() => {
                 if (!isSub) subToUser();
                 else unSubToUser();
@@ -135,7 +143,7 @@ const UserPage = () => {
             >
               {isSub ? "Отписаться" : "Подписаться"}
             </Button>
-            <div className="p-6 bg-[#404040] mt-6 rounded-3xl max-[1500px]:p-5">
+            <div className="p-6 bg-[#eeeeee] dark:bg-[#404040] mt-6 rounded-3xl max-[1500px]:p-5">
               <p className="text-3xl max-[1500px]:text-2xl font-bold text-black dark:text-white">
                 {userData?.username}
               </p>

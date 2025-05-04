@@ -17,7 +17,7 @@ const PostPage = () => {
   return (
     <div className="flex flex-col items-start gap-2">
       <Button
-        className="text-sm bg-[#404040] rounded-full"
+        className="text-sm bg-[#eeeeee] dark:bg-[#404040] rounded-full"
         onClick={() => nav("/")}
       >
         <p>К постам</p>

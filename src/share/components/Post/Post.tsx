@@ -11,6 +11,7 @@ import {
 } from "../..";
 import {
   commentIco,
+  crossDark,
   crossLight,
   likeIco,
   likeIcoActive,
@@ -25,6 +26,7 @@ import { usePost } from "../../../lib/hooks/usePost";
 import { useComments } from "../../../lib/hooks/useComments";
 import { IReplyItem } from "../../../types/comment";
 import { isMobile } from "../../../utils/styles.utils";
+import { useTheme } from "next-themes";
 
 const Post = (props: PostProps) => {
   const { title, text, id, images, ownerId } = props;
@@ -39,6 +41,7 @@ const Post = (props: PostProps) => {
   const [refetchId, setRefetchId] = useState<string | null>(null);
   const [showText, setShowText] = useState(false);
   const location = useLocation();
+  const { theme } = useTheme();
   const initialReplyItem: IReplyItem = useMemo(() => {
     return {
       parentId: id,
@@ -215,7 +218,7 @@ const Post = (props: PostProps) => {
             )}
           </Button>
           <Button
-            className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-[#585757]"
+            className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-white dark:bg-[#585757]"
             onClick={() => nav(`/post/${id}`)}
           >
             <Image
@@ -242,7 +245,7 @@ const Post = (props: PostProps) => {
                 ))}
             </div>
             {replyItem.replyText && (
-              <div className="bg-[#585757] p-2 w-max rounded-2xl flex items-center gap-2 max-w-full">
+              <div className="bg-white dark:bg-[#585757] p-2 w-max rounded-2xl flex items-center gap-2 max-w-full text-md max-[500px]:text-sm">
                 <p className="break-words">
                   Ответ на комментарий:{" "}
                   {replyItem.replyText.length < 10
@@ -250,21 +253,21 @@ const Post = (props: PostProps) => {
                     : replyItem.replyText.slice(0, 11) + "..."}
                 </p>
                 <Image
-                  url={crossLight}
+                  url={theme === "dark" ? crossLight : crossDark}
                   className="w-4 h-4 cursor-pointer"
                   onClick={() => setReplyItem(initialReplyItem)}
                 />
               </div>
             )}
-            <div className="bg-[#2A2A2A] rounded-xl p-5 flex flex-col items-end gap-4">
+            <div className="bg-[#E3E3E3] dark:bg-[#2A2A2A] rounded-xl p-5 flex flex-col items-end gap-4">
               <TextareaAutosize
-                className="w-full resize-none bg-transparent border-none outline-none"
+                className="w-full resize-none bg-transparent border-none outline-none text-md max-[500px]:text-sm"
                 placeholder="Добавьте комментарий"
                 value={commentValue}
                 onChange={handleChangeCommentValue}
               />
               <Button
-                className="max-w-max max-h-max min-w-0 px-4 py-2 rounded-full bg-[#CE3333]"
+                className="max-w-max max-h-max min-w-0 px-4 py-2 rounded-full bg-[#CE3333] text-white dark:text-black text-md max-[500px]:text-sm"
                 onClick={handleCreateComment}
               >
                 Отправить

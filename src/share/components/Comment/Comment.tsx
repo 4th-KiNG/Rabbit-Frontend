@@ -85,7 +85,7 @@ const Comment = (props: IComment) => {
       )}
       <div className="pl-10 flex flex-col gap-3 max-w-full">
         {text && (
-          <p className="max-w-full text-balance whitespace-normal break-words">
+          <p className="max-w-full text-balance whitespace-normal break-words text-md max-[500px]:text-sm">
             {text.length < 100 || showText ? text : text.slice(0, 100) + "..."}
             {text.length > 100 &&
               (showText ? (
@@ -108,7 +108,7 @@ const Comment = (props: IComment) => {
 
         <div className="mt-2 flex gap-3 items-center">
           <Button
-            className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-[#585757]"
+            className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-white dark:bg-[#585757]"
             onClick={toggleLike}
           >
             <Image
@@ -120,23 +120,21 @@ const Comment = (props: IComment) => {
             )}
           </Button>
           {location.pathname.includes("post") && (
-            <Button className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-[#585757]">
+            <Button
+              className="max-w-max max-h-max min-w-0 p-3 rounded-full bg-white dark:bg-[#585757]"
+              onClick={() =>
+                setReplyItem({
+                  parentId: id,
+                  parentType: "comment",
+                  replyText: text,
+                })
+              }
+            >
               <Image
                 url={commentIco}
                 className="w-4 h-4 object-contain max-[500px]:w-3 max-[500px]:h-3"
               />
-              <p
-                className="text-xs"
-                onClick={() =>
-                  setReplyItem({
-                    parentId: id,
-                    parentType: "comment",
-                    replyText: text,
-                  })
-                }
-              >
-                Ответить
-              </p>
+              <p className="text-xs">Ответить</p>
             </Button>
           )}
           <DropDownMenu
@@ -166,7 +164,7 @@ const Comment = (props: IComment) => {
         </div>
         {comments && comments.length > 0 && (
           <Button
-            className="w-max max-w-max max-h-max min-w-0 px-1 py-2 rounded-full"
+            className="w-max max-w-max max-h-max min-w-0 px-1 py-2 rounded-full bg-white dark:bg-[#585757]"
             onClick={() => setShowReplies(!isShowReplies)}
           >
             <Image url={isShowReplies ? minusIcon : plusIcon} />

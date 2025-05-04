@@ -35,7 +35,6 @@ const TagInput = (props: TagInputProps) => {
     setTags(newTags);
   };
 
-  // Кастомный обработчик для поля ввода
   const handleChangeInput = useCallback(
     (value: string) => {
       if (value.includes(" ") && value.length > 2) {
@@ -73,8 +72,8 @@ const TagInput = (props: TagInputProps) => {
           tagInput: "flex-1",
           selected:
             "bg-[rgba(0,0,0,0.3)] p-3 flex gap-2 items-center min-w-64 min-h-[56px] rounded-xl flex-wrap max-[900px]:min-w-0",
-          tag: "flex gap-1 text-base bg-[#404040] rounded-[8px] px-2 py-1 max-[550px]:text-sm",
-          remove: "outline-0",
+          tag: "flex gap-1 text-base bg-[#E3E3E3] dark:bg-[#404040] rounded-[8px] px-2 py-1 max-[550px]:text-sm",
+          remove: "outline-0 [&_svg]:fill-black [&_svg]:dark:fill-white",
         }}
         placeholder=""
       />

@@ -4,7 +4,6 @@ import { SettingsInputPassword } from "./SettingsInput/SettingsInput";
 import { ChangePasswordValues } from "./SettingsInput/SettingsInput.types";
 import { useAuth } from "../../lib/hooks/useAuth";
 import { ServerError } from "../../types/errors.types";
-import { ThemeButton } from "../../share";
 
 const initialValues: ChangePasswordValues = {
   oldPassword: "",
@@ -96,18 +95,12 @@ const SettingsPage = () => {
           </div>
 
           <Button
-            className="rounded-[52px] bg-[#CE3333] text-l mt-6 py-[15px] px-8 max-w-[244px]
+            className="rounded-[52px] bg-[#CE3333]  text-l mt-6 py-[15px] px-8 max-w-[244px]
           max-[475px]:max-w-[195px] max-[475px]:text-[14px] max-[475px]:px-4"
             onClick={() => changePassword(formValues)}
           >
-            Изменить пароль
+            <p className="text-white">Изменить пароль</p>
           </Button>
-        </div>
-        <div>
-          <h2 className="text-[2.5rem] font-bold text-[#7F7F7F] mb-6 max-[475px]:text-[1.5rem] max-[475px]:mb-3">
-            Светлая/Темная тема
-          </h2>
-          <ThemeButton />
         </div>
       </div>
     </>

@@ -91,7 +91,7 @@ const CreatePostArea = () => {
         <div className="w-full">
           <input
             type="text"
-            className="w-full text-lg p-2 bg-transparent outline-none border-none"
+            className="w-full text-lg p-2 bg-transparent outline-none border-none max-[500px]:text-base"
             placeholder="О чем хотите поговорить?"
             onFocus={() => setFocus(true)}
             value={textTitle}
@@ -100,14 +100,16 @@ const CreatePostArea = () => {
           {isFocus && (
             <div className="flex flex-col gap-3">
               <TextareaAutosize
-                className="w-full inline-table text-md p-2 bg-transparent outline-none border-noned h-auto"
+                className="w-full inline-table text-md p-2 bg-transparent outline-none border-noned h-auto max-[500px]:text-sm"
                 placeholder="Текст обсуждения"
                 value={textArea}
                 onChange={handleChangeTextArea}
               />
               {uploadFiles.length > 0 && (
                 <>
-                  <p>Загруженные файлы (максимум 5 штук):</p>
+                  <p className="text-md max-[500px]:text-sm">
+                    Загруженные файлы (максимум 5 штук):
+                  </p>
                   <div className="flex gap-3 flex-wrap">
                     {uploadFiles.map((file) => (
                       <>
@@ -140,10 +142,10 @@ const CreatePostArea = () => {
                   <Image url={photoIco} className="w-6 h-6" />
                 </Button>
                 <Button
-                  className="rounded-full bg-[#CE3333]"
+                  className="rounded-full bg-[#CE3333] text-white"
                   onClick={handleCreatePost}
                 >
-                  <p>Опубликовать</p>
+                  <p className="text-md max-[500px]:text-sm">Опубликовать</p>
                 </Button>
               </div>
             </div>

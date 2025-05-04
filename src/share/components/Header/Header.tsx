@@ -1,5 +1,5 @@
-import { logo, search, searchBlack } from "../../../assets";
-import { RabbitTitle, Image } from "../..";
+import { exitIco, logo, search, searchBlack } from "../../../assets";
+import { RabbitTitle, Image, ThemeButton } from "../..";
 import { useProfile } from "../../../lib/hooks/useProfile";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -7,9 +7,11 @@ import { Input as InputUI } from "@nextui-org/react";
 import { isMobile } from "../../../utils/styles.utils";
 import { useDebouncedCallback } from "use-debounce";
 import { useTheme } from "next-themes";
+import { useAuth } from "../../../lib/hooks/useAuth";
 
 const Header = () => {
   const { user, avatar } = useProfile();
+  const { signOut } = useAuth();
   const [searchString, setSearchString] = useState<string>();
   const [, setSearchParams] = useSearchParams();
   const nav = useNavigate();
@@ -68,7 +70,10 @@ const Header = () => {
           />
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-5 max-[500px]:gap-2">
+          <div className="hidden max-[900px]:block">
+            <ThemeButton />
+          </div>
           <div
             className="flex gap-4 items-center cursor-pointer"
             onClick={() => nav("/profile")}
@@ -76,8 +81,14 @@ const Header = () => {
             <span className="text-xl max-[900px]:hidden">{user?.username}</span>
             <Image
               url={avatar}
-              className="w-14 max-[900px]:w-9 object-cover h-14 max-[900px]:h-9 rounded-full"
+              className="w-14 max-[900px]:w-10 object-cover h-14 max-[900px]:h-10 rounded-full"
             />
+          </div>
+          <div
+            className="bg-[#eeeeee] dark:bg-[#272727] rounded-full p-3 cursor-pointer flex items-center justify-center"
+            onClick={() => signOut()}
+          >
+            <img src={exitIco} className="w-8 max-[900px]:w-4" alt="" />
           </div>
         </div>
       </header>

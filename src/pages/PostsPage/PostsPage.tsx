@@ -36,7 +36,7 @@ const PostsPage = () => {
         ref={postPageRef}
       >
         <CreatePostArea />
-        {postsData && (
+        {postsData && postsData.posts && (
           <>
             {postsData.posts.map((post: PostProps, index) => (
               <Post {...post} key={index} />

@@ -29,6 +29,6 @@ export const SignIn = async (userData: ISignIn) => {
 };
 
 export const SignOut = async () => {
-  localStorage.clear();
+  localStorage.removeItem("access_token");
   location.reload();
 };

@@ -52,11 +52,15 @@ const ProfilePage = () => {
               userAvatar={avatar}
               isProfile
             />
-            <div className="hidden max-[1300px]:flex w-full justify-around py-3 rounded-xl">
+            <div className="hidden bg-[#eeeeee] dark:bg-[#404040] max-[1300px]:flex w-full justify-around py-3 rounded-xl">
               {userInfo.map((info, index) => (
                 <div key={index} className="flex flex-col items-center">
-                  <p className="text-base font-bold">{info.data}</p>
-                  <p className="text-sm font-normal">{info.title}</p>
+                  <p className="text-base font-bold max-[500px]:text-[12px]">
+                    {info.data}
+                  </p>
+                  <p className="text-sm font-normal max-[500px]:text-[10px]">
+                    {info.title}
+                  </p>
                 </div>
               ))}
             </div>
@@ -65,7 +69,9 @@ const ProfilePage = () => {
                 <div key={index}>
                   <Button
                     className={`rounded-full text-xl max-[1500px]:text-medium max-[500px]:text-sm font-normal text-black dark:text-white px-10 max-[1500px]:px-6 max-[500px]:px-4 py-4 max-[1500px]:py-3 h-max ${
-                      btn.label === section ? "bg-[#d6d6d6] dark:bg-[#404040]" : "bg-[#EDEDED] dark:bg-[#272727]"
+                      btn.label === section
+                        ? "bg-[#d6d6d6] dark:bg-[#404040]"
+                        : "bg-[#EDEDED] dark:bg-[#272727]"
                     }`}
                     onClick={() => setSection(btn.label)}
                   >
@@ -85,7 +91,7 @@ const ProfilePage = () => {
             {section === "Комментарии" && userComments && (
               <div className="flex flex-col gap-8 max-[500px]:gap-3">
                 {userComments.map((comment) => (
-                  <div className="bg-[#404040] p-4 rounded-xl">
+                  <div className="bg-[#eeeeee] dark:bg-[#404040] p-4 rounded-xl">
                     <Comment {...comment} />
                   </div>
                 ))}
