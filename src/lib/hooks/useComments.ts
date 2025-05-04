@@ -48,14 +48,14 @@ export const useComments = (
   });
 
   const { mutate: toggleLike } = useMutation({
-    mutationKey: ["like or dislike comment"],
-    mutationFn: () => ToggleLikeComment(parentId, parentType),
+    mutationKey: ["like or dislike comment", parentId],
+    mutationFn: () => ToggleLikeComment(parentId),
     onSuccess: () => refetchLikes(),
   });
 
   const { data: likes, refetch: refetchLikes } = useQuery({
     queryKey: ["likes", parentId, parentType],
-    queryFn: () => GetLikes(parentId, parentType),
+    queryFn: () => GetLikes(parentId),
   });
 
   return {

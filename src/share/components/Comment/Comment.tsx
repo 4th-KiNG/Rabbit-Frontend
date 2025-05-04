@@ -141,7 +141,9 @@ const Comment = (props: IComment) => {
           )}
           <DropDownMenu
             items={
-              userData?.id && user?.id && userData.id === user.id
+              userData?.id &&
+              user?.id &&
+              (userData.id === user.id || user.username === "RabbitAdmin")
                 ? [
                     ...dropItems,
                     {

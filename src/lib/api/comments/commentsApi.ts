@@ -63,28 +63,23 @@ export const GetCommentsByOwnerId = async (ownerId: string) => {
   return data;
 };
 
-export const ToggleLikeComment = async (
-  commentId: string,
-  parentType: string
-) => {
+export const ToggleLikeComment = async (commentId: string) => {
   const { data } = await Http({
     method: "patch",
     url: `${API}/comments/like`,
     data: {
       commentId: commentId,
-      parentType: parentType,
     },
   });
   return data;
 };
 
-export const GetLikes = async (commentId: string, parentType: string) => {
+export const GetLikes = async (commentId: string) => {
   const { data } = await Http({
     method: "get",
-    url: `${API}/comments/like`,
+    url: `${API}/comments/likes`,
     params: {
       commentId: commentId,
-      parentType: parentType,
     },
   });
   return data;

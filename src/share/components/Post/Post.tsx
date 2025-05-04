@@ -128,7 +128,9 @@ const Post = (props: PostProps) => {
           </Link>
           <DropDownMenu
             items={
-              userData?.id && user?.id && userData.id === user.id
+              userData?.id &&
+              user?.id &&
+              (userData.id === user.id || user.username === "RabbitAdmin")
                 ? [
                     ...dropItems,
                     {
