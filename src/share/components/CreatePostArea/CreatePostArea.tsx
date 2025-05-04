@@ -47,9 +47,6 @@ const CreatePostArea = () => {
     (e: MouseEvent) => {
       if (areaRef.current && !areaRef.current.contains(e.target as Node)) {
         setFocus(false);
-        setTextArea("");
-        setTextTitle("");
-        setUploadFiles([]);
       }
     },
     [areaRef]

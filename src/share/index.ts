@@ -21,6 +21,7 @@ import RecoveryModal from "./components/RecoveryModal/RecoveryModal";
 import Comment from "./components/Comment/Comment";
 import Pagination from "./components/Pagination/Pagination";
 import ReportModal from "./components/ReportModal/ReportModal";
+import CutText from "./ui/CutText/CutText";
 
 export {
   Checkbox,
@@ -46,4 +47,5 @@ export {
   Comment,
   Pagination,
   ReportModal,
+  CutText,
 };

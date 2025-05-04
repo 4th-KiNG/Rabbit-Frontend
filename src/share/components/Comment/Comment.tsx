@@ -3,7 +3,7 @@ import { useUser } from "../../../lib/hooks/useUser";
 import { IComment } from "../../../types/comment";
 import Image from "../../ui/Image/Image";
 import { useProfile } from "../../../lib/hooks/useProfile";
-import { Button, DropDownMenu, ReportModal } from "../..";
+import { Button, CutText, DropDownMenu, ReportModal } from "../..";
 import {
   commentIco,
   likeIco,
@@ -34,7 +34,6 @@ const Comment = (props: IComment) => {
     useComments(id, "comment");
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isShowReplies, setShowReplies] = useState(false);
-  const [showText, setShowText] = useState(false);
   const location = useLocation();
   const [dropItems] = useState<DropDownItem[]>([
     {
@@ -89,23 +88,7 @@ const Comment = (props: IComment) => {
       <div className="pl-10 flex flex-col gap-3 max-w-full">
         {text && (
           <p className="max-w-full text-balance whitespace-normal break-words text-md max-[500px]:text-sm">
-            {text.length < 100 || showText ? text : text.slice(0, 100) + "..."}
-            {text.length > 100 &&
-              (showText ? (
-                <button
-                  onClick={() => setShowText(false)}
-                  className="text-[#ecedee86] ml-2"
-                >
-                  Скрыть текст
-                </button>
-              ) : (
-                <button
-                  onClick={() => setShowText(true)}
-                  className="text-[#ecedee86] ml-2"
-                >
-                  Показать ещё
-                </button>
-              ))}
+            <CutText text={text} />
           </p>
         )}
 

@@ -4,6 +4,7 @@ import { PostProps } from "../../../types/post.types";
 import {
   Button,
   Comment,
+  CutText,
   DropDownMenu,
   Image,
   ImageModal,
@@ -39,8 +40,6 @@ const Post = (props: PostProps) => {
   const [isOpenModal, setOpenModal] = useState(false);
   const [commentValue, setCommentValue] = useState<string>("");
   const [refetchId, setRefetchId] = useState<string | null>(null);
-  const [showTextTitle, setShowTextTitle] = useState(false);
-  const [showText, setShowText] = useState(false);
   const location = useLocation();
   const { theme } = useTheme();
   const initialReplyItem: IReplyItem = useMemo(() => {
@@ -164,45 +163,11 @@ const Post = (props: PostProps) => {
           />
         </div>
         <h3 className="text-2xl font-bold break-words max-[900px]:text-lg">
-          {title.length < 100 || showTextTitle
-            ? title
-            : title.slice(0, 100) + "..."}
-          {title.length > 100 &&
-            (showTextTitle ? (
-              <button
-                onClick={() => setShowTextTitle(false)}
-                className="text-[#ecedee86] ml-2"
-              >
-                Скрыть текст
-              </button>
-            ) : (
-              <button
-                onClick={() => setShowTextTitle(true)}
-                className="text-[#ecedee86] ml-2"
-              >
-                Показать ещё
-              </button>
-            ))}
+          <CutText text={title} />
         </h3>
         {text && (
           <p className="text-lg break-words max-[900px]:text-base">
-            {text.length < 100 || showText ? text : text.slice(0, 100) + "..."}
-            {text.length > 100 &&
-              (showText ? (
-                <button
-                  onClick={() => setShowText(false)}
-                  className="text-[#ecedee86] ml-2"
-                >
-                  Скрыть текст
-                </button>
-              ) : (
-                <button
-                  onClick={() => setShowText(true)}
-                  className="text-[#ecedee86] ml-2"
-                >
-                  Показать ещё
-                </button>
-              ))}
+            <CutText text={text} />
           </p>
         )}
         {images.length > 0 && (

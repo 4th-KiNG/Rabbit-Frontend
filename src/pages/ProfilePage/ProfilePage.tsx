@@ -44,8 +44,8 @@ const ProfilePage = () => {
     <>
       <div className="relative z-0 max-[900px]:w-full">
         <ProfileBanner banner={banner} isProfile />
-        <div className="grid grid-cols-[1fr_320px] gap-6 max-[1300px]:flex">
-          <div className="-mt-8 flex flex-col gap-6 max-[1300px]:w-full">
+        <div className="grid grid-cols-[1fr_320px] max-w-full gap-6 max-[1300px]:flex">
+          <div className="-mt-8 flex flex-col gap-6 mb-52 max-[1300px]:w-full">
             <UserInfo
               username={user?.username ?? ""}
               userId={user?.id ?? ""}
